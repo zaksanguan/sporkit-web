@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params
   const video = await getVideo(id)
   if (!video) return { title: 'SporkIt', description: 'Your food diary starts here' }
-  const restaurant = video.restaurant as { name: string } | null
+  const restaurant = Array.isArray(video.restaurant) ? video.restaurant[0] as { name: string } : video.restaurant as { name: string } | null
   const title = video.dish_name
     ? video.dish_name + ' at ' + (restaurant?.name ?? '') + ' — SporkIt'
     : (restaurant?.name ?? '') + ' — SporkIt'
