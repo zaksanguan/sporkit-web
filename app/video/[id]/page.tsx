@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function VideoPage({ params }: Props) {
   const { id } = await params
   const video = await getVideo(id)
-  const restaurant = Array.isArray(video?.restaurant) ? video?.restaurant[0] as { name: string } : video?.restaurant as { name: string } | null
+  const restaurant = (video?.restaurant as unknown as { name: string } | null)
   const name = video?.dish_name
     ? video.dish_name + ' at ' + (restaurant?.name ?? '')
     : (restaurant?.name ?? 'SporkIt')
