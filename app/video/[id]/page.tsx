@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [{ url: video.thumbnail_url, width: 1280, height: 720 }],
       type: 'website',
       siteName: 'SporkIt',
+      url: 'https://sporkitapp.com/video/' + id,
     },
     twitter: {
       card: 'summary_large_image',
