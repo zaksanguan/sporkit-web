@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "3KTLJ8T633.com.sporkitapp.sporkit",
+        "paths": ["/video/*"]
+      }
+    ]
+  }
+}
