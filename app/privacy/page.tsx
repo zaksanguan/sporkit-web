@@ -94,7 +94,7 @@ export default function PrivacyPage() {
             <li>Request deletion of your account and personal data</li>
             <li>Withdraw location permission at any time</li>
           </ul>
-          <p>To exercise these rights, contact us at <a href="mailto:hello@sporkitapp.com">hello@sporkitapp.com</a>.</p>
+          <p>To exercise these rights, contact us at <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a>.</p>
 
           <h2>9. Children</h2>
           <p>SporkIt is not intended for users under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal data, please contact us and we will delete it promptly.</p>
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
           <p>We may update this Privacy Policy from time to time. When we do, we will update the date at the top of this page. Continued use of SporkIt after changes constitutes acceptance of the updated policy.</p>
 
           <h2>11. Contact</h2>
-          <p>If you have questions about this Privacy Policy, contact us at <a href="mailto:hello@sporkitapp.com">hello@sporkitapp.com</a>.</p>
+          <p>If you have questions about this Privacy Policy, contact us at <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a>.</p>
           <p>SporkIt is operated by Zak Sanguanshua, Bangkok, Thailand.</p>
 
           <div className="footer">

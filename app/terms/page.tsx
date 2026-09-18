@@ -106,7 +106,7 @@ export default function TermsPage() {
           <p>We may update these Terms from time to time. We will notify you of significant changes through the app. Continued use of SporkIt after changes constitutes acceptance of the updated Terms.</p>
 
           <h2>15. Contact</h2>
-          <p>For questions about these Terms, contact us at <a href="mailto:hello@sporkitapp.com">hello@sporkitapp.com</a>.</p>
+          <p>For questions about these Terms, contact us at <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a>.</p>
 
           <div className="footer">
             <p>© 2026 SporkIt · <a href="https://sporkitapp.com">sporkitapp.com</a> · <a href="https://sporkitapp.com/privacy">Privacy Policy</a></p>
