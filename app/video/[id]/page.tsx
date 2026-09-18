@@ -62,7 +62,7 @@ export default async function VideoPage({ params }: Props) {
           *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
           html, body { background: #0F0F0F; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
           .banner { position: sticky; top: 0; z-index: 100; background: #1A1A1A; border-bottom: 1px solid #222; display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
-          .banner-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+          .banner-logo { display: flex; align-items: center; gap: 4px; text-decoration: none; }
           .logo-circle { width: 24px; height: 24px; border-radius: 50%; background: #FF8C00; display: flex; align-items: flex-start; justify-content: center; overflow: visible; flex-shrink: 0; }
           .logo-circle svg { margin-top: -1px; }
           .wordmark { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
