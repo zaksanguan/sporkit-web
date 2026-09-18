@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.sporkitapp.sporkit",
+    "sha256_cert_fingerprints": ["30:9D:A7:9C:6C:03:B0:68:33:D3:53:32:50:14:12:F3:9D:1C:0C:7F:A0:8D:87:05:46:2A:BE:26:41:AD:BC:61"]
+  }
+}]
