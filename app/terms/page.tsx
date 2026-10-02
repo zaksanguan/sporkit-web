@@ -41,7 +41,7 @@ export default function TermsPage() {
           </a>
 
           <h1>Terms of Service</h1>
-          <p className="meta">Last updated: September 2026</p>
+          <p className="meta">Last updated: October 2026</p>
 
           <p>Welcome to SporkIt. By downloading, installing, or using the SporkIt app or website (sporkitapp.com), you agree to be bound by these Terms of Service. If you do not agree, do not use SporkIt.</p>
 
