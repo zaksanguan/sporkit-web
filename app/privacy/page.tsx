@@ -41,7 +41,7 @@ export default function PrivacyPage() {
           </a>
 
           <h1>Privacy Policy</h1>
-          <p className="meta">Last updated: September 2026</p>
+          <p className="meta">Last updated: October 2026</p>
 
           <p>SporkIt ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share information when you use the SporkIt app and website (sporkitapp.com).</p>
 
@@ -84,14 +84,14 @@ export default function PrivacyPage() {
           <p>Videos and photos you upload may be scanned by Google Cloud Vision API for safety compliance before being published. This is an automated process to detect inappropriate content. Images are not stored by Google beyond the scan.</p>
 
           <h2>7. Data Retention</h2>
-          <p>We retain your account data for as long as your account is active. If you delete your account, your personal information is removed within 30 days. Public content (reviews, sporks) may be retained in anonymised form to preserve the integrity of restaurant ratings.</p>
+          <p>We keep your account data for as long as your account is active. When you delete your account, your profile, phone number, sporks, saved places, reviews, videos, photos and dish preferences are deleted within 30 days. Encrypted backups are removed within 30 days. Reports about rule-breaking content may be kept without your profile details.</p>
 
           <h2>8. Your Rights</h2>
           <p>You have the right to:</p>
           <ul>
             <li>Access the personal data we hold about you</li>
             <li>Request correction of inaccurate data</li>
-            <li>Request deletion of your account and personal data</li>
+            <li>Request deletion of your account and personal data (<a href="https://sporkitapp.com/delete-account">sporkitapp.com/delete-account</a>)</li>
             <li>Withdraw location permission at any time</li>
           </ul>
           <p>To exercise these rights, contact us at <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a>.</p>
