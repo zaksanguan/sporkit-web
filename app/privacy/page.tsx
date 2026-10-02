@@ -13,7 +13,7 @@ export default function PrivacyPage() {
           *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
           html, body { background: #0F0F0F; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
           .page { max-width: 680px; margin: 0 auto; padding: 48px 24px 80px; }
-          .logo-link { display: flex; align-items: center; gap: 8px; text-decoration: none; margin-bottom: 48px; }
+          .logo-link { display: flex; align-items: center; gap: 4px; text-decoration: none; margin-bottom: 48px; }
           .logo-circle { width: 36px; height: 36px; border-radius: 50%; background: #FF8C00; display: flex; align-items: flex-start; justify-content: center; overflow: visible; flex-shrink: 0; }
           .logo-circle svg { margin-top: -1px; }
           .wordmark { font-size: 32px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.7px; }
