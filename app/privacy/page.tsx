@@ -16,7 +16,7 @@ export default function PrivacyPage() {
           .logo-link { display: flex; align-items: center; gap: 8px; text-decoration: none; margin-bottom: 48px; }
           .logo-circle { width: 36px; height: 36px; border-radius: 50%; background: #FF8C00; display: flex; align-items: flex-start; justify-content: center; overflow: visible; flex-shrink: 0; }
           .logo-circle svg { margin-top: -1px; }
-          .wordmark { font-size: 28px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.7px; }
+          .wordmark { font-size: 32px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.7px; }
           .wordmark span { color: #FF8C00; }
           h1 { font-size: 32px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.5px; margin-bottom: 8px; }
           .meta { font-size: 14px; color: #888888; margin-bottom: 48px; }
