@@ -91,7 +91,7 @@ export default function TermsPage() {
           <p>SporkIt, the SporkIt logo, and all related brand assets are the property of SporkIt. You may not use our name, logo, or trademarks without prior written permission.</p>
 
           <h2>10. Termination</h2>
-          <p>We may suspend or terminate your account at any time if you violate these Terms or for any other reason at our discretion. You may delete your account at any time from Settings.</p>
+          <p>We may suspend or terminate your account at any time if you violate these Terms or for any other reason at our discretion. You can delete your account at any time by emailing <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a> with the subject "Delete my account", or by following the steps at <a href="https://sporkitapp.com/delete-account">sporkitapp.com/delete-account</a>.</p>
 
           <h2>11. Disclaimers</h2>
           <p>SporkIt is provided "as is" without warranties of any kind. We do not guarantee that the app will be available at all times or that restaurant information will be accurate. SporkIt is not responsible for any dining experience based on content posted on the platform.</p>
