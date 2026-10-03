@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "SporkIt — Your food diary starts here",
   description: "Discover dishes worth trying. Share your honest verdict. Because every meal has a story.",
-  icons: { icon: '/favicon.png' },
+  icons: { icon: '/favicon.png', apple: '/apple-icon.png' },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
