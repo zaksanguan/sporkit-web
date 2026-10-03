@@ -7,6 +7,8 @@ export default function Home() {
         <meta property="og:title" content="SporkIt — Your food diary starts here" />
         <meta property="og:description" content="Discover dishes worth trying. Share your honest verdict. Because every meal has a story." />
         <meta property="og:image" content="https://sporkitapp.com/og-image.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:url" content="https://sporkitapp.com" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="SporkIt" />
