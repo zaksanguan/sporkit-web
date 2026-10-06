@@ -68,7 +68,7 @@ export default async function VideoPage({ params }: Props) {
           .wordmark { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
           .wordmark span { color: #FF8C00; }
           .banner-btn { background: #FF8C00; color: #0F0F0F; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 14px; text-decoration: none; white-space: nowrap; }
-          .page { max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; display: flex; flex-direction: column; gap: 20px; }
+          .page { width: 100%; max-width: 640px; margin: 0 auto; padding: 24px 16px 64px; display: flex; flex-direction: column; gap: 20px; }
           .video-wrap { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; background: #111; }
           .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
           h1 { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
