@@ -53,6 +53,7 @@ export default function PrivacyPage() {
             <li><strong>Location data</strong> — if you grant permission, we use your location to show nearby restaurants and calculate distances. Location is never stored on our servers without your explicit action.</li>
             <li><strong>Content you create</strong> — videos, photos, reviews, sporks, and dish preferences you submit through the app.</li>
             <li><strong>Usage data</strong> — how you interact with the app, including which screens you visit and features you use, to improve the product.</li>
+            <li><strong>Crash and diagnostic data</strong> — if the app crashes or hits an error, we receive a technical report with the error details, your device model, operating system version and app version. We do not intentionally include your name, phone number or other profile details in these reports.</li>
           </ul>
 
           <h2>2. How We Use Your Information</h2>
@@ -63,13 +64,14 @@ export default function PrivacyPage() {
             <li>To display your public profile, reviews, and sporks to other users</li>
             <li>To send you OTP verification codes via SMS (Twilio)</li>
             <li>To detect and prevent spam, abuse, and policy violations</li>
+            <li>To find and fix crashes and bugs</li>
             <li>To improve and develop SporkIt features</li>
           </ul>
 
           <h2>3. What We Share</h2>
           <p>We do not sell your personal information. We share data only in the following circumstances:</p>
           <ul>
-            <li><strong>Service providers</strong> — we use Supabase (database), Twilio (SMS), Bunny.net (video hosting), and Google (Places API, Cloud Vision) to operate the app. These providers process data on our behalf under strict agreements.</li>
+            <li><strong>Service providers</strong> — we use Supabase (database), Twilio (SMS), Bunny.net (video hosting), Sentry (crash and error reports, processed in the United States), and Google (Places API, Cloud Vision) to operate the app. These providers process data on our behalf under strict agreements.</li>
             <li><strong>Public content</strong> — your username, profile photo, reviews, and sporks are visible to other SporkIt users. Videos you post are public by default.</li>
             <li><strong>Legal requirements</strong> — we may disclose information if required by law or to protect the safety of our users.</li>
           </ul>
