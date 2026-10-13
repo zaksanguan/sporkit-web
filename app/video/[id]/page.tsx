@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import HlsPlayer from '../../../components/HlsPlayer'
 import { supabase } from '../../../lib/supabase'
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 async function getVideo(id: string) {
   const { data } = await supabase
     .from('videos')
-    .select('id, thumbnail_url, dish_name, youtube_video_id, restaurant:restaurants(name)')
+    .select('id, thumbnail_url, video_url, source, dish_name, youtube_video_id, restaurant:restaurants(name)')
     .eq('id', id)
     .single()
   return data
@@ -100,6 +101,10 @@ export default async function VideoPage({ params }: Props) {
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
+            </div>
+          ) : video?.source === 'direct_upload' && video.video_url ? (
+            <div className="video-wrap">
+              <HlsPlayer src={video.video_url} poster={video.thumbnail_url} />
             </div>
           ) : video?.thumbnail_url ? (
             <img src={video.thumbnail_url} alt={name} style={{ width: '100%', borderRadius: '12px' }} />
