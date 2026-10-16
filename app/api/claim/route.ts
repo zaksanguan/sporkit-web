@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   if (!body) return Response.json({ error: 'bad_request' }, { status: 400 })
   if (clean(body.website, 100)) return Response.json({ ok: true })  // honeypot: bots fill this, people never see it
 
-  const restaurantName = clean(body.restaurantName, 200)
+  let restaurantName = clean(body.restaurantName, 200)
   const requesterName  = clean(body.requesterName, 120)
   const contact        = clean(body.contact, 200)
   const notes          = clean(body.notes, 1000)
@@ -22,7 +22,16 @@ export async function POST(request: Request) {
   const proofType      = PROOFS.includes(body.proofType) ? body.proofType : null
   const fileType       = typeof body.fileType === 'string' ? body.fileType : ''
   const fileSize       = Number(body.fileSize)
-  const restaurantId   = isUuid(body.restaurantId) ? body.restaurantId : null
+  let restaurantId     = isUuid(body.restaurantId) ? body.restaurantId : null
+
+  const db = supabaseAdmin()
+
+  // Linked claim: the name always comes from the database, never from the browser.
+  let claimStatus: string | null = null
+  if (restaurantId) {
+    const { data: r } = await db.from('restaurants').select('name, claim_status').eq('id', restaurantId).maybeSingle()
+    if (r) { restaurantName = r.name; claimStatus = r.claim_status } else { restaurantId = null }
+  }
 
   if (!restaurantName || !requesterName || !contact || !role || !proofType) {
     return Response.json({ error: 'missing_fields' }, { status: 400 })
@@ -30,18 +39,13 @@ export async function POST(request: Request) {
   if (!TYPES[fileType]) return Response.json({ error: 'bad_file_type' }, { status: 400 })
   if (!(fileSize > 0) || fileSize > MAX_BYTES) return Response.json({ error: 'file_too_big' }, { status: 400 })
 
-  const db = supabaseAdmin()
-
   // Light spam limit: at most 3 requests per contact per day
   const since = new Date(Date.now() - 24 * 3600 * 1000).toISOString()
   const { count } = await db.from('claim_requests').select('id', { count: 'exact', head: true }).eq('contact', contact).gte('created_at', since)
   if ((count ?? 0) >= 3) return Response.json({ error: 'too_many' }, { status: 429 })
 
   // An approved restaurant already has an owner: ask them to email us instead.
-  if (restaurantId) {
-    const { data: r } = await db.from('restaurants').select('claim_status').eq('id', restaurantId).maybeSingle()
-    if (r?.claim_status === 'approved') return Response.json({ error: 'already_claimed' }, { status: 409 })
-  }
+  if (claimStatus === 'approved') return Response.json({ error: 'already_claimed' }, { status: 409 })
 
   const id = crypto.randomUUID()
   const path = `${id}/proof.${TYPES[fileType]}`

@@ -88,7 +88,7 @@ export default function ClaimForm({ restaurantId, restaurantName }: { restaurant
       {restaurantId ? (
         <>
           <label>Restaurant</label>
-          <input value={restaurantName} readOnly />
+          <div style={{ background: '#141414', border: '1px solid #262626', borderRadius: 10, padding: '12px 14px', fontSize: 16, color: '#888888' }}>{restaurantName}</div>
         </>
       ) : (
         <>
