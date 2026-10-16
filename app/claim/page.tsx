@@ -39,10 +39,9 @@ export default async function ClaimPage({ searchParams }: Props) {
         .claim button:disabled { opacity: 0.5; cursor: default; }
       `}} />
       <div className="claim">
-        <h1>Claim your restaurant</h1>
-        <p>Send us proof that you own or manage the restaurant. We check every request by hand.</p>
         {alreadyClaimed ? (
           <>
+            <h1>Claim your restaurant</h1>
             <h2>{restaurant!.name} already has a verified owner</h2>
             <p>If you are the real owner, email <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a> with your proof and we will look into it.</p>
           </>

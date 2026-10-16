@@ -70,8 +70,12 @@ export default function ClaimForm({ restaurantId, restaurantName }: { restaurant
 
   if (done) {
     return (
-      <div>
-        <h2>Request received</h2>
+      <div style={{ textAlign: 'center', paddingTop: 48 }}>
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true" style={{ marginBottom: 16 }}>
+          <circle cx="36" cy="36" r="34" stroke="#1BAF7A" strokeWidth="4" />
+          <path d="M22 37l10 10 18-21" stroke="#1BAF7A" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        <h2 style={{ color: '#FFFFFF' }}>Request received</h2>
         <p>Thank you. We will check your proof and contact you using the details you gave. This can take a few days.</p>
       </div>
     )
@@ -79,6 +83,8 @@ export default function ClaimForm({ restaurantId, restaurantName }: { restaurant
 
   return (
     <form onSubmit={onSubmit}>
+      <h1>Claim your restaurant</h1>
+      <p>Send us proof that you own or manage the restaurant. We check every request by hand.</p>
       {restaurantId ? (
         <>
           <label>Restaurant</label>
