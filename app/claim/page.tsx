@@ -33,6 +33,7 @@ export default async function ClaimPage({ searchParams }: Props) {
         .claim input, .claim select, .claim textarea { width: 100%; background: #1A1A1A; color: #FFFFFF; border: 1px solid #333333; border-radius: 10px; padding: 12px 14px; font-size: 16px; font-family: inherit; }
         .claim input:focus, .claim select:focus, .claim textarea:focus { outline: none; border-color: #FF8C00; }
         .claim input[type=file] { padding: 10px; }
+        .claim select { -webkit-appearance: none; appearance: none; padding-right: 44px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 256 256' fill='none' stroke='%23999999' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'><polyline points='208 96 128 176 48 96'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; }
         .claim .privacy { font-size: 13px; color: #888888; margin-top: 24px; }
         .claim .error { color: #E34948; font-size: 14px; }
         .claim button { width: 100%; margin-top: 8px; background: #FF8C00; color: #0F0F0F; border: 0; border-radius: 999px; padding: 16px; font-size: 17px; font-weight: 700; font-family: inherit; cursor: pointer; }
