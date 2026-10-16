@@ -132,7 +132,7 @@ export default function ClaimForm({ restaurantId, restaurantName }: { restaurant
       </p>
 
       {error && <p className="error">{error}</p>}
-      <button type="submit" disabled={busy}>{busy ? 'Sending...' : 'Send request'}</button>
+      <button type="submit" disabled={busy}>{busy ? 'Submitting...' : 'Submit claim'}</button>
     </form>
   )
 }
