@@ -85,8 +85,13 @@ export default function ClaimForm({ restaurantId, restaurantName }: { restaurant
     <form onSubmit={onSubmit}>
       <h1>Claim your restaurant</h1>
       <p>You are claiming a restaurant on the SporkIt app. Send us proof that you own or manage it. The SporkIt team checks every request by hand.</p>
-      <div className="trust">
-        <h3>We will never ask for money</h3>
+      <div className="trust warn">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 256 256" fill="none" stroke="#FF8C00" strokeWidth="20" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M40 114.7V56a8 8 0 0 1 8-8h160a8 8 0 0 1 8 8v58.7c0 84-54.3 111.2-83.2 120.8a7.8 7.8 0 0 1-5.6 0C94.3 225.9 40 198.7 40 114.7Z" />
+          </svg>
+          We will never ask for money
+        </h3>
         <p>Claiming is free. We will never ask for payment, passwords, bank details or OTP codes, on this page or by message.</p>
       </div>
       {restaurantId ? (

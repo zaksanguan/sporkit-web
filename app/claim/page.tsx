@@ -42,6 +42,9 @@ export default async function ClaimPage({ searchParams }: Props) {
         .wordmark { font-size: 32px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.7px; }
         .wordmark span { color: #FF8C00; }
         .claim .trust { background: #141414; border: 1px solid #262626; border-radius: 10px; padding: 14px 16px; margin: 24px 0 0; }
+        .claim .trust.warn { background: rgba(255,140,0,0.1); border-color: #FF8C00; }
+        .claim .trust.warn h3 { display: flex; align-items: center; gap: 8px; }
+        .claim .trust.warn p { color: #DDDDDD; }
         .claim .trust h3 { font-size: 14px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px; }
         .claim .trust p { font-size: 13px; line-height: 1.6; color: #AAAAAA; margin-bottom: 8px; }
         .claim .trust p:last-child { margin-bottom: 0; }
