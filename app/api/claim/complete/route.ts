@@ -13,6 +13,9 @@ export async function POST(request: Request) {
   const { data: files } = await db.storage.from('claim-proofs').list(id)
   if (!files || files.length === 0) return Response.json({ error: 'no_file' }, { status: 400 })
 
+  // Private file: a signed link that works for 24 hours, sent only to Zak
+  const { data: link } = await db.storage.from('claim-proofs').createSignedUrl(row.proof_path, 24 * 3600)
+
   const key = process.env.RESEND_API_KEY
   const to = process.env.CLAIM_ALERT_TO
   const from = process.env.CLAIM_ALERT_FROM
@@ -26,7 +29,8 @@ export async function POST(request: Request) {
       `Proof type: ${row.proof_type}`,
       `Notes: ${row.notes ?? '-'}`,
       `Request id: ${row.id}`, '',
-      `Proof file: Supabase > Storage > claim-proofs > ${row.proof_path}`,
+      `Proof file (link works for 24 hours): ${link?.signedUrl ?? '(could not create link)'}`,
+      `Stored at: Supabase > Storage > claim-proofs > ${row.proof_path}`,
       'Review it in Supabase > Table Editor > claim_requests.',
     ].join('\n')
     const res = await fetch('https://api.resend.com/emails', {
