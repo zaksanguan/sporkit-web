@@ -87,9 +87,7 @@ export default function ClaimForm({ restaurantId, restaurantName }: { restaurant
       <p>You are claiming a restaurant on the SporkIt app. Send us proof that you own or manage it. The SporkIt team checks every request by hand.</p>
       <div className="trust warn">
         <h3>
-          <svg width="20" height="20" viewBox="0 0 256 256" fill="none" stroke="#FF8C00" strokeWidth="20" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M40 114.7V56a8 8 0 0 1 8-8h160a8 8 0 0 1 8 8v58.7c0 84-54.3 111.2-83.2 120.8a7.8 7.8 0 0 1-5.6 0C94.3 225.9 40 198.7 40 114.7Z" />
-          </svg>
+          <svg width="24" height="24" viewBox="0 0 256 256" fill="#FF8C00" aria-hidden="true"><path d="M208 36H48a20 20 0 0 0-20 20v56c0 54.29 26.32 87.22 48.4 105.29 23.71 19.39 47.44 26 48.44 26.29a12.1 12.1 0 0 0 6.32 0c1-.28 24.73-6.9 48.44-26.29 22.08-18.07 48.4-51 48.4-105.29V56a20 20 0 0 0-20-20m-4 76c0 35.71-13.09 64.69-38.91 86.15A126.3 126.3 0 0 1 128 219.38a126.1 126.1 0 0 1-37.09-21.23C65.09 176.69 52 147.71 52 112V60h152ZM79.51 144.49a12 12 0 1 1 17-17L112 143l47.51-47.52a12 12 0 0 1 17 17l-56 56a12 12 0 0 1-17 0Z" /></svg>
           We will never ask for money
         </h3>
         <p>Claiming is free. We will never ask for payment, passwords, bank details or OTP codes, on this page or by message.</p>
@@ -136,8 +134,11 @@ export default function ClaimForm({ restaurantId, restaurantName }: { restaurant
       {/* Honeypot: hidden from people, bots fill it */}
       <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px' }} />
 
-      <div className="trust">
-        <h3>What we do with your document</h3>
+      <div className="trust ok">
+        <h3>
+          <svg width="24" height="24" viewBox="0 0 256 256" fill="#1BAF7A" aria-hidden="true"><path d="M208 76h-28V56a52 52 0 0 0-104 0v20H48a20 20 0 0 0-20 20v112a20 20 0 0 0 20 20h160a20 20 0 0 0 20-20V96a20 20 0 0 0-20-20M100 56a28 28 0 0 1 56 0v20h-56Zm104 148H52V100h152Zm-60-52a16 16 0 1 1-16-16 16 16 0 0 1 16 16" /></svg>
+          What we do with your document
+        </h3>
         <p>We use it only to check that you own or manage this restaurant. It is stored privately, never shown to anyone, and deleted after review.</p>
         <p>Your information is handled under Thailand's PDPA. Read our <a href="/privacy">Privacy Policy</a>.</p>
       </div>

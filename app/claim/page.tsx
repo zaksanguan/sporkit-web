@@ -34,7 +34,7 @@ export default async function ClaimPage({ searchParams }: Props) {
         .claim input:focus, .claim select:focus, .claim textarea:focus { outline: none; border-color: #FF8C00; }
         .claim input[type=file] { padding: 10px; }
         .claim select { -webkit-appearance: none; appearance: none; padding-right: 44px; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 256 256' fill='none' stroke='%23999999' stroke-width='32' stroke-linecap='round' stroke-linejoin='round'><polyline points='208 96 128 176 48 96'/></svg>"); background-repeat: no-repeat; background-position: right 14px center; }
-        .claim .privacy { font-size: 13px; color: #888888; margin-top: 24px; }
+        
         .claim .error { color: #E34948; font-size: 14px; }
         .logo-link { display: flex; align-items: center; gap: 4px; text-decoration: none; margin-bottom: 32px; }
         .logo-circle { width: 36px; height: 36px; border-radius: 50%; background: #FF8C00; display: flex; align-items: flex-start; justify-content: center; overflow: visible; flex-shrink: 0; }
@@ -43,14 +43,16 @@ export default async function ClaimPage({ searchParams }: Props) {
         .wordmark span { color: #FF8C00; }
         .claim .trust { background: #141414; border: 1px solid #262626; border-radius: 10px; padding: 14px 16px; margin: 24px 0 0; }
         .claim .trust.warn { background: rgba(255,140,0,0.1); border-color: #FF8C00; }
-        .claim .trust.warn h3 { display: flex; align-items: center; gap: 8px; }
+        .claim .trust.ok { background: rgba(27,175,122,0.1); border-color: #1BAF7A; margin-top: 32px; }
+        .claim .trust.warn h3, .claim .trust.ok h3 { display: flex; align-items: center; gap: 8px; }
+        .claim .trust.ok p { color: #DDDDDD; }
         .claim .trust.warn p { color: #DDDDDD; }
         .claim .trust h3 { font-size: 14px; font-weight: 700; color: #FFFFFF; margin-bottom: 6px; }
         .claim .trust p { font-size: 13px; line-height: 1.6; color: #AAAAAA; margin-bottom: 8px; }
         .claim .trust p:last-child { margin-bottom: 0; }
         .claim .footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid #222222; font-size: 13px; color: #888888; }
         .claim .footer p { font-size: 13px; color: #888888; margin-bottom: 6px; }
-        .claim button { width: 100%; margin-top: 8px; background: #FF8C00; color: #0F0F0F; border: 0; border-radius: 999px; padding: 16px; font-size: 17px; font-weight: 700; font-family: inherit; cursor: pointer; }
+        .claim button { width: 100%; margin-top: 32px; background: #FF8C00; color: #0F0F0F; border: 0; border-radius: 999px; padding: 16px; font-size: 17px; font-weight: 700; font-family: inherit; cursor: pointer; }
         .claim button:disabled { opacity: 0.5; cursor: default; }
       `}} />
       <div className="claim">
