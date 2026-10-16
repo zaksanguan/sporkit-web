@@ -84,7 +84,11 @@ export default function ClaimForm({ restaurantId, restaurantName }: { restaurant
   return (
     <form onSubmit={onSubmit}>
       <h1>Claim your restaurant</h1>
-      <p>Send us proof that you own or manage the restaurant. We check every request by hand.</p>
+      <p>You are claiming a restaurant on the SporkIt app. Send us proof that you own or manage it. The SporkIt team checks every request by hand.</p>
+      <div className="trust">
+        <h3>We will never ask for money</h3>
+        <p>Claiming is free. We will never ask for payment, passwords, bank details or OTP codes, on this page or by message.</p>
+      </div>
       {restaurantId ? (
         <>
           <label>Restaurant</label>
@@ -127,9 +131,11 @@ export default function ClaimForm({ restaurantId, restaurantName }: { restaurant
       {/* Honeypot: hidden from people, bots fill it */}
       <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px' }} />
 
-      <p className="privacy">
-        We use your document only to check that you own or manage this restaurant. It is stored privately, never shown to anyone, and deleted after review.
-      </p>
+      <div className="trust">
+        <h3>What we do with your document</h3>
+        <p>We use it only to check that you own or manage this restaurant. It is stored privately, never shown to anyone, and deleted after review.</p>
+        <p>Your information is handled under Thailand's PDPA. Read our <a href="/privacy">Privacy Policy</a>.</p>
+      </div>
 
       {error && <p className="error">{error}</p>}
       <button type="submit" disabled={busy}>{busy ? 'Submitting...' : 'Submit claim'}</button>
