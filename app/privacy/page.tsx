@@ -99,7 +99,7 @@ export default function PrivacyPage() {
           <p>To exercise these rights, contact us at <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a>.</p>
 
           <h2>9. Children</h2>
-          <p>SporkIt is not intended for users under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal data, please contact us and we will delete it promptly.</p>
+          <p>SporkIt is not intended for users under the age of 18. We do not knowingly collect personal information from children. If you believe a child has provided us with personal data, please contact us and we will delete it promptly.</p>
 
           <h2>10. Changes to This Policy</h2>
           <p>We may update this Privacy Policy from time to time. When we do, we will update the date at the top of this page. Continued use of SporkIt after changes constitutes acceptance of the updated policy.</p>
