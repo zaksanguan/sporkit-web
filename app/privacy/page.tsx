@@ -86,7 +86,7 @@ export default function PrivacyPage() {
           <p>Videos and photos you upload may be scanned by Google Cloud Vision API for safety compliance before being published. This is an automated process to detect inappropriate content. Images are not stored by Google beyond the scan.</p>
 
           <h2>7. Data Retention</h2>
-          <p>We keep your account data for as long as your account is active. When you delete your account, your profile, phone number, sporks, saved places, reviews, videos, photos and dish preferences are deleted within 30 days. Encrypted backups are removed within 30 days. Reports about rule-breaking content may be kept without your profile details.</p>
+          <p>We keep your account data for as long as your account is active. When you delete your account in the app, your profile, phone number, sporks, saved places, reviews, videos, photos and dish preferences are deleted straight away. If you ask by email instead, we delete them within 30 days. Encrypted backups are removed within 30 days. Reports about rule-breaking content may be kept without your profile details.</p>
 
           <h2>8. Your Rights</h2>
           <p>You have the right to:</p>

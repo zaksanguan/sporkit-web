@@ -43,9 +43,16 @@ export default function DeleteAccountPage() {
           <h1>Delete your SporkIt account</h1>
           <p className="meta">Last updated: October 2026</p>
 
-          <p>SporkIt is an app by SporkIt (sporkitapp.com). You can ask us to delete your account and the data linked to it at any time.</p>
+          <p>SporkIt is an app by SporkIt (sporkitapp.com). You can delete your account and the data linked to it at any time.</p>
 
-          <h2>How to request deletion</h2>
+          <h2>Delete in the app</h2>
+          <ol>
+            <li>Open SporkIt and go to your profile.</li>
+            <li>Tap the menu, then Settings.</li>
+            <li>Tap Delete account and confirm. Your account and data are deleted straight away.</li>
+          </ol>
+
+          <h2>Or request deletion by email</h2>
           <ol>
             <li>Send an email to <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a> with the subject "Delete my account".</li>
             <li>Write the phone number you use to log in to SporkIt (including country code, for example +66...). We use it to find your account.</li>
