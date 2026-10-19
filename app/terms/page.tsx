@@ -46,7 +46,7 @@ export default function TermsPage() {
           <p>Welcome to SporkIt. By downloading, installing, or using the SporkIt app or website (sporkitapp.com), you agree to be bound by these Terms of Service. If you do not agree, do not use SporkIt.</p>
 
           <h2>1. Who Can Use SporkIt</h2>
-          <p>You must be at least 13 years old to use SporkIt. By creating an account, you confirm that you meet this requirement. SporkIt is currently available in Thailand and is operated by Zak Sanguanshua, Bangkok, Thailand.</p>
+          <p>You must be at least 18 years old to use SporkIt. By creating an account, you confirm that you meet this requirement. SporkIt is currently available in Thailand and is operated by Zak Sanguanshua, Bangkok, Thailand.</p>
 
           <h2>2. Your Account</h2>
           <p>You register using your phone number. You are responsible for all activity that occurs under your account. Keep your access secure and do not share your OTP codes with anyone.</p>
