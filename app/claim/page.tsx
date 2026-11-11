@@ -75,7 +75,7 @@ export default async function ClaimPage({ searchParams }: Props) {
           <ClaimForm restaurantId={restaurant?.id ?? null} restaurantName={restaurant?.name ?? ''} />
         )}
       </div>
-      <SiteFooter />
+      <SiteFooter narrow={560} />
     </>
   )
 }

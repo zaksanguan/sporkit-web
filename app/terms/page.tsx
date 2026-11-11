@@ -111,7 +111,7 @@ export default function TermsPage() {
           <p>For questions about these Terms, contact us at <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a>.</p>
 
         </div>
-        <SiteFooter />
+        <SiteFooter narrow={680} />
       </body>
     </html>
   )

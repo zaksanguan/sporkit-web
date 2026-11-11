@@ -1,9 +1,13 @@
 import Image from "next/image";
 
 // One footer for the whole site (landing, Terms, Privacy, Account deletion, Claim).
-export default function SiteFooter() {
+export default function SiteFooter({ narrow }: { narrow?: number }) {
+  // `narrow` = stacked layout inside a column of that many px (legal + claim pages).
   return (
-    <footer className="site-footer">
+    <footer
+      className={narrow ? "site-footer site-footer-narrow" : "site-footer"}
+      style={narrow ? ({ "--footer-w": `${narrow}px` } as React.CSSProperties) : undefined}
+    >
       <a className="site-footer-brand" href="/" aria-label="SporkIt home">
         <Image src="/landing/fork-mark.svg" alt="" width={28} height={28} loading="eager" />
         <span className="site-footer-word">

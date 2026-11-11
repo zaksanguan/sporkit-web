@@ -77,7 +77,7 @@ export default function DeleteAccountPage() {
           </ul>
 
         </div>
-        <SiteFooter />
+        <SiteFooter narrow={680} />
       </body>
     </html>
   )

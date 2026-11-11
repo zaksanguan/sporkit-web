@@ -111,7 +111,7 @@ export default function PrivacyPage() {
           <p>SporkIt is operated by Zak Sanguanshua, Bangkok, Thailand.</p>
 
         </div>
-        <SiteFooter />
+        <SiteFooter narrow={680} />
       </body>
     </html>
   )
