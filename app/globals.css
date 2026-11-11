@@ -231,6 +231,7 @@ ul { list-style: none; }
 .latest-rest { font-family: var(--font-ui); font-size: 15px; color: var(--secondary); }
 .latest-by { font-family: var(--font-ui); font-size: 13px; color: var(--secondary); margin-top: 4px; }
 
+.latest-dots { display: none; }
 .modal {
   position: fixed; inset: 0; z-index: 100; background: var(--overlay);
   display: flex; align-items: center; justify-content: center; padding: 16px;
@@ -259,6 +260,15 @@ ul { list-style: none; }
   }
   .latest-grid::-webkit-scrollbar { display: none; }
   .latest-card { flex: 0 0 min(78%, 300px); scroll-snap-align: start; }
+  .latest-dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: -8px; }
+  /* same look as the app's step indicator: 8px dots, active one is a 24x8 orange pill */
+  .latest-dot {
+    width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; cursor: pointer;
+    background: rgba(255, 255, 255, 0.2); transition: width 0.25s ease, background-color 0.25s ease;
+    position: relative;
+  }
+  .latest-dot::after { content: ""; position: absolute; inset: -12px -6px; } /* bigger tap area */
+  .latest-dot-on { width: 24px; background: var(--orange); }
 }
 
 /* ---------- stacked footer (legal + claim pages) ---------- */
