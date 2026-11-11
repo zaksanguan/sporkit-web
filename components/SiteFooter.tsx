@@ -17,7 +17,7 @@ export default function SiteFooter({ narrow }: { narrow?: number }) {
       <p className="site-footer-copy">© 2026 SporkIt. All rights reserved.</p>
       <nav className="site-footer-links" aria-label="Footer">
         <a href="/terms">Terms of Service</a>
-        <a href="/privacy">Privacy</a>
+        <a href="/privacy">Privacy Policy</a>
         <a href="/delete-account">Account deletion</a>
         <a href="mailto:contact@sporkitapp.com">Contact</a>
       </nav>
