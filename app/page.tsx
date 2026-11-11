@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
 import SpinWheel from "@/components/SpinWheel";
+import SpinDemo from "@/components/SpinDemo";
 import LatestPosts from "@/components/LatestPosts";
 import SiteFooter from "@/components/SiteFooter";
 import { getLatestPosts } from "@/lib/latestPosts";
@@ -133,8 +134,8 @@ export default async function Home() {
               <Image
                 src="/landing/hero.webp"
                 alt="A table of dishes on SporkIt"
-                width={1384}
-                height={822}
+                width={1594}
+                height={1158}
                 priority
                 sizes="(max-width: 900px) 100vw, 760px"
               />
@@ -169,7 +170,9 @@ export default async function Home() {
         <section className="section" id="latest">
           <div className="head">
             <h2>What people are eating</h2>
-            <p>Latest dishes worth trying, shared by real people on SporkIt.</p>
+            <p>
+              Latest dishes worth trying,<br className="br-narrow" /> shared by real people on SporkIt.
+            </p>
           </div>
           <LatestPosts posts={latest} />
         </section>
@@ -191,10 +194,13 @@ export default async function Home() {
         <div className="steps">
           <div className="step">
             <div className="step-text">
-              <p className="step-title">Save it</p>
+              <p className="step-title">
+                <BookmarkIcon />
+                Save it
+              </p>
               <p>
-                Spot a place you like? Tap Want to go to save it, or{" "}
-                <strong>Ate here</strong> if you’ve been.
+                Spot a place you like? Tap Want to go to save it,
+                <br className="br-steps" /> or <strong>Ate here</strong> if you’ve been.
               </p>
             </div>
             <Sheet title="Restaurant" subtitle="What do you think?">
@@ -218,9 +224,13 @@ export default async function Home() {
           </div>
           <div className="step">
             <div className="step-text">
-              <p className="step-title">Give your verdict</p>
+              <p className="step-title">
+                <StoreCheckIcon />
+                Give your verdict
+              </p>
               <p>
-                Been there? Tell us honestly: would you go back? Yes or no.
+                Been there? Tell us honestly:
+                <br className="br-steps" /> would you go back? Yes or no.
               </p>
             </div>
             <Sheet title="Restaurant" subtitle="What do you think?">
@@ -234,10 +244,13 @@ export default async function Home() {
           </div>
           <div className="step">
             <div className="step-text">
-              <p className="step-title">Judge the dish</p>
+              <p className="step-title">
+                <CookieIcon />
+                Judge the dish
+              </p>
               <p>
-                Was it worth the bite? How did it taste to you? Tell us if
-                you’d order it again.
+                Was it worth the bite? How did it taste to you?
+                <br className="br-steps" /> Tell us if you’d order it again.
               </p>
             </div>
             <Sheet title="Dish" subtitle="How was this dish?">
@@ -263,7 +276,7 @@ export default async function Home() {
         </div>
         <ul className="features">
           <Feature title="Honest verdicts" icon="fork-mark">
-            No stars. Rated by how many people would go back, or order it again
+            No stars. Rated by who would go back, or order it again.
           </Feature>
           <Feature title="See the dish" icon="camera">
             Short videos of the real dish, so you know what you’re ordering.
@@ -286,6 +299,7 @@ export default async function Home() {
             a dish.
           </p>
         </div>
+        <SpinDemo />
         <div className="wheels">
           <div className="wheel-col">
             <h3>Pick a category</h3>
@@ -311,7 +325,7 @@ export default async function Home() {
             />
             <div className="result">
               <p className="result-label">You got:</p>
-              <p className="result-value">🍛 Italian</p>
+              <p className="result-value">Italian</p>
             </div>
           </div>
         </div>
@@ -320,10 +334,11 @@ export default async function Home() {
       {/* RESTAURANTS */}
       <section className="section section-band" id="restaurants">
         <div className="head">
-          <h2>Own a restaurant? Meet your diners</h2>
+          <h2>
+            Own a restaurant?<br className="br-narrow" /> Meet your diners
+          </h2>
           <p>
-            Claim your restaurant on SporkIt and see how people feel about it,
-            honestly and anonymously.
+            Claim your restaurant on SporkIt<br className="br-narrow" /> and see how people feel about it,<br className="br-narrow" /> honestly and anonymously.
           </p>
         </div>
         <ul className="features">
@@ -348,7 +363,9 @@ export default async function Home() {
       {/* CLOSING BAND */}
       <section className="closing">
         <div className="head head-dark">
-          <h2>Your next meal is worth it.</h2>
+          <h2>
+            Your next meal<br className="br-narrow" /> is worth it.
+          </h2>
           <p>Your food diary starts here.</p>
         </div>
         <div className="stack-3">

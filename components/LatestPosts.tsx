@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HlsPlayer from "@/components/HlsPlayer";
 import { CloseIcon } from "@/components/Icons";
 import type { LatestPost } from "@/lib/latestPosts";
@@ -19,6 +19,28 @@ function timeAgo(iso: string): string {
 export default function LatestPosts({ posts }: { posts: LatestPost[] }) {
   const [open, setOpen] = useState<LatestPost | null>(null);
   const [ago, setAgo] = useState<Record<string, string>>({});
+  const rowRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  // Which card is at the left edge of the swipe row (phones/tablets); the last dot lights at the very end.
+  const onScroll = () => {
+    const row = rowRef.current;
+    if (!row) return;
+    const cards = Array.from(row.children) as HTMLElement[];
+    if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 4) return setActive(cards.length - 1);
+    let best = 0;
+    cards.forEach((c, i) => {
+      if (Math.abs(c.offsetLeft - parseFloat(getComputedStyle(row).paddingLeft) - row.scrollLeft) <
+          Math.abs(cards[best].offsetLeft - parseFloat(getComputedStyle(row).paddingLeft) - row.scrollLeft)) best = i;
+    });
+    setActive(best);
+  };
+  const goTo = (i: number) => {
+    const row = rowRef.current;
+    const card = row?.children[i] as HTMLElement | undefined;
+    if (!row || !card) return;
+    row.scrollTo({ left: card.offsetLeft - parseFloat(getComputedStyle(row).paddingLeft), behavior: "smooth" });
+  };
 
   // Relative times are computed in the browser so the cached page never shows a stale "2 min ago".
   useEffect(() => {
@@ -39,7 +61,7 @@ export default function LatestPosts({ posts }: { posts: LatestPost[] }) {
 
   return (
     <>
-      <div className="latest-grid">
+      <div className="latest-grid" ref={rowRef} onScroll={onScroll}>
         {posts.map((p) => (
           <button key={p.id} type="button" className="latest-card" onClick={() => setOpen(p)}>
             <span className="latest-thumb">
@@ -59,6 +81,19 @@ export default function LatestPosts({ posts }: { posts: LatestPost[] }) {
               </span>
             </span>
           </button>
+        ))}
+      </div>
+
+      <div className="latest-dots" aria-hidden="false">
+        {posts.map((p, i) => (
+          <button
+            key={p.id}
+            type="button"
+            className={i === active ? "latest-dot latest-dot-on" : "latest-dot"}
+            aria-label={`Show post ${i + 1} of ${posts.length}`}
+            aria-current={i === active}
+            onClick={() => goTo(i)}
+          />
         ))}
       </div>
 

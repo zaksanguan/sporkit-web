@@ -63,6 +63,30 @@ ul { list-style: none; }
 }
 .hero-photo { flex: 1.5 1 0; min-width: 0; max-width: 760px; }
 .hero-photo img { width: 100%; height: auto; display: block; }
+/* desktop/tablet: the dishes hang over the bottom edge of the hero into the next section */
+@media (min-width: 901px) {
+  .hero { position: relative; z-index: 2; padding-bottom: 56px; }
+  /* the image hangs --overhang below the hero line; the 56px keeps the text off the line */
+  .hero-photo { --overhang: min(6.2vw, 80px); --drop: 16px; position: relative; isolation: isolate; align-self: flex-end; margin-bottom: calc(-1 * (var(--overhang) + 56px)); }
+  /* room under the hanging dishes so the cheese never touches the next heading */
+  .hero + .section { padding-top: 96px; }
+  /* shadow cast ONLY by the part that hangs over the edge: a blurred black copy of the image,
+     moved down and clipped to everything below the hero's bottom line */
+  .hero-photo::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: url(/landing/hero.webp) center / 100% 100% no-repeat;
+    filter: brightness(0) blur(12px); opacity: 0.85;
+    transform: translateY(var(--drop));
+    clip-path: inset(calc(100% - var(--overhang) - var(--drop)) -80px -80px -80px);
+  }
+}
+/* tablet / small laptop (901-1199px): logo centred over the whole hero, slightly smaller heading */
+@media (min-width: 901px) and (max-width: 1199px) {
+  .hero-inner { position: relative; padding-top: 162px; }
+  .hero-logo { position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
+  .hero h1 { font-size: 28px; text-wrap: balance; }
+  .lede { text-wrap: balance; }
+}
 .hero-copy { flex: 1 1 0; max-width: 460px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .hero-logo { width: 171px; height: auto; }
 .hero h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.096px; line-height: 1.15; }
@@ -76,10 +100,24 @@ ul { list-style: none; }
 .steps { width: 100%; max-width: var(--max); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; align-items: stretch; }
 .step { display: flex; flex-direction: column; gap: 16px; align-items: center; min-width: 0; }
 .step-text {
-  width: 100%; background: var(--overlay); border-radius: 8px; padding: 16px;
+  width: 100%;
   display: flex; flex-direction: column; gap: 16px; text-align: center; line-height: 1.3;
 }
-.step-title { color: var(--orange); font-weight: 800; }
+.br-steps { display: none; }
+.step-text p { text-wrap: balance; }
+@media (min-width: 1200px) { .step { gap: 32px; } .br-steps { display: inline; } }
+/* three columns only when they really fit; below that the steps stack */
+@media (max-width: 1199px) {
+  .steps { grid-template-columns: minmax(0, 1fr); gap: 48px; justify-items: center; }
+  .step { width: 100%; max-width: 402px; }
+}
+.step-title { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 20px; font-weight: 800; }
+/* the shared icons are drawn in white; colour them orange here */
+.step-title svg { flex: none; }
+.step-title svg [fill="white"] { fill: var(--orange); }
+.step-title svg [stroke="white"] { stroke: var(--orange); stroke-width: 2.5; }
+/* outline icons in the sheet mockups get the same heavier stroke (the filled store-check icon is left as drawn) */
+.sheet svg [stroke="white"] { stroke-width: 2.5; }
 .step-text strong { font-weight: 800; }
 
 .sheet {
@@ -93,11 +131,14 @@ ul { list-style: none; }
 .sheet-close { position: absolute; top: 12px; right: 12px; }
 .sheet-head { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .sheet-title { font-size: 20px; font-weight: 700; letter-spacing: -0.06px; }
-.sheet-sub { font-size: 15px; font-weight: 700; color: var(--secondary); }
+.sheet-sub { font-size: 15px; font-weight: 700; }
+/* the sheet frame is muted so the eye goes to the part the step is about */
+.sheet-title, .sheet-sub { color: rgba(255, 255, 255, 0.16); }
+.sheet-head { filter: blur(2.5px); }
 
 .row { border-radius: 10px; padding: 12px; }
 .row-plain { background: var(--elevated); border: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
-.row-plain + .row-plain { margin-top: 0; }
+.row-plain + .row-plain { margin-top: -8px; } /* sheet gap 16px -> 8px between the two choices */
 .row-vote { background: var(--overlay); border: 1px solid var(--border-strong); display: flex; flex-direction: column; gap: 8px; }
 .row-main { display: flex; align-items: center; gap: 8px; }
 .row-text { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
@@ -118,6 +159,9 @@ ul { list-style: none; }
 .feature { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .feature h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.06px; }
 .feature p { line-height: 1.3; max-width: 260px; }
+.feature p { text-wrap: balance; }
+/* below 1200px four columns are too tight: two columns */
+@media (max-width: 1199px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 48px; } }
 
 /* ---------- spin wheel ---------- */
 .wheels { width: 100%; max-width: var(--max); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; align-items: start; }
@@ -138,6 +182,23 @@ ul { list-style: none; }
 .result { display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--font-ui); letter-spacing: 0; }
 .result-label { font-size: 17px; font-weight: 700; color: var(--secondary); }
 .result-value { font-size: 32px; font-weight: 800; letter-spacing: 0.16px; }
+
+.spin-demo { display: none; }
+.result-note { font-family: var(--font-ui); font-size: 15px; color: var(--secondary); }
+.pill { font-family: var(--font-ui); color: inherit; }
+button.pill { cursor: pointer; }
+button.pill:disabled { cursor: default; opacity: 0.6; }
+.pill.pill-on { color: var(--inverted); }
+.pill:focus-visible, .spin-btn:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+button.spin-btn { border: 0; cursor: pointer; }
+@media (max-width: 900px) {
+  /* phones/tablets: one interactive wheel instead of the three pictures */
+  .wheels { display: none; }
+  .spin-demo { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 335px; }
+  .spin-demo-action { min-height: 48px; display: flex; align-items: center; justify-content: center; }
+  .spin-demo-result { min-height: 112px; }
+  .spin-demo-hint { font-family: var(--font-ui); font-size: 13px; color: var(--secondary); text-align: center; text-wrap: balance; }
+}
 
 /* ---------- claim CTA ---------- */
 .cta {
@@ -174,6 +235,7 @@ ul { list-style: none; }
 .site-footer-tiktok { display: flex; }
 
 /* ---------- responsive ---------- */
+.br-narrow { display: none; }
 @media (max-width: 1100px) {
   .site-footer { padding: 40px var(--gutter); flex-wrap: wrap; }
   .site-footer-copy { flex-basis: 100%; order: 3; }
@@ -185,14 +247,48 @@ ul { list-style: none; }
   .steps, .wheels { grid-template-columns: minmax(0, 1fr); gap: 48px; justify-items: center; }
   .step, .wheel-col { width: 100%; max-width: 402px; }
   .br-wide { display: none; }
+  .hero h1, .lede, .head p { text-wrap: balance; }
+  /* phones/tablets: logo first, then the food photo, then the text */
+  .hero-inner { gap: 24px; }
+  .hero-copy { display: contents; }
+  .hero-logo { order: 1; }
+  .hero-photo { order: 2; }
+  .hero-copy > .stack-2 { order: 3; }
+  .hero-copy > .stack-3 { order: 4; }
+  .hero-copy > .stack-2, .hero-copy > .stack-3 { width: 100%; max-width: 460px; text-align: center; }
 }
 @media (max-width: 560px) {
+  .br-narrow { display: inline; }
   .section, .closing { padding-top: 56px; padding-bottom: 56px; }
   .hero { padding-top: 40px; padding-bottom: 56px; }
   .head h2, .closing h2, .hero h1 { font-size: 28px; }
   .features { grid-template-columns: minmax(0, 1fr); }
+  /* compact list on phones (Eat where it's worth it): icon left, title + text right */
+  #worth-it .features, #restaurants .features { row-gap: 0; gap: 32px; max-width: 420px; }
+  #worth-it .feature,
+  #restaurants .feature {
+    display: grid; grid-template-columns: 32px minmax(0, 1fr); column-gap: 16px; row-gap: 4px;
+    align-items: start; text-align: left;
+  }
+  #worth-it .feature img, #restaurants .feature img { grid-column: 1; grid-row: 1 / span 2; width: 32px; height: 32px; }
+  #worth-it .feature h3, #restaurants .feature h3 { grid-column: 2; grid-row: 1; }
+  #worth-it .feature p, #restaurants .feature p { grid-column: 2; grid-row: 2; max-width: none; text-wrap: pretty; }
   .site-footer-links { gap: 12px 16px; }
   .site-footer-links a + a::before { display: none; }
+  /* home footer on phones = same arrangement as the legal pages: links left, TikTok right */
+  .site-footer:not(.site-footer-narrow) {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px; row-gap: 20px; align-items: center;
+  }
+  .site-footer:not(.site-footer-narrow) .site-footer-brand { grid-column: 1 / 3; grid-row: 1; }
+  .site-footer:not(.site-footer-narrow) .site-footer-links { grid-column: 1; grid-row: 2; }
+  .site-footer:not(.site-footer-narrow) .site-footer-tiktok { grid-column: 2; grid-row: 2; align-self: start; }
+  .site-footer:not(.site-footer-narrow) .site-footer-copy { grid-column: 1 / 3; grid-row: 3; flex: none; }
+}
+
+@media (max-width: 400px) {
+  /* keep the two answer buttons from touching on 360px phones */
+  .vote-buttons { gap: 6px; }
+  .btn-ghost, .btn-orange { font-size: 17px; padding-left: 10px; padding-right: 10px; white-space: nowrap; }
 }
 
 /* ---------- latest posts + video modal ---------- */
@@ -220,6 +316,7 @@ ul { list-style: none; }
 .latest-rest { font-family: var(--font-ui); font-size: 15px; color: var(--secondary); }
 .latest-by { font-family: var(--font-ui); font-size: 13px; color: var(--secondary); margin-top: 4px; }
 
+.latest-dots { display: none; }
 .modal {
   position: fixed; inset: 0; z-index: 100; background: var(--overlay);
   display: flex; align-items: center; justify-content: center; padding: 16px;
@@ -239,8 +336,24 @@ ul { list-style: none; }
 .modal-link { font-family: var(--font-ui); font-size: 14px; font-weight: 600; color: var(--orange); margin-top: 8px; }
 
 @media (max-width: 900px) {
-  .latest-grid { grid-template-columns: 1fr; max-width: 420px; }
-  .latest-thumb { aspect-ratio: 1 / 1; }
+  /* phones/tablets: swipeable row, the next card peeks in from the right */
+  .latest-grid {
+    display: flex; gap: 16px; max-width: none;
+    width: calc(100% + 2 * var(--gutter)); margin: 0 calc(-1 * var(--gutter));
+    padding: 0 var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter); -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .latest-grid::-webkit-scrollbar { display: none; }
+  .latest-card { flex: 0 0 min(78%, 300px); scroll-snap-align: start; }
+  .latest-dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: -8px; }
+  /* same look as the app's step indicator: 8px dots, active one is a 24x8 orange pill */
+  .latest-dot {
+    width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; cursor: pointer;
+    background: rgba(255, 255, 255, 0.2); transition: width 0.25s ease, background-color 0.25s ease;
+    position: relative;
+  }
+  .latest-dot::after { content: ""; position: absolute; inset: -12px -6px; } /* bigger tap area */
+  .latest-dot-on { width: 24px; background: var(--orange); }
 }
 
 /* ---------- stacked footer (legal + claim pages) ---------- */
@@ -252,7 +365,7 @@ ul { list-style: none; }
 .site-footer-narrow .site-footer-brand { grid-column: 1; grid-row: 1; }
 .site-footer-narrow .site-footer-copy { grid-column: 2 / 4; grid-row: 1; flex: none; }
 .site-footer-narrow .site-footer-links { grid-column: 1 / 3; grid-row: 2; }
-.site-footer-narrow .site-footer-tiktok { grid-column: 3; grid-row: 2; }
+.site-footer-narrow .site-footer-tiktok { grid-column: 3; grid-row: 2; align-self: start; }
 @media (max-width: 560px) {
   .site-footer.site-footer-narrow { padding: 32px 24px 48px; }
   .site-footer-narrow .site-footer-copy { grid-column: 1 / 4; grid-row: 3; }

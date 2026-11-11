@@ -38,9 +38,9 @@ function polar(r: number, deg: number) {
   return [C + r * Math.cos(a), C + r * Math.sin(a)] as const;
 }
 
-export default function SpinWheel({ lit = {}, label }: { lit?: Lit; label: string }) {
+export default function SpinWheel({ lit = {}, label, labels = CUISINES }: { lit?: Lit; label: string; labels?: string[] }) {
   // The centre logo points at the picked slice (straight up while nothing is picked).
-  const picked = CUISINES.findIndex((name) => lit[name] === "hot");
+  const picked = labels.findIndex((name) => lit[name] === "hot");
   const pointAt = picked >= 0 ? picked * 45 + 22.5 : 0;
   return (
     <svg
@@ -49,7 +49,7 @@ export default function SpinWheel({ lit = {}, label }: { lit?: Lit; label: strin
       role="img"
       aria-label={label}
     >
-      {CUISINES.map((name, i) => {
+      {labels.map((name, i) => {
         const state = lit[name];
         const fill = state === "hot" ? "#FF8C00" : state === "warm" ? "#C96F00" : "#222222";
         const textFill = state ? "#0F0F0F" : "rgba(255,255,255,0.55)";
