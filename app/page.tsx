@@ -325,7 +325,7 @@ export default async function Home() {
             />
             <div className="result">
               <p className="result-label">You got:</p>
-              <p className="result-value">🍝 Italian</p>
+              <p className="result-value">Italian</p>
             </div>
           </div>
         </div>

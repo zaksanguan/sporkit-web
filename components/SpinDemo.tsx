@@ -5,40 +5,40 @@
 import { useEffect, useRef, useState } from "react";
 import SpinWheel from "@/components/SpinWheel";
 
-type Item = { label: string; emoji: string; note?: string };
+type Item = { label: string; note?: string };
 type Tab = "Nearby" | "Cuisines" | "Dishes";
 const TABS: Tab[] = ["Nearby", "Cuisines", "Dishes"];
 
 const DATA: Record<Tab, Item[]> = {
   Nearby: [
-    { label: "Baan Noodle", emoji: "🍜", note: "0.4 km away" },
-    { label: "Som Tam Hut", emoji: "🥗", note: "0.6 km away" },
-    { label: "Pizza Alley", emoji: "🍕", note: "0.8 km away" },
-    { label: "Wok Station", emoji: "🥡", note: "1.1 km away" },
-    { label: "Grill House", emoji: "🍖", note: "1.3 km away" },
-    { label: "Taco Cart", emoji: "🌮", note: "1.6 km away" },
-    { label: "Curry Pot", emoji: "🍛", note: "2.0 km away" },
-    { label: "Sushi Corner", emoji: "🍣", note: "2.4 km away" },
+    { label: "Baan Noodle", note: "0.4 km away" },
+    { label: "Som Tam Hut", note: "0.6 km away" },
+    { label: "Pizza Alley", note: "0.8 km away" },
+    { label: "Wok Station", note: "1.1 km away" },
+    { label: "Grill House", note: "1.3 km away" },
+    { label: "Taco Cart", note: "1.6 km away" },
+    { label: "Curry Pot", note: "2.0 km away" },
+    { label: "Sushi Corner", note: "2.4 km away" },
   ],
   Cuisines: [
-    { label: "Mexican", emoji: "🌮" },
-    { label: "Thai", emoji: "🍜" },
-    { label: "Japanese", emoji: "🍣" },
-    { label: "Korean", emoji: "🥘" },
-    { label: "Chinese", emoji: "🥟" },
-    { label: "Italian", emoji: "🍝" },
-    { label: "Vietnamese", emoji: "🥖" },
-    { label: "Indian", emoji: "🍛" },
+    { label: "Mexican" },
+    { label: "Thai" },
+    { label: "Japanese" },
+    { label: "Korean" },
+    { label: "Chinese" },
+    { label: "Italian" },
+    { label: "Vietnamese" },
+    { label: "Indian" },
   ],
   Dishes: [
-    { label: "Pad Thai", emoji: "🍜" },
-    { label: "Ramen", emoji: "🍜" },
-    { label: "Pizza", emoji: "🍕" },
-    { label: "Burger", emoji: "🍔" },
-    { label: "Sushi", emoji: "🍣" },
-    { label: "Tacos", emoji: "🌮" },
-    { label: "Som Tam", emoji: "🥗" },
-    { label: "Dumplings", emoji: "🥟" },
+    { label: "Pad Thai" },
+    { label: "Ramen" },
+    { label: "Pizza" },
+    { label: "Burger" },
+    { label: "Sushi" },
+    { label: "Tacos" },
+    { label: "Som Tam" },
+    { label: "Dumplings" },
   ],
 };
 
@@ -143,7 +143,7 @@ export default function SpinDemo() {
           <>
             <p className="result-label">You got:</p>
             <p className="result-value">
-              {result.emoji} {result.label}
+              {result.label}
             </p>
             {result.note && <p className="result-note">{result.note}</p>}
           </>
