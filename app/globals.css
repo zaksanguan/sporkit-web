@@ -107,11 +107,13 @@ ul { list-style: none; }
 .sheet-close { position: absolute; top: 12px; right: 12px; }
 .sheet-head { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .sheet-title { font-size: 20px; font-weight: 700; letter-spacing: -0.06px; }
-.sheet-sub { font-size: 15px; font-weight: 700; color: var(--secondary); }
+.sheet-sub { font-size: 15px; font-weight: 700; }
+/* the sheet frame is muted so the eye goes to the part the step is about */
+.sheet-title, .sheet-sub { color: rgba(255, 255, 255, 0.4); }
 
 .row { border-radius: 10px; padding: 12px; }
 .row-plain { background: var(--elevated); border: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
-.row-plain + .row-plain { margin-top: 0; }
+.row-plain + .row-plain { margin-top: -8px; } /* sheet gap 16px -> 8px between the two choices */
 .row-vote { background: var(--overlay); border: 1px solid var(--border-strong); display: flex; flex-direction: column; gap: 8px; }
 .row-main { display: flex; align-items: center; gap: 8px; }
 .row-text { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
