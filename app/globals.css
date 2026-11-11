@@ -66,9 +66,9 @@ ul { list-style: none; }
 /* desktop/tablet: the dishes hang over the bottom edge of the hero into the next section */
 @media (min-width: 901px) {
   .hero { position: relative; z-index: 2; padding-bottom: 0; }
-  .hero-photo { align-self: flex-end; margin-bottom: calc(-1 * min(7.3vw, 94px)); }
+  .hero-photo { align-self: flex-end; margin-bottom: calc(-1 * min(6.2vw, 80px)); }
   /* room under the hanging dishes so the cheese never touches the next heading */
-  .hero + .section { padding-top: 104px; }
+  .hero + .section { padding-top: 96px; }
 }
 .hero-copy { flex: 1 1 0; max-width: 460px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .hero-logo { width: 171px; height: auto; }
