@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
 import SpinWheel from "@/components/SpinWheel";
+import SpinDemo from "@/components/SpinDemo";
 import LatestPosts from "@/components/LatestPosts";
 import SiteFooter from "@/components/SiteFooter";
 import { getLatestPosts } from "@/lib/latestPosts";
@@ -298,6 +299,7 @@ export default async function Home() {
             a dish.
           </p>
         </div>
+        <SpinDemo />
         <div className="wheels">
           <div className="wheel-col">
             <h3>Pick a category</h3>
@@ -323,7 +325,7 @@ export default async function Home() {
             />
             <div className="result">
               <p className="result-label">You got:</p>
-              <p className="result-value">🍛 Italian</p>
+              <p className="result-value">🍝 Italian</p>
             </div>
           </div>
         </div>
