@@ -74,7 +74,7 @@ export default function LatestPosts({ posts }: { posts: LatestPost[] }) {
             <div className="modal-info">
               <p className="latest-dish">{open.dish_name ?? open.restaurant_name}</p>
               {open.dish_name && open.restaurant_name && <p className="latest-rest">{open.restaurant_name}</p>}
-              <a className="modal-link" href={`/video/${open.id}`}>Open post</a>
+              <a className="modal-link" href={`/video/${open.id}`} target="_blank" rel="noopener noreferrer">Open post</a>
             </div>
           </div>
         </div>
