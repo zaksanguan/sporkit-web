@@ -135,7 +135,7 @@ export default async function Home() {
                 width={1384}
                 height={822}
                 priority
-                sizes="(max-width: 900px) 100vw, 840px"
+                sizes="(max-width: 900px) 100vw, 760px"
               />
             </div>
           )}

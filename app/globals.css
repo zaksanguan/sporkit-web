@@ -61,7 +61,7 @@ ul { list-style: none; }
   justify-content: center;
   gap: 32px;
 }
-.hero-photo { flex: 1.65 1 0; min-width: 0; max-width: 840px; }
+.hero-photo { flex: 1.5 1 0; min-width: 0; max-width: 760px; }
 .hero-photo img { width: 100%; height: auto; display: block; }
 .hero-copy { flex: 1 1 0; max-width: 460px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .hero-logo { width: 171px; height: auto; }
