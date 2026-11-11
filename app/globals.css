@@ -206,6 +206,12 @@ ul { list-style: none; }
   .site-footer-links a + a::before { display: none; }
 }
 
+@media (max-width: 400px) {
+  /* keep the two answer buttons from touching on 360px phones */
+  .vote-buttons { gap: 6px; }
+  .btn-ghost, .btn-orange { font-size: 17px; padding-left: 10px; padding-right: 10px; white-space: nowrap; }
+}
+
 /* ---------- latest posts + video modal ---------- */
 #latest, #worth-it, #restaurants { background: var(--card); }
 .latest-grid { width: 100%; max-width: 1056px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
