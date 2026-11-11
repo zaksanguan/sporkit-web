@@ -54,16 +54,16 @@ ul { list-style: none; }
 /* ---------- hero ---------- */
 .hero { padding: 64px var(--gutter) 80px; }
 .hero-inner {
-  max-width: var(--max);
+  max-width: 1320px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 48px;
+  gap: 32px;
 }
-.hero-photo { flex: 1 1 0; min-width: 0; max-width: 692px; }
+.hero-photo { flex: 1.65 1 0; min-width: 0; max-width: 840px; }
 .hero-photo img { width: 100%; height: auto; display: block; }
-.hero-copy { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
+.hero-copy { flex: 1 1 0; max-width: 460px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .hero-logo { width: 171px; height: auto; }
 .hero h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.096px; line-height: 1.15; }
 .lede { color: var(--secondary); line-height: 1.4; }

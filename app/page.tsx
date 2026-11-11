@@ -132,10 +132,10 @@ export default async function Home() {
               <Image
                 src="/landing/hero.webp"
                 alt="A table of dishes on SporkIt"
-                width={692}
-                height={411}
+                width={1384}
+                height={822}
                 priority
-                sizes="(max-width: 900px) 100vw, 692px"
+                sizes="(max-width: 900px) 100vw, 840px"
               />
             </div>
           )}
