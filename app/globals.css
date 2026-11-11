@@ -79,11 +79,19 @@ ul { list-style: none; }
   width: 100%;
   display: flex; flex-direction: column; gap: 16px; text-align: center; line-height: 1.3;
 }
+.br-steps { display: none; }
+.step-text p { text-wrap: balance; }
+@media (min-width: 1200px) { .step { gap: 32px; } .br-steps { display: inline; } }
+/* three columns only when they really fit; below that the steps stack */
+@media (max-width: 1199px) {
+  .steps { grid-template-columns: minmax(0, 1fr); gap: 48px; justify-items: center; }
+  .step { width: 100%; max-width: 402px; }
+}
 .step-title { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 20px; font-weight: 800; }
 /* the shared icons are drawn in white; colour them orange here */
 .step-title svg { flex: none; }
-.step-title svg [fill="white"] { fill: var(--orange); }
-.step-title svg [stroke="white"] { stroke: var(--orange); }
+.step-title svg [fill="white"] { fill: var(--orange); stroke: var(--orange); stroke-width: 0.6; stroke-linejoin: round; }
+.step-title svg [stroke="white"] { stroke: var(--orange); stroke-width: 2.5; }
 .step-text strong { font-weight: 800; }
 
 .sheet {

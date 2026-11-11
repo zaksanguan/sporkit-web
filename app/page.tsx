@@ -198,8 +198,8 @@ export default async function Home() {
                 Save it
               </p>
               <p>
-                Spot a place you like? Tap Want to go to save it, or{" "}
-                <strong>Ate here</strong> if you’ve been.
+                Spot a place you like? Tap Want to go to save it,
+                <br className="br-steps" /> or <strong>Ate here</strong> if you’ve been.
               </p>
             </div>
             <Sheet title="Restaurant" subtitle="What do you think?">
@@ -228,7 +228,8 @@ export default async function Home() {
                 Give your verdict
               </p>
               <p>
-                Been there? Tell us honestly: would you go back? Yes or no.
+                Been there? Tell us honestly:
+                <br className="br-steps" /> would you go back? Yes or no.
               </p>
             </div>
             <Sheet title="Restaurant" subtitle="What do you think?">
@@ -247,8 +248,8 @@ export default async function Home() {
                 Judge the dish
               </p>
               <p>
-                Was it worth the bite? How did it taste to you? Tell us if
-                you’d order it again.
+                Was it worth the bite? How did it taste to you?
+                <br className="br-steps" /> Tell us if you’d order it again.
               </p>
             </div>
             <Sheet title="Dish" subtitle="How was this dish?">
