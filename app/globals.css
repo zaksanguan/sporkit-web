@@ -186,6 +186,14 @@ ul { list-style: none; }
   .step, .wheel-col { width: 100%; max-width: 402px; }
   .br-wide { display: none; }
   .hero h1, .lede { text-wrap: balance; }
+  /* phones/tablets: logo first, then the food photo, then the text */
+  .hero-inner { gap: 24px; }
+  .hero-copy { display: contents; }
+  .hero-logo { order: 1; }
+  .hero-photo { order: 2; }
+  .hero-copy > .stack-2 { order: 3; }
+  .hero-copy > .stack-3 { order: 4; }
+  .hero-copy > .stack-2, .hero-copy > .stack-3 { width: 100%; max-width: 460px; text-align: center; }
 }
 @media (max-width: 560px) {
   .section, .closing { padding-top: 56px; padding-bottom: 56px; }
