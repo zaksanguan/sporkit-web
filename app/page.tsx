@@ -379,7 +379,7 @@ export default async function Home() {
         </nav>
         <a
           className="footer-tiktok"
-          href="https://www.tiktok.com/@sporkit"
+          href="https://www.tiktok.com/@spork.it"
           aria-label="SporkIt on TikTok"
           target="_blank"
           rel="noopener noreferrer"
