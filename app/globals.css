@@ -163,7 +163,7 @@ ul { list-style: none; }
 .result-note { font-family: var(--font-ui); font-size: 15px; color: var(--secondary); }
 .pill { font-family: var(--font-ui); color: inherit; cursor: pointer; }
 .pill:disabled { cursor: default; opacity: 0.6; }
-button.pill-on { color: var(--inverted); }
+.pill.pill-on { color: var(--inverted); }
 .pill:focus-visible, .spin-btn:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 button.spin-btn { border: 0; cursor: pointer; }
 @media (max-width: 900px) {
