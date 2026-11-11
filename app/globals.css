@@ -257,7 +257,7 @@ button.spin-btn { border: 0; cursor: pointer; }
   }
   .site-footer:not(.site-footer-narrow) .site-footer-brand { grid-column: 1 / 3; grid-row: 1; }
   .site-footer:not(.site-footer-narrow) .site-footer-links { grid-column: 1; grid-row: 2; }
-  .site-footer:not(.site-footer-narrow) .site-footer-tiktok { grid-column: 2; grid-row: 2; }
+  .site-footer:not(.site-footer-narrow) .site-footer-tiktok { grid-column: 2; grid-row: 2; align-self: start; }
   .site-footer:not(.site-footer-narrow) .site-footer-copy { grid-column: 1 / 3; grid-row: 3; flex: none; }
 }
 
@@ -341,7 +341,7 @@ button.spin-btn { border: 0; cursor: pointer; }
 .site-footer-narrow .site-footer-brand { grid-column: 1; grid-row: 1; }
 .site-footer-narrow .site-footer-copy { grid-column: 2 / 4; grid-row: 1; flex: none; }
 .site-footer-narrow .site-footer-links { grid-column: 1 / 3; grid-row: 2; }
-.site-footer-narrow .site-footer-tiktok { grid-column: 3; grid-row: 2; }
+.site-footer-narrow .site-footer-tiktok { grid-column: 3; grid-row: 2; align-self: start; }
 @media (max-width: 560px) {
   .site-footer.site-footer-narrow { padding: 32px 24px 48px; }
   .site-footer-narrow .site-footer-copy { grid-column: 1 / 4; grid-row: 3; }
