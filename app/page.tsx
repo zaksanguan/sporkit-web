@@ -168,7 +168,7 @@ export default async function Home() {
         <section className="section" id="latest">
           <div className="head">
             <h2>What people are eating</h2>
-            <p>Worth it? Fresh dishes by real people on SporkIt.</p>
+            <p>Latest dishes worth trying, shared by real people on SporkIt.</p>
           </div>
           <LatestPosts posts={latest} />
         </section>
