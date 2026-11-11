@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
 import SpinWheel from "@/components/SpinWheel";
+import LatestPosts from "@/components/LatestPosts";
+import { getLatestPosts } from "@/lib/latestPosts";
 import {
   BookmarkIcon,
   CaretIcon,
@@ -13,6 +15,9 @@ import {
 // The hero food photo is optional while the design is being finished:
 // if public/landing/hero.webp is missing the hero simply shows no photo.
 const HERO_PHOTO = fs.existsSync(path.join(process.cwd(), "public/landing/hero.webp"));
+
+// Refresh the latest posts about once a minute.
+export const revalidate = 60;
 
 const PILLS = ["Nearby", "Cuisines", "Dishes"];
 
@@ -115,7 +120,8 @@ function VoteCard({
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const latest = await getLatestPosts(3);
   return (
     <main>
       {/* HERO */}
@@ -156,6 +162,17 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* LATEST POSTS (hidden until there are 3 real in-app posts) */}
+      {latest.length >= 3 && (
+        <section className="section" id="latest">
+          <div className="head">
+            <h2>Latest on Spork<span className="brand">It</span></h2>
+            <p>Fresh dishes, just posted by people on SporkIt.</p>
+          </div>
+          <LatestPosts posts={latest} />
+        </section>
+      )}
 
       {/* WHAT IS SPORKIT */}
       <section className="section" id="what">

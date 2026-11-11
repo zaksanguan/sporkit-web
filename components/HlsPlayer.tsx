@@ -5,7 +5,7 @@ import Hls from 'hls.js'
 
 // Plays a Bunny HLS (.m3u8) video. Safari / iOS play HLS natively; other browsers
 // (Android in-app browsers such as LINE) use hls.js. Tap to play, no autoplay.
-export default function HlsPlayer({ src, poster }: { src: string; poster?: string }) {
+export default function HlsPlayer({ src, poster, autoPlay = false }: { src: string; poster?: string; autoPlay?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -13,15 +13,17 @@ export default function HlsPlayer({ src, poster }: { src: string; poster?: strin
     if (!video) return
     if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = src
+      if (autoPlay) video.play().catch(() => {})
       return
     }
     if (Hls.isSupported()) {
       const hls = new Hls()
       hls.loadSource(src)
       hls.attachMedia(video)
+      if (autoPlay) hls.on(Hls.Events.MANIFEST_PARSED, () => { video.play().catch(() => {}) })
       return () => hls.destroy()
     }
-  }, [src])
+  }, [src, autoPlay])
 
   return (
     <video
