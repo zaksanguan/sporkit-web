@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import SiteFooter from '../../components/SiteFooter'
 import ClaimForm from '../../components/ClaimForm'
 import { supabase } from '../../lib/supabase'
 
@@ -73,11 +74,8 @@ export default async function ClaimPage({ searchParams }: Props) {
         ) : (
           <ClaimForm restaurantId={restaurant?.id ?? null} restaurantName={restaurant?.name ?? ''} />
         )}
-        <div className="footer">
-          <p>© 2026 SporkIt · <a href="https://sporkitapp.com">sporkitapp.com</a></p>
-          <p><a href="https://sporkitapp.com/privacy">Privacy Policy</a> · <a href="https://sporkitapp.com/terms">Terms of Service</a> · <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a></p>
-        </div>
       </div>
+      <SiteFooter />
     </>
   )
 }

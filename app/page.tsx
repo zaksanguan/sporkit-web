@@ -3,6 +3,7 @@ import path from "node:path";
 import Image from "next/image";
 import SpinWheel from "@/components/SpinWheel";
 import LatestPosts from "@/components/LatestPosts";
+import SiteFooter from "@/components/SiteFooter";
 import { getLatestPosts } from "@/lib/latestPosts";
 import {
   BookmarkIcon,
@@ -363,30 +364,7 @@ export default async function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="site-footer">
-        <div className="site-footer-brand">
-          <Image src="/landing/fork-mark.svg" alt="" width={28} height={28} />
-          <span className="site-footer-word">
-            Spork<span className="brand">It</span>
-          </span>
-        </div>
-        <p className="site-footer-copy">© 2026 SporkIt. All rights reserved.</p>
-        <nav className="site-footer-links" aria-label="Footer">
-          <a href="/terms">Terms of Service</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/delete-account">Account deletion</a>
-          <a href="mailto:contact@sporkitapp.com">Contact</a>
-        </nav>
-        <a
-          className="site-footer-tiktok"
-          href="https://www.tiktok.com/@spork.it"
-          aria-label="SporkIt on TikTok"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image src="/landing/tiktok.svg" alt="" width={24} height={24} />
-        </a>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

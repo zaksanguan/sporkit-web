@@ -1,3 +1,5 @@
+import SiteFooter from "@/components/SiteFooter"
+
 export default function DeleteAccountPage() {
   return (
     <html lang="en">
@@ -74,11 +76,8 @@ export default function DeleteAccountPage() {
             <li>Reports about content that broke our rules may be kept for safety, without your profile details.</li>
           </ul>
 
-          <div className="footer">
-            <p>Questions? Email <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a>.</p>
-            <p>© 2026 SporkIt · <a href="https://sporkitapp.com">sporkitapp.com</a> · <a href="https://sporkitapp.com/privacy">Privacy Policy</a> · <a href="https://sporkitapp.com/terms">Terms of Service</a></p>
-          </div>
         </div>
+        <SiteFooter />
       </body>
     </html>
   )

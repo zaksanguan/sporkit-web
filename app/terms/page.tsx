@@ -1,3 +1,5 @@
+import SiteFooter from "@/components/SiteFooter"
+
 export default function TermsPage() {
   return (
     <html lang="en">
@@ -108,10 +110,8 @@ export default function TermsPage() {
           <h2>15. Contact</h2>
           <p>For questions about these Terms, contact us at <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a>.</p>
 
-          <div className="footer">
-            <p>© 2026 SporkIt · <a href="https://sporkitapp.com">sporkitapp.com</a> · <a href="https://sporkitapp.com/privacy">Privacy Policy</a></p>
-          </div>
         </div>
+        <SiteFooter />
       </body>
     </html>
   )
