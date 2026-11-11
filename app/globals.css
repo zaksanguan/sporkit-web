@@ -73,7 +73,7 @@ ul { list-style: none; }
 .badges { width: 327px; max-width: 100%; height: auto; }
 
 /* ---------- how sporking works ---------- */
-.steps { width: 100%; max-width: var(--max); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; align-items: start; }
+.steps { width: 100%; max-width: var(--max); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; align-items: stretch; }
 .step { display: flex; flex-direction: column; gap: 16px; align-items: center; min-width: 0; }
 .step-text {
   width: 100%; background: var(--overlay); border-radius: 8px; padding: 16px;
@@ -83,13 +83,11 @@ ul { list-style: none; }
 .step-text strong { font-weight: 800; }
 
 .sheet {
-  position: relative; width: 100%; max-width: 402px; height: 230px; overflow: hidden;
+  position: relative; width: 100%; max-width: 402px; flex: 1;
   background: var(--card); border-top: 1px solid var(--border-strong);
-  border-radius: 20px 20px 0 0; padding: 8px 12px 0;
+  border-radius: 20px; padding: 8px 12px 24px;
   box-shadow: 0 -7px 5px rgba(0, 0, 0, 0.5);
   display: flex; flex-direction: column; gap: 16px; font-family: var(--font-ui); letter-spacing: 0;
-  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
-          mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
 }
 .sheet-handle { align-self: center; width: 36px; height: 4px; border: 1px solid var(--border-strong); border-radius: 999px; }
 .sheet-close { position: absolute; top: 12px; right: 12px; }
@@ -98,7 +96,7 @@ ul { list-style: none; }
 .sheet-sub { font-size: 15px; font-weight: 700; color: var(--secondary); }
 
 .row { border-radius: 10px; padding: 12px; }
-.row-plain { background: var(--elevated); border: 1px solid var(--border); display: flex; align-items: center; gap: 8px; margin-bottom: -8px; }
+.row-plain { background: var(--elevated); border: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
 .row-plain + .row-plain { margin-top: 0; }
 .row-vote { background: var(--overlay); border: 1px solid var(--border-strong); display: flex; flex-direction: column; gap: 8px; }
 .row-main { display: flex; align-items: center; gap: 8px; }
