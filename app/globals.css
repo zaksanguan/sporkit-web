@@ -189,7 +189,7 @@ ul { list-style: none; }
 }
 
 /* ---------- latest posts + video modal ---------- */
-#latest, #worth-it { background: var(--card); }
+#latest, #worth-it, #restaurants { background: var(--card); }
 .latest-grid { width: 100%; max-width: 1056px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .latest-card {
   display: flex; flex-direction: column; gap: 12px; text-align: left; cursor: pointer;
