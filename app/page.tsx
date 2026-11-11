@@ -167,8 +167,8 @@ export default async function Home() {
       {latest.length >= 3 && (
         <section className="section" id="latest">
           <div className="head">
-            <h2>Latest on Spork<span className="brand">It</span></h2>
-            <p>Fresh dishes, just posted by people on SporkIt.</p>
+            <h2>What people are eating</h2>
+            <p>Worth it? Fresh dishes by real people on SporkIt.</p>
           </div>
           <LatestPosts posts={latest} />
         </section>
