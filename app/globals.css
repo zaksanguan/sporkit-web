@@ -146,7 +146,7 @@ ul { list-style: none; }
   transition: opacity 0.15s;
 }
 .cta:hover { opacity: 0.88; }
-.cta:focus-visible, .footer a:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+.cta:focus-visible, .site-footer a:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 
 /* ---------- closing band ---------- */
 .closing {
@@ -156,23 +156,23 @@ ul { list-style: none; }
 .head-dark p { color: var(--inverted); }
 
 /* ---------- footer ---------- */
-.footer {
+.site-footer {
   max-width: 1440px; margin: 0 auto; padding: 48px 120px;
   display: flex; align-items: center; gap: 24px; color: var(--secondary);
 }
-.footer-brand { display: flex; align-items: center; gap: 4px; color: var(--text); }
-.footer-word { font-size: 28px; font-weight: 800; letter-spacing: -0.7px; line-height: 1; }
-.footer-copy { flex: 1; }
-.footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
-.footer-links a:hover { color: var(--text); }
-.footer-links a { position: relative; }
-.footer-links a + a::before { content: "|"; position: absolute; left: -10px; color: rgba(255, 255, 255, 0.35); pointer-events: none; }
-.footer-tiktok { display: flex; }
+.site-footer-brand { display: flex; align-items: center; gap: 4px; color: var(--text); }
+.site-footer-word { font-size: 28px; font-weight: 800; letter-spacing: -0.7px; line-height: 1; }
+.site-footer-copy { flex: 1; }
+.site-footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+.site-footer-links a:hover { color: var(--text); }
+.site-footer-links a { position: relative; }
+.site-footer-links a + a::before { content: "|"; position: absolute; left: -10px; color: rgba(255, 255, 255, 0.35); pointer-events: none; }
+.site-footer-tiktok { display: flex; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 1100px) {
-  .footer { padding: 40px var(--gutter); flex-wrap: wrap; }
-  .footer-copy { flex-basis: 100%; order: 3; }
+  .site-footer { padding: 40px var(--gutter); flex-wrap: wrap; }
+  .site-footer-copy { flex-basis: 100%; order: 3; }
 }
 @media (max-width: 900px) {
   .hero-inner { flex-direction: column; gap: 32px; }
@@ -187,8 +187,8 @@ ul { list-style: none; }
   .hero { padding-top: 40px; padding-bottom: 56px; }
   .head h2, .closing h2, .hero h1 { font-size: 28px; }
   .features { grid-template-columns: minmax(0, 1fr); }
-  .footer-links { gap: 12px 16px; }
-  .footer-links a + a::before { display: none; }
+  .site-footer-links { gap: 12px 16px; }
+  .site-footer-links a + a::before { display: none; }
 }
 
 /* ---------- latest posts + video modal ---------- */

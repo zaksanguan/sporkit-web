@@ -363,22 +363,22 @@ export default async function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-brand">
+      <footer className="site-footer">
+        <div className="site-footer-brand">
           <Image src="/landing/fork-mark.svg" alt="" width={28} height={28} />
-          <span className="footer-word">
+          <span className="site-footer-word">
             Spork<span className="brand">It</span>
           </span>
         </div>
-        <p className="footer-copy">© 2026 SporkIt. All rights reserved.</p>
-        <nav className="footer-links" aria-label="Footer">
+        <p className="site-footer-copy">© 2026 SporkIt. All rights reserved.</p>
+        <nav className="site-footer-links" aria-label="Footer">
           <a href="/terms">Terms of Service</a>
           <a href="/privacy">Privacy</a>
           <a href="/delete-account">Account deletion</a>
           <a href="mailto:contact@sporkitapp.com">Contact</a>
         </nav>
         <a
-          className="footer-tiktok"
+          className="site-footer-tiktok"
           href="https://www.tiktok.com/@spork.it"
           aria-label="SporkIt on TikTok"
           target="_blank"
