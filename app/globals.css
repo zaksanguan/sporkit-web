@@ -135,6 +135,9 @@ ul { list-style: none; }
 .feature { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .feature h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.06px; }
 .feature p { line-height: 1.3; max-width: 260px; }
+.feature p { text-wrap: balance; }
+/* below 1200px four columns are too tight: two columns */
+@media (max-width: 1199px) { .features { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 48px; } }
 
 /* ---------- spin wheel ---------- */
 .wheels { width: 100%; max-width: var(--max); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; align-items: start; }
@@ -219,6 +222,15 @@ ul { list-style: none; }
   .hero { padding-top: 40px; padding-bottom: 56px; }
   .head h2, .closing h2, .hero h1 { font-size: 28px; }
   .features { grid-template-columns: minmax(0, 1fr); }
+  /* compact list on phones (Eat where it's worth it): icon left, title + text right */
+  #worth-it .features { row-gap: 0; gap: 24px; max-width: 420px; }
+  #worth-it .feature {
+    display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 16px; row-gap: 4px;
+    align-items: start; text-align: left;
+  }
+  #worth-it .feature img { grid-column: 1; grid-row: 1 / span 2; width: 48px; height: 48px; }
+  #worth-it .feature h3 { grid-column: 2; grid-row: 1; }
+  #worth-it .feature p { grid-column: 2; grid-row: 2; max-width: none; text-wrap: pretty; }
   .site-footer-links { gap: 12px 16px; }
   .site-footer-links a + a::before { display: none; }
 }

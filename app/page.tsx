@@ -275,7 +275,8 @@ export default async function Home() {
         </div>
         <ul className="features">
           <Feature title="Honest verdicts" icon="fork-mark">
-            No stars. Rated by how many people would go back, or order it again
+            No stars.<br /> Rated by how many people would go back, or order it
+            again.
           </Feature>
           <Feature title="See the dish" icon="camera">
             Short videos of the real dish, so you know what you’re ordering.
