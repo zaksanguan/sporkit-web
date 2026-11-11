@@ -90,8 +90,10 @@ ul { list-style: none; }
 .step-title { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 20px; font-weight: 800; }
 /* the shared icons are drawn in white; colour them orange here */
 .step-title svg { flex: none; }
-.step-title svg [fill="white"] { fill: var(--orange); stroke: var(--orange); stroke-width: 0.6; stroke-linejoin: round; }
+.step-title svg [fill="white"] { fill: var(--orange); }
 .step-title svg [stroke="white"] { stroke: var(--orange); stroke-width: 2.5; }
+/* outline icons in the sheet mockups get the same heavier stroke (the filled store-check icon is left as drawn) */
+.sheet svg [stroke="white"] { stroke-width: 2.5; }
 .step-text strong { font-weight: 800; }
 
 .sheet {
