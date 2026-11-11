@@ -165,6 +165,8 @@ ul { list-style: none; }
 .footer-copy { flex: 1; }
 .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
 .footer-links a:hover { color: var(--text); }
+.footer-links a { position: relative; }
+.footer-links a + a::before { content: "|"; position: absolute; left: -10px; color: rgba(255, 255, 255, 0.35); pointer-events: none; }
 .footer-tiktok { display: flex; }
 
 /* ---------- responsive ---------- */
@@ -186,6 +188,7 @@ ul { list-style: none; }
   .head h2, .closing h2, .hero h1 { font-size: 28px; }
   .features { grid-template-columns: minmax(0, 1fr); }
   .footer-links { gap: 12px 16px; }
+  .footer-links a + a::before { display: none; }
 }
 
 /* ---------- latest posts + video modal ---------- */
