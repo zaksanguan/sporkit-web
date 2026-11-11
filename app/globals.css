@@ -109,7 +109,8 @@ ul { list-style: none; }
 .sheet-title { font-size: 20px; font-weight: 700; letter-spacing: -0.06px; }
 .sheet-sub { font-size: 15px; font-weight: 700; }
 /* the sheet frame is muted so the eye goes to the part the step is about */
-.sheet-title, .sheet-sub { color: rgba(255, 255, 255, 0.4); }
+.sheet-title, .sheet-sub { color: rgba(255, 255, 255, 0.22); }
+.sheet-head { filter: blur(1.5px); }
 
 .row { border-radius: 10px; padding: 12px; }
 .row-plain { background: var(--elevated); border: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
