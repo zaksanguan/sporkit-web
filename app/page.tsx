@@ -334,10 +334,11 @@ export default async function Home() {
       {/* RESTAURANTS */}
       <section className="section section-band" id="restaurants">
         <div className="head">
-          <h2>Own a restaurant? Meet your diners</h2>
+          <h2>
+            Own a restaurant?<br className="br-narrow" /> Meet your diners
+          </h2>
           <p>
-            Claim your restaurant on SporkIt and see how people feel about it,
-            honestly and anonymously.
+            Claim your restaurant on SporkIt<br className="br-narrow" /> and see how people feel about it,<br className="br-narrow" /> honestly and anonymously.
           </p>
         </div>
         <ul className="features">
