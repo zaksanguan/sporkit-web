@@ -185,6 +185,7 @@ ul { list-style: none; }
   .steps, .wheels { grid-template-columns: minmax(0, 1fr); gap: 48px; justify-items: center; }
   .step, .wheel-col { width: 100%; max-width: 402px; }
   .br-wide { display: none; }
+  .hero h1, .lede { text-wrap: balance; }
 }
 @media (max-width: 560px) {
   .section, .closing { padding-top: 56px; padding-bottom: 56px; }
