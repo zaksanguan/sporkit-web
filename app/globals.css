@@ -76,10 +76,14 @@ ul { list-style: none; }
 .steps { width: 100%; max-width: var(--max); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; align-items: stretch; }
 .step { display: flex; flex-direction: column; gap: 16px; align-items: center; min-width: 0; }
 .step-text {
-  width: 100%; background: var(--overlay); border-radius: 8px; padding: 16px;
+  width: 100%;
   display: flex; flex-direction: column; gap: 16px; text-align: center; line-height: 1.3;
 }
-.step-title { color: var(--orange); font-weight: 800; }
+.step-title { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 20px; font-weight: 800; }
+/* the shared icons are drawn in white; colour them orange here */
+.step-title svg { flex: none; }
+.step-title svg [fill="white"] { fill: var(--orange); }
+.step-title svg [stroke="white"] { stroke: var(--orange); }
 .step-text strong { font-weight: 800; }
 
 .sheet {

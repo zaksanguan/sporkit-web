@@ -193,7 +193,10 @@ export default async function Home() {
         <div className="steps">
           <div className="step">
             <div className="step-text">
-              <p className="step-title">Save it</p>
+              <p className="step-title">
+                <BookmarkIcon />
+                Save it
+              </p>
               <p>
                 Spot a place you like? Tap Want to go to save it, or{" "}
                 <strong>Ate here</strong> if you’ve been.
@@ -220,7 +223,10 @@ export default async function Home() {
           </div>
           <div className="step">
             <div className="step-text">
-              <p className="step-title">Give your verdict</p>
+              <p className="step-title">
+                <StoreCheckIcon />
+                Give your verdict
+              </p>
               <p>
                 Been there? Tell us honestly: would you go back? Yes or no.
               </p>
@@ -236,7 +242,10 @@ export default async function Home() {
           </div>
           <div className="step">
             <div className="step-text">
-              <p className="step-title">Judge the dish</p>
+              <p className="step-title">
+                <CookieIcon />
+                Judge the dish
+              </p>
               <p>
                 Was it worth the bite? How did it taste to you? Tell us if
                 you’d order it again.
