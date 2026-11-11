@@ -161,8 +161,9 @@ ul { list-style: none; }
 
 .spin-demo { display: none; }
 .result-note { font-family: var(--font-ui); font-size: 15px; color: var(--secondary); }
-.pill { font-family: var(--font-ui); color: inherit; cursor: pointer; }
-.pill:disabled { cursor: default; opacity: 0.6; }
+.pill { font-family: var(--font-ui); color: inherit; }
+button.pill { cursor: pointer; }
+button.pill:disabled { cursor: default; opacity: 0.6; }
 .pill.pill-on { color: var(--inverted); }
 .pill:focus-visible, .spin-btn:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 button.spin-btn { border: 0; cursor: pointer; }
