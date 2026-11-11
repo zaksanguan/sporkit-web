@@ -65,8 +65,9 @@ ul { list-style: none; }
 .hero-photo img { width: 100%; height: auto; display: block; }
 /* desktop/tablet: the dishes hang over the bottom edge of the hero into the next section */
 @media (min-width: 901px) {
-  .hero { position: relative; z-index: 2; padding-bottom: 0; }
-  .hero-photo { --overhang: min(6.2vw, 80px); --drop: 16px; position: relative; isolation: isolate; align-self: flex-end; margin-bottom: calc(-1 * var(--overhang)); }
+  .hero { position: relative; z-index: 2; padding-bottom: 56px; }
+  /* the image hangs --overhang below the hero line; the 56px keeps the text off the line */
+  .hero-photo { --overhang: min(6.2vw, 80px); --drop: 16px; position: relative; isolation: isolate; align-self: flex-end; margin-bottom: calc(-1 * (var(--overhang) + 56px)); }
   /* room under the hanging dishes so the cheese never touches the next heading */
   .hero + .section { padding-top: 96px; }
   /* shadow cast ONLY by the part that hangs over the edge: a blurred black copy of the image,
@@ -78,6 +79,13 @@ ul { list-style: none; }
     transform: translateY(var(--drop));
     clip-path: inset(calc(100% - var(--overhang) - var(--drop)) -80px -80px -80px);
   }
+}
+/* tablet / small laptop (901-1199px): logo centred over the whole hero, slightly smaller heading */
+@media (min-width: 901px) and (max-width: 1199px) {
+  .hero-inner { position: relative; padding-top: 162px; }
+  .hero-logo { position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
+  .hero h1 { font-size: 28px; text-wrap: balance; }
+  .lede { text-wrap: balance; }
 }
 .hero-copy { flex: 1 1 0; max-width: 460px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .hero-logo { width: 171px; height: auto; }
