@@ -191,10 +191,11 @@ ul { list-style: none; }
 }
 
 /* ---------- latest posts + video modal ---------- */
+#latest { background: var(--card); }
 .latest-grid { width: 100%; max-width: 1056px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .latest-card {
   display: flex; flex-direction: column; gap: 12px; text-align: left; cursor: pointer;
-  background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 12px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 12px;
   color: inherit; font: inherit;
 }
 .latest-card:hover { border-color: var(--border-strong); }
