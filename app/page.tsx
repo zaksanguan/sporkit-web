@@ -1,69 +1,375 @@
+import fs from "node:fs";
+import path from "node:path";
+import Image from "next/image";
+import SpinWheel from "@/components/SpinWheel";
+import {
+  BookmarkIcon,
+  CaretIcon,
+  CloseIcon,
+  CookieIcon,
+  StoreCheckIcon,
+} from "@/components/Icons";
+
+// The hero food photo is optional while the design is being finished:
+// if public/landing/hero.webp is missing the hero simply shows no photo.
+const HERO_PHOTO = fs.existsSync(path.join(process.cwd(), "public/landing/hero.webp"));
+
+const PILLS = ["Nearby", "Cuisines", "Dishes"];
+
+function Pills() {
+  return (
+    <div className="pills" aria-hidden="true">
+      {PILLS.map((p) => (
+        <span key={p} className={p === "Cuisines" ? "pill pill-on" : "pill"}>
+          {p}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function StoreBadges() {
+  return (
+    <>
+      <p className="coming-soon">Coming soon</p>
+      <Image
+        className="badges"
+        src="/landing/store-badges.svg"
+        alt="Coming soon to the App Store and Google Play"
+        width={327}
+        height={48}
+      />
+    </>
+  );
+}
+
+function Feature({
+  title,
+  icon,
+  children,
+}: {
+  title: string;
+  icon: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <li className="feature">
+      <h3>{title}</h3>
+      <Image src={`/landing/${icon}.svg`} alt="" width={64} height={64} />
+      <p>{children}</p>
+    </li>
+  );
+}
+
+function Sheet({
+  title,
+  subtitle,
+  children,
+}: {
+  title: string;
+  subtitle: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="sheet" aria-hidden="true">
+      <span className="sheet-handle" />
+      <span className="sheet-close">
+        <CloseIcon />
+      </span>
+      <div className="sheet-head">
+        <p className="sheet-title">{title}</p>
+        <p className="sheet-sub">{subtitle}</p>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function VoteCard({
+  icon,
+  title,
+  sub,
+  question,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  sub: string;
+  question: string;
+}) {
+  return (
+    <div className="row row-vote">
+      <div className="row-main">
+        {icon}
+        <div className="row-text">
+          <p className="row-title">{title}</p>
+          <p className="row-sub">{sub}</p>
+        </div>
+      </div>
+      <hr />
+      <p className="vote-q">{question}</p>
+      <div className="vote-buttons">
+        <span className="btn-ghost">No, I wouldn’t</span>
+        <span className="btn-orange">Yes, I would</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta property="og:title" content="SporkIt — Your food diary starts here" />
-        <meta property="og:description" content="Discover dishes worth trying. Share your honest verdict. Because every meal has a story." />
-        <meta property="og:image" content="https://sporkitapp.com/og-image.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://sporkitapp.com" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="SporkIt" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="SporkIt — Your food diary starts here" />
-        <meta name="twitter:description" content="Discover dishes worth trying. Share your honest verdict. Because every meal has a story." />
-        <meta name="twitter:image" content="https://sporkitapp.com/og-image.jpg" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <style dangerouslySetInnerHTML={{ __html: `
-          *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-          :root { --bg: #0F0F0F; --orange: #FF8C00; --text: #FFFFFF; --muted: #888888; --secondary: #AAAAAA; }
-          html, body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; -webkit-font-smoothing: antialiased; }
-          .page { max-width: 480px; margin: 0 auto; padding: 0 24px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; text-align: center; }
-          .logo-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-          .logo-circle { width: 96px; height: 96px; border-radius: 50%; background: var(--orange); display: flex; align-items: flex-start; justify-content: center; overflow: visible; }
-          .logo-circle svg { margin-top: -2px; }
-          .wordmark { font-size: 36px; font-weight: 800; letter-spacing: -1px; }
-          .wordmark span { color: var(--orange); }
-          .hero { display: flex; flex-direction: column; gap: 12px; }
-          .hero h1 { font-size: 28px; font-weight: 800; line-height: 1.2; letter-spacing: -0.5px; }
-          .hero p { font-size: 15px; color: var(--secondary); line-height: 1.6; }
-          .tagline { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; }
-          .cta-group { display: flex; flex-direction: column; gap: 12px; width: 100%; }
-          .btn { display: flex; align-items: center; justify-content: center; padding: 16px 24px; border-radius: 999px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 17px; font-weight: 700; cursor: pointer; text-decoration: none; transition: opacity 0.15s; }
-          .btn:hover { opacity: 0.85; }
-          .btn-primary { background: var(--orange); color: #0F0F0F; }
-          .btn-secondary { background: transparent; color: var(--text); border: 1px solid #333; }
-          footer { font-size: 13px; color: var(--muted); padding-bottom: 32px; }
-        `}} />
-      </head>
-      <body>
-        <div className="page">
-          <div className="logo-wrap">
-            <div className="logo-circle">
-              <svg width="49" height="80" viewBox="0 0 78 127" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M38.4995 0C42.968 0 45.9579 0.4931 45.9995 0.5C44.4995 4.99985 43.9995 15.5 43.9995 15.5C43.9985 15.5168 43.5 24.0034 43.9995 27.5C44.8545 30.0718 45.7997 32.0001 49.9995 35C58.5534 41.1099 70.4995 45.5001 75.9995 66.5C81.011 85.6347 68.4995 113 53.4995 122C53.3328 113.167 52.7995 94.6 51.9995 93C51.3327 92.5 49.8992 91.8002 47.4995 93L45.9995 125.5C45.6659 125.833 44.4991 126.5 42.4995 126.5L41.4995 93C41.17 92.8354 40.1265 92.5093 38.561 92.501C36.9958 92.5095 35.9526 92.8355 35.6235 93L34.6235 126.5C32.6236 126.5 31.4569 125.833 31.1235 125.5L29.6235 93C27.2236 91.8 25.7902 92.5 25.1235 93C24.3235 94.6 23.7902 113.167 23.6235 122C8.62353 113 -3.88793 85.6347 1.12352 66.5C6.62353 45.5 18.5696 41.1099 27.1235 35C31.3235 32 32.2685 30.0719 33.1235 27.5C33.6233 24.0015 33.1239 15.5072 33.1235 15.5C33.1235 15.5 32.6235 4.99985 31.1235 0.5C31.1431 0.496743 34.0832 0.00901329 38.4995 0Z" fill="#0F0F0F"/>
-              </svg>
+    <main>
+      {/* HERO */}
+      <section className="hero">
+        <div className="hero-inner">
+          {HERO_PHOTO && (
+            <div className="hero-photo">
+              <Image
+                src="/landing/hero.webp"
+                alt="A table of dishes on SporkIt"
+                width={692}
+                height={411}
+                priority
+                sizes="(max-width: 900px) 100vw, 692px"
+              />
             </div>
-            <div className="wordmark">Spork<span>It</span></div>
+          )}
+          <div className="hero-copy">
+            <Image
+              className="hero-logo"
+              src="/landing/logo.svg"
+              alt="SporkIt"
+              width={172}
+              height={138}
+              priority
+            />
+            <div className="stack-2">
+              <h1>Your food diary starts here</h1>
+              <p className="lede">
+                Discover dishes worth trying. Share your honest verdict.
+                <br className="br-wide" /> Because every meal has a story.
+              </p>
+            </div>
+            <div className="stack-3">
+              <p className="tagline">Worth it? Spork it.</p>
+              <StoreBadges />
+            </div>
           </div>
-          <div className="hero">
-            <h1>Your food diary starts here</h1>
-            <p>Discover dishes worth trying. Share your honest verdict. Because every meal has a story.</p>
-          </div>
-          <div className="tagline">Worth it? Spork it.</div>
-          <div className="cta-group">
-            <a href="#" className="btn btn-primary">Download on the App Store</a>
-            <a href="#" className="btn btn-secondary">Coming to Android</a>
-          </div>
-          <footer>© 2026 SporkIt. Bangkok, Thailand.</footer>
         </div>
-      </body>
-    </html>
-  )
+      </section>
+
+      {/* WHAT IS SPORKIT */}
+      <section className="section" id="what">
+        <div className="head">
+          <h2>
+            What is Spork<span className="brand">It</span>?
+          </h2>
+          <p>
+            SporkIt is a video-first food diary. Watch short videos of real
+            dishes, then spork them: give your honest verdict. Every spork goes
+            into your diary and helps the next person decide where to eat.
+          </p>
+        </div>
+        <h3 className="sub-head">How sporking works</h3>
+        <div className="steps">
+          <div className="step">
+            <div className="step-text">
+              <p className="step-title">Save it</p>
+              <p>
+                Spot a place you like? Tap Want to go to save it, or{" "}
+                <strong>Ate here</strong> if you’ve been.
+              </p>
+            </div>
+            <Sheet title="Restaurant" subtitle="What do you think?">
+              <div className="row row-plain">
+                <BookmarkIcon />
+                <div className="row-text">
+                  <p className="row-title">Want to go</p>
+                  <p className="row-sub">Save to your favorites</p>
+                </div>
+                <CaretIcon />
+              </div>
+              <div className="row row-plain">
+                <StoreCheckIcon />
+                <div className="row-text">
+                  <p className="row-title">Ate here</p>
+                  <p className="row-sub">Tell us if it was worth it</p>
+                </div>
+                <CaretIcon />
+              </div>
+            </Sheet>
+          </div>
+          <div className="step">
+            <div className="step-text">
+              <p className="step-title">Give your verdict</p>
+              <p>
+                Been there? Tell us honestly: would you go back? Yes or no.
+              </p>
+            </div>
+            <Sheet title="Restaurant" subtitle="What do you think?">
+              <VoteCard
+                icon={<StoreCheckIcon />}
+                title="Ate here"
+                sub="Endorse this place"
+                question="Would you go back?"
+              />
+            </Sheet>
+          </div>
+          <div className="step">
+            <div className="step-text">
+              <p className="step-title">Judge the dish</p>
+              <p>
+                Was it worth the bite? How did it taste to you? Tell us if
+                you’d order it again.
+              </p>
+            </div>
+            <Sheet title="Dish" subtitle="How was this dish?">
+              <VoteCard
+                icon={<CookieIcon />}
+                title="Ate it"
+                sub="Endorse this dish"
+                question="Would you order it again?"
+              />
+            </Sheet>
+          </div>
+        </div>
+      </section>
+
+      {/* EAT WHERE IT'S WORTH IT */}
+      <section className="section" id="worth-it">
+        <div className="head">
+          <h2>Eat where it’s worth it</h2>
+          <p>
+            Real dishes, real people, honest verdicts. See what’s worth your
+            time before you sit down.
+          </p>
+        </div>
+        <ul className="features">
+          <Feature title="Honest verdicts" icon="fork-mark">
+            No stars. Rated by how many people would go back, or order it again
+          </Feature>
+          <Feature title="See the dish" icon="camera">
+            Short videos of the real dish, so you know what you’re ordering.
+          </Feature>
+          <Feature title="Smart feed" icon="sparkle">
+            Pick the dishes you love and they show up first.
+          </Feature>
+          <Feature title="Your food diary" icon="stack">
+            Every dish and place you’ve sporked, in one diary.
+          </Feature>
+        </ul>
+      </section>
+
+      {/* SPIN */}
+      <section className="section" id="spin">
+        <div className="head">
+          <h2>Can’t decide? Spin it.</h2>
+          <p>
+            Spin the wheel and let SporkIt pick: a place near you, a cuisine, or
+            a dish.
+          </p>
+        </div>
+        <div className="wheels">
+          <div className="wheel-col">
+            <h3>Pick a category</h3>
+            <Pills />
+            <SpinWheel label="The spin wheel with eight cuisines" />
+            <span className="spin-btn">Spin</span>
+          </div>
+          <div className="wheel-col">
+            <h3>Spin</h3>
+            <Pills />
+            <SpinWheel
+              label="The wheel spinning past Indian, Mexican and Thai"
+              lit={{ Indian: "hot", Mexican: "warm", Thai: "warm" }}
+            />
+            <span className="wait-pill">Fate is choosing your next meal...</span>
+          </div>
+          <div className="wheel-col">
+            <h3>See results</h3>
+            <Pills />
+            <SpinWheel
+              label="The wheel stopped on Italian"
+              lit={{ Italian: "hot" }}
+            />
+            <div className="result">
+              <p className="result-label">You got:</p>
+              <p className="result-value">🍛 Italian</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* RESTAURANTS */}
+      <section className="section section-band" id="restaurants">
+        <div className="head">
+          <h2>Own a restaurant? Meet your diners</h2>
+          <p>
+            Claim your restaurant on SporkIt and see how people feel about it,
+            honestly and anonymously.
+          </p>
+        </div>
+        <ul className="features">
+          <Feature title="Get verified" icon="seal-check">
+            Claim your place and get the green check.
+          </Feature>
+          <Feature title="Your own page" icon="storefront">
+            A public profile with your videos and reviews.
+          </Feature>
+          <Feature title="See how diners feel" icon="chart-bar">
+            How many would go back, and which dishes people love.
+          </Feature>
+          <Feature title="Keep it up to date" icon="note-pencil">
+            Edit your hours, tags and address yourself.
+          </Feature>
+        </ul>
+        <a className="cta" href="/claim">
+          Claim your restaurant
+        </a>
+      </section>
+
+      {/* CLOSING BAND */}
+      <section className="closing">
+        <div className="head head-dark">
+          <h2>Your next meal is worth it.</h2>
+          <p>Your food diary starts here.</p>
+        </div>
+        <div className="stack-3">
+          <p className="coming-soon coming-soon-dark">Coming soon</p>
+          <Image
+            className="badges"
+            src="/landing/store-badges.svg"
+            alt="Coming soon to the App Store and Google Play"
+            width={327}
+            height={48}
+          />
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="footer">
+        <div className="footer-brand">
+          <Image src="/landing/fork-mark.svg" alt="" width={28} height={28} />
+          <span className="footer-word">
+            Spork<span className="brand">It</span>
+          </span>
+        </div>
+        <p className="footer-copy">© 2026 SporkIt. All rights reserved.</p>
+        <nav className="footer-links" aria-label="Footer">
+          <a href="/terms">Terms of Service</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/delete-account">Account deletion</a>
+          <a href="mailto:contact@sporkitapp.com">Contact</a>
+        </nav>
+        <a
+          className="footer-tiktok"
+          href="https://www.tiktok.com/@sporkit"
+          aria-label="SporkIt on TikTok"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image src="/landing/tiktok.svg" alt="" width={24} height={24} />
+        </a>
+      </footer>
+    </main>
+  );
 }
