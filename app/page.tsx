@@ -363,7 +363,9 @@ export default async function Home() {
       {/* CLOSING BAND */}
       <section className="closing">
         <div className="head head-dark">
-          <h2>Your next meal is worth it.</h2>
+          <h2>
+            Your next meal<br className="br-narrow" /> is worth it.
+          </h2>
           <p>Your food diary starts here.</p>
         </div>
         <div className="stack-3">
