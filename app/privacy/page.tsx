@@ -1,3 +1,5 @@
+import SiteFooter from "@/components/SiteFooter"
+
 export default function PrivacyPage() {
   return (
     <html lang="en">
@@ -108,10 +110,8 @@ export default function PrivacyPage() {
           <p>If you have questions about this Privacy Policy, contact us at <a href="mailto:contact@sporkitapp.com">contact@sporkitapp.com</a>.</p>
           <p>SporkIt is operated by Zak Sanguanshua, Bangkok, Thailand.</p>
 
-          <div className="footer">
-            <p>© 2026 SporkIt · <a href="https://sporkitapp.com">sporkitapp.com</a> · <a href="https://sporkitapp.com/terms">Terms of Service</a></p>
-          </div>
         </div>
+        <SiteFooter narrow={680} />
       </body>
     </html>
   )
