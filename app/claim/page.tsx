@@ -38,6 +38,7 @@ export default async function ClaimPage({ searchParams }: Props) {
         
         .claim .error { color: #E34948; font-size: 14px; }
         .logo-link { display: flex; align-items: center; gap: 4px; text-decoration: none; margin-bottom: 32px; }
+        .logo-link:hover { text-decoration: none; }
         .logo-circle { width: 36px; height: 36px; border-radius: 50%; background: #FF8C00; display: flex; align-items: flex-start; justify-content: center; overflow: visible; flex-shrink: 0; }
         .logo-circle svg { margin-top: -1px; }
         .wordmark { font-size: 32px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.7px; }
