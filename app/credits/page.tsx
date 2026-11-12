@@ -16,7 +16,7 @@ export default function CreditsPage() {
           html, body { background: #0F0F0F; color: #FFFFFF; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
           body { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
           .page { width: 100%; max-width: 680px; margin: 0 auto; padding: 48px 24px 80px; flex: 1 0 auto; }
-          body > .site-footer { margin-top: auto; flex-shrink: 0; }
+          body > .site-footer { width: 100%; margin-top: auto; flex-shrink: 0; }
           .logo-link { display: flex; align-items: center; gap: 4px; text-decoration: none; margin-bottom: 48px; }
           .logo-circle { width: 36px; height: 36px; border-radius: 50%; background: #FF8C00; display: flex; align-items: flex-start; justify-content: center; overflow: visible; flex-shrink: 0; }
           .logo-circle svg { margin-top: -1px; }
