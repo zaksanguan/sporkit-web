@@ -44,7 +44,7 @@ export default function PrivacyPage() {
           </a>
 
           <h1>Privacy Policy</h1>
-          <p className="meta">Last updated: October 2026</p>
+          <p className="meta">Last updated: November 2026</p>
 
           <p>SporkIt ("we", "us", or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and share information when you use the SporkIt app and website (sporkitapp.com).</p>
 
@@ -55,14 +55,16 @@ export default function PrivacyPage() {
             <li><strong>Profile information</strong> — your display name, username, profile photo, and optional bio.</li>
             <li><strong>Location data</strong> — if you grant permission, we use your location to show nearby restaurants and calculate distances. Location is never stored on our servers without your explicit action.</li>
             <li><strong>Content you create</strong> — videos, photos, reviews, sporks, and dish preferences you submit through the app.</li>
-            <li><strong>Usage data</strong> — how you interact with the app, including which screens you visit and features you use, to improve the product.</li>
+            <li><strong>Activity in the app</strong> — which videos you watch (a view is counted after a few seconds), the places you spork, the people you block, and your notification settings.</li>
+            <li><strong>Push notification token</strong> — if you allow notifications, an identifier for your phone so we can send you alerts.</li>
+            <li><strong>Restaurant claims</strong> — restaurant owners who claim a restaurant on our website send us their name, role, contact details (phone, LINE ID or email) and a proof document. These are stored privately and used only to check the claim.</li>
             <li><strong>Crash and diagnostic data</strong> — if the app crashes or hits an error, we receive a technical report with the error details, your device model, operating system version and app version. We do not intentionally include your name, phone number or other profile details in these reports.</li>
           </ul>
 
           <h2>2. How We Use Your Information</h2>
           <ul>
             <li>To create and manage your account</li>
-            <li>To personalise your feed based on your spork history and dish preferences</li>
+            <li>To personalise your feed based on your dish preferences</li>
             <li>To show restaurant distances and nearby recommendations</li>
             <li>To display your public profile, reviews, and sporks to other users</li>
             <li>To send you OTP verification codes via SMS (Twilio)</li>
@@ -74,7 +76,7 @@ export default function PrivacyPage() {
           <h2>3. What We Share</h2>
           <p>We do not sell your personal information. We share data only in the following circumstances:</p>
           <ul>
-            <li><strong>Service providers</strong> — we use Supabase (database), Twilio (SMS), Bunny.net (video hosting), Sentry (crash and error reports, processed in the United States), and Google (Places API, Cloud Vision) to operate the app. These providers process data on our behalf under strict agreements.</li>
+            <li><strong>Service providers</strong> — we use Supabase (database), Twilio (SMS), Bunny.net (video hosting), Sentry (crash and error reports, processed in the United States), Expo (push notifications and app updates), Google Firebase Cloud Messaging and Apple Push Notification service (push notification delivery), Vercel (website hosting), and Google (Places API) to operate the app and website. These providers process data on our behalf under strict agreements.</li>
             <li><strong>Public content</strong> — your username, profile photo, reviews, and sporks are visible to other SporkIt users. Videos you post are public by default.</li>
             <li><strong>Legal requirements</strong> — we may disclose information if required by law or to protect the safety of our users.</li>
           </ul>
@@ -86,7 +88,7 @@ export default function PrivacyPage() {
           <p>Location access is optional. If granted, your device location is used in-session to show nearby restaurants and distances. We do not continuously track your location in the background. You can revoke location permission at any time in your device settings.</p>
 
           <h2>6. Content Moderation</h2>
-          <p>Videos and photos you upload may be scanned by Google Cloud Vision API for safety compliance before being published. This is an automated process to detect inappropriate content. Images are not stored by Google beyond the scan.</p>
+          <p>You can report videos, reviews, restaurants and users inside the app, and you can block other users. Our team reviews reports and can remove content or accounts that break our rules.</p>
 
           <h2>7. Data Retention</h2>
           <p>We keep your account data for as long as your account is active. When you delete your account in the app, your profile, phone number, sporks, saved places, reviews, videos, photos and dish preferences are deleted straight away. If you ask by email instead, we delete them within 30 days. Encrypted backups are removed within 30 days. Reports about rule-breaking content may be kept without your profile details.</p>
