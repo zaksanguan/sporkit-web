@@ -64,7 +64,7 @@ export default function PrivacyPage() {
           <h2>2. How We Use Your Information</h2>
           <ul>
             <li>To create and manage your account</li>
-            <li>To personalise your feed based on your spork history and dish preferences</li>
+            <li>To personalise your feed based on your dish preferences</li>
             <li>To show restaurant distances and nearby recommendations</li>
             <li>To display your public profile, reviews, and sporks to other users</li>
             <li>To send you OTP verification codes via SMS (Twilio)</li>
