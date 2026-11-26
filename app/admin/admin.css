@@ -77,3 +77,4 @@
 .adm .row b{font-size:16px;font-weight:600}
 .adm .card.ac-b .row,.adm .card.wa-b .row{border-top-color:rgba(0,0,0,.2)}
 .adm .card.ac-b .row span,.adm .card.wa-b .row span{color:#1d1d1b}
+.adm .ptw{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
