@@ -62,8 +62,18 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
         </span>
         <StatusPill level={c.level} />
       </div>
+      {c.detail?.label ? <div className="lbl cap">{c.detail.label}</div> : null}
       <div className="big">{c.value || '-'}</div>
-      {c.detail?.label ? <div className="lbl">{c.detail.label}</div> : null}
+      {c.detail?.rows?.length ? (
+        <div className="rows">
+          {c.detail.rows.map((r) => (
+            <div className="row" key={r.label}>
+              <span>{r.label}</span>
+              <b>{r.value}</b>
+            </div>
+          ))}
+        </div>
+      ) : null}
     </div>
   )
 
