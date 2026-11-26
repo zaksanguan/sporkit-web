@@ -14,7 +14,7 @@
 .adm *{box-sizing:border-box}
 .adm .wrap{max-width:1040px;margin:0 auto}
 .adm .hdr{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:14px;border-bottom:0.5px solid var(--border-strong)}
-.adm .brand{display:flex;align-items:center;gap:6px}
+.adm .brand{display:flex;align-items:center;gap:6px;color:var(--text-primary)}
 .adm .logo{width:36px;height:36px;border-radius:50%;background:#FF8C00;display:flex;justify-content:center;align-items:flex-start;overflow:visible;flex:none}
 .adm .word{font-family:var(--font-jakarta),system-ui,sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.6px;line-height:1}
 .adm .adm-label{font-size:20px;font-weight:500;color:var(--text-secondary);margin-left:8px;padding-left:12px;border-left:1.5px solid var(--border-strong);line-height:1.2}
