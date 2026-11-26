@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { supabaseAdmin } from '../../lib/supabaseAdmin'
 import { verifyTotp } from '../../lib/admin/totp'
-import { ADMIN_COOKIE, createSessionToken, readAdminEnv, safeEqual } from '../../lib/admin/session'
+import { ADMIN_COOKIE, createSessionToken, readAdminEnv, requireAdmin, safeEqual } from '../../lib/admin/session'
 
 const MAX_FAILS = 8            // wrong tries in the window below, counted for the whole page (one admin)
 const WINDOW_MIN = 15
@@ -71,4 +71,25 @@ export async function login(_prev: LoginState, formData: FormData): Promise<Logi
 export async function logout(): Promise<void> {
   ;(await cookies()).delete({ name: ADMIN_COOKIE, path: '/admin' })
   redirect('/admin/login')
+}
+
+// Refresh button: ask the checker to run once now. The page then re-reads the saved numbers.
+// Needs ADMIN_CHECK_SECRET in Vercel (same value as the Supabase function secret). Without it the button only re-reads.
+const CHECK_PATH = '/functions/v1/dynamic-worker' // the checker's live address (display name admin-check)
+export async function refreshNow(): Promise<{ ran: boolean }> {
+  await requireAdmin()
+  const secret = process.env.ADMIN_CHECK_SECRET
+  const base = process.env.NEXT_PUBLIC_SUPABASE_URL
+  if (!secret || !base) return { ran: false }
+  try {
+    const res = await fetch(`${base}${CHECK_PATH}?mode=check`, {
+      method: 'POST',
+      headers: { 'x-webhook-secret': secret },
+      cache: 'no-store',
+      signal: AbortSignal.timeout(20000),
+    })
+    return { ran: res.ok }
+  } catch {
+    return { ran: false }
+  }
 }
