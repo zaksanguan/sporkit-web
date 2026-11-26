@@ -1,7 +1,7 @@
 /* Admin dashboard (private). Scoped under .adm so nothing leaks into the public site. Tokens match the approved mock. */
 .adm{
   --surface-1:#f6f5f1;--surface-2:#ffffff;--text-primary:#1d1d1b;--text-secondary:#5c5b56;--text-muted:#8a8984;
-  --border:#e3e1da;--border-strong:#c9c6bc;--bg-neutral:#e9e7e0;--text-danger:#8f1d18;--border-danger:#c8352d;--radius:8px;
+  --border:#e3e1da;--border-strong:#c9c6bc;--bg-neutral:#e9e7e0;--text-danger:#8f1d18;--border-danger:#c8352d;--radius:8px;--bg-success:#e3f1e8;--text-success:#1d5a34;--bg-warning:#fbefd0;--text-warning:#6b4400;--border-warning:#c98a10;--bg-danger:#fbe4e2;
   position:fixed;inset:0;overflow-y:auto;background:var(--surface-1);color:var(--text-primary);
   font-family:system-ui,-apple-system,"Segoe UI",Inter,sans-serif;font-size:15px;line-height:1.5;
   padding-block:20px;padding-top:max(20px,env(safe-area-inset-top,0px));padding-bottom:max(20px,env(safe-area-inset-bottom,0px));
@@ -9,7 +9,7 @@
 }
 @media (prefers-color-scheme:dark){
   .adm{--surface-1:#161615;--surface-2:#202020;--text-primary:#f1f0ec;--text-secondary:#aaa8a1;--text-muted:#7d7c77;
-    --border:#34332f;--border-strong:#4b4a45;--bg-neutral:#2c2b28;--text-danger:#f5a29c;--border-danger:#e0564d;color-scheme:dark}
+    --border:#34332f;--border-strong:#4b4a45;--bg-neutral:#2c2b28;--text-danger:#f5a29c;--border-danger:#e0564d;--bg-success:#1c3326;--text-success:#9fd8b3;color-scheme:dark}
 }
 .adm *{box-sizing:border-box}
 .adm .wrap{max-width:1040px;margin:0 auto}
@@ -44,3 +44,26 @@
 .adm .err{display:flex;gap:8px;align-items:flex-start;color:var(--text-danger);border:1.5px solid var(--border-danger);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:14px;font-weight:600}
 .adm .err svg{width:18px;height:18px;fill:currentColor;flex:none;margin-top:1px}
 .adm .sep{width:1px;height:18px;background:var(--border-strong);flex:none}
+
+/* Status cards (approved mock) */
+.adm .sec{font-size:20px;font-weight:700;color:var(--text-primary);margin:22px 0 10px}
+.adm .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.adm .hd{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.adm .hd b{font-weight:600;font-size:17px}
+.adm .big{font-size:30px;font-weight:600;margin:12px 0 2px;line-height:1.15}
+.adm .st{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;padding:4px 12px;border-radius:var(--radius);white-space:nowrap}
+.adm .st svg.pi{width:18px;height:18px;fill:currentColor;flex:none}
+.adm .st.ok{background:var(--bg-success);color:var(--text-success)}
+.adm .card.ac-b{background:#E34948;border:0;color:#1d1d1b}
+.adm .card.ac-b .lbl,.adm .card.ac-b b,.adm .card.ac-b .big,.adm .card.ac-b div{color:#1d1d1b}
+.adm .card.wa-b{background:#FFD700;border:0;color:#1d1d1b}
+.adm .card.wa-b .lbl,.adm .card.wa-b b,.adm .card.wa-b .big,.adm .card.wa-b div{color:#1d1d1b}
+.adm .card.ac-b .st.ac{background:#1d1d1b;color:#fff;border:0}
+.adm .card.wa-b .st.wa{background:#1d1d1b;color:#FFD700;border:0}
+.adm .summary{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.adm .summary .sum-t{font-size:18px;font-weight:600}
+.adm .summary.ac-b{background:#E34948;border:0}
+.adm .summary.wa-b{background:#FFD700;border:0}
+.adm .summary.ac-b *,.adm .summary.wa-b *{color:#1d1d1b}
+.adm .summary.ac-b .st.ac{background:#1d1d1b;color:#fff}
+.adm .summary.wa-b .st.wa{background:#1d1d1b;color:#FFD700}
