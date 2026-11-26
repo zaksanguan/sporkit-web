@@ -95,11 +95,16 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
                 <div className="sum-t">{act.length} needs action, {watch.length} to watch, {fine.length} fine</div>
               </div>
             </div>
-            {attention.length > 0 && (
-              <>
-                <div className="sec">Requires attention</div>
-                <div className="grid">{attention.map((c) => <Card key={c.service} c={c} />)}</div>
-              </>
+            <div className="sec">Requires attention</div>
+            {attention.length > 0 ? (
+              <div className="grid">{attention.map((c) => <Card key={c.service} c={c} />)}</div>
+            ) : (
+              <div className="card summary">
+                <StatusPill level="fine" />
+                <div>
+                  <div className="sum-t">Nothing requires attention right now</div>
+                </div>
+              </div>
             )}
             {fine.length > 0 && (
               <>
