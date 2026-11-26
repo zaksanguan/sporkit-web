@@ -4,7 +4,7 @@ import { useEffect, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import AdminLogo from './AdminLogo'
 import { logout, refreshNow } from './actions'
-import { CARD_CLASS, LOGOS, StatusPill, type Level, type Snapshot } from './status'
+import { CARD_CLASS, LOGOS, PLAIN_LOGOS, StatusPill, type Level, type Snapshot } from './status'
 
 // Phosphor ArrowClockwise (bold), same icon set as the app.
 const REFRESH = 'M244 56v48a12 12 0 0 1-12 12h-48a12 12 0 1 1 0-24h17.1l-19-17.38c-.13-.12-.26-.24-.38-.37A76 76 0 1 0 127 204h1a75.53 75.53 0 0 0 52.15-20.72 12 12 0 0 1 16.49 17.45A99.45 99.45 0 0 1 128 228h-1.37a100 100 0 1 1 71.88-170.94L220 76.72V56a12 12 0 0 1 24 0'
@@ -56,7 +56,7 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
     <div className={CARD_CLASS[c.level]}>
       <div className="hd">
         <span className="ttl">
-          {LOGOS[c.service] ? <span className="lg">{LOGOS[c.service]}</span> : null}
+          {LOGOS[c.service] ? <span className={'lg' + (PLAIN_LOGOS.has(c.service) ? ' n' : '')}>{LOGOS[c.service]}</span> : null}
           <b>{c.title}</b>
         </span>
         <StatusPill level={c.level} />
