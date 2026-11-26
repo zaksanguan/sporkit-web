@@ -41,12 +41,11 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
 
   // If the checker itself has gone quiet, say so loudly: it cannot email about its own death.
   const newest = snapshots.reduce((m, s) => Math.max(m, new Date(s.checked_at).getTime()), 0)
-  const cards: Snapshot[] = snapshots.map((s) => {
-    if (s.service === 'checker' && now - new Date(s.checked_at).getTime() > STALE_MIN * 60000) {
-      return { ...s, level: 'act' as Level, value: `Stopped, last ran ${ago(now - new Date(s.checked_at).getTime())}` }
-    }
-    return s
-  })
+  // The checker is shown as a pill beside the title, not as a card, and is left out of the counts.
+  const checker = snapshots.find((s) => s.service === 'checker')
+  const checkerAge = checker ? now - new Date(checker.checked_at).getTime() : 0
+  const checkerStopped = checker ? checkerAge > STALE_MIN * 60000 : false
+  const cards: Snapshot[] = snapshots.filter((s) => s.service !== 'checker')
   const act = cards.filter((c) => c.level === 'act')
   const watch = cards.filter((c) => c.level === 'watch')
   const fine = cards.filter((c) => c.level === 'fine')
@@ -87,7 +86,15 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
         </nav>
       </div>
       <div className="upd">
-        <span className="pt">{tab === 'server' ? 'Summary' : 'User activity'}</span>
+        <span className="ptw">
+          <span className="pt">{tab === 'server' ? 'Status summary' : 'User activity'}</span>
+          {tab === 'server' && checker ? (
+            <StatusPill
+              level={checkerStopped ? 'act' : 'fine'}
+              text={checkerStopped ? `Checker stopped, last ran ${ago(checkerAge)}` : 'Checker running'}
+            />
+          ) : null}
+        </span>
         <span className="rt">
           <button className={'rf' + (pending ? ' go' : '')} onClick={refresh} disabled={pending} aria-label="Refresh" title="Refresh">
             <svg viewBox="0 0 256 256" aria-hidden="true"><path d={REFRESH} /></svg>

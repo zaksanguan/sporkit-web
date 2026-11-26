@@ -13,11 +13,11 @@ const PATHS: Record<Level, string> = {
 export const WORD: Record<Level, string> = { fine: 'Fine', watch: 'Watch', act: 'Act now' }
 const CLASS: Record<Level, string> = { fine: 'ok', watch: 'wa', act: 'ac' }
 
-export function StatusPill({ level }: { level: Level }): ReactNode {
+export function StatusPill({ level, text }: { level: Level; text?: string }): ReactNode {
   return (
     <span className={'st ' + CLASS[level]}>
       <svg className="pi" viewBox="0 0 256 256" aria-hidden="true"><path d={PATHS[level]} /></svg>
-      {WORD[level]}
+      {text ?? WORD[level]}
     </span>
   )
 }
