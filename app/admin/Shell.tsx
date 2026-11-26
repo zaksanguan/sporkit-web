@@ -31,12 +31,13 @@ export default function Shell() {
         </nav>
       </div>
       <div className="upd">
-        <span className="pt">{tab === 'server' ? 'Summary' : 'Client activity'}</span>
+        <span className="pt">{tab === 'server' ? 'Summary' : 'User activity'}</span>
         <span className="rt">
-          <span>No data yet</span>
           <button className={'rf' + (spin ? ' go' : '')} onClick={refresh} aria-label="Refresh" title="Refresh">
             <svg viewBox="0 0 256 256" aria-hidden="true"><path d={REFRESH} /></svg>
           </button>
+          <span>No data yet</span>
+          <span className="sep" aria-hidden="true" />
           <form action={logout}><button className="out" type="submit">Sign out</button></form>
         </span>
       </div>

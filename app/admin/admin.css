@@ -43,3 +43,4 @@
 .adm .go-btn:disabled{opacity:.6;cursor:default}
 .adm .err{display:flex;gap:8px;align-items:flex-start;color:var(--text-danger);border:1.5px solid var(--border-danger);border-radius:10px;padding:10px 12px;margin-bottom:14px;font-size:14px;font-weight:600}
 .adm .err svg{width:18px;height:18px;fill:currentColor;flex:none;margin-top:1px}
+.adm .sep{width:1px;height:18px;background:var(--border-strong);flex:none}
