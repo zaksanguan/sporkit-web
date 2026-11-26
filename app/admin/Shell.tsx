@@ -97,7 +97,7 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
             </div>
             {attention.length > 0 && (
               <>
-                <div className="sec">Needs your attention first</div>
+                <div className="sec">Requires attention</div>
                 <div className="grid">{attention.map((c) => <Card key={c.service} c={c} />)}</div>
               </>
             )}
