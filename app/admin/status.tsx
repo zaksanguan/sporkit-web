@@ -45,4 +45,10 @@ export const LOGOS: Record<string, ReactNode> = {
       />
     </svg>
   ),
+  // Vercel (the website card): the triangle from the approved mock.
+  vercel: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#1d1d1b" d="m12 1.608 12 20.784H0Z" />
+    </svg>
+  ),
 }
