@@ -45,11 +45,11 @@ export const LOGOS: Record<string, ReactNode> = {
       />
     </svg>
   ),
-  // The Website card uses Phosphor "desktop" (fill), a plain icon with no tile (see PLAIN_LOGOS).
+  // The Website card uses Phosphor "desktop" (fill), on the white tile like the other cards.
   vercel: (
     <svg viewBox="0 0 256 256" aria-hidden="true">
       <path
-        fill="currentColor"
+        fill="#1d1d1b"
         d="M208,40H48A24,24,0,0,0,24,64V176a24,24,0,0,0,24,24h72v16H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16H136V200h72a24,24,0,0,0,24-24V64A24,24,0,0,0,208,40Zm0,144H48a8,8,0,0,1-8-8V160H216v16A8,8,0,0,1,208,184Z"
       />
     </svg>
@@ -57,4 +57,4 @@ export const LOGOS: Record<string, ReactNode> = {
 }
 
 // Services whose mark is a plain icon (no white tile), as in the approved mock.
-export const PLAIN_LOGOS = new Set(['vercel'])
+export const PLAIN_LOGOS = new Set<string>([])
