@@ -63,6 +63,7 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
         <StatusPill level={c.level} />
       </div>
       <div className="big">{c.value || '-'}</div>
+      {c.detail?.label ? <div className="lbl">{c.detail.label}</div> : null}
     </div>
   )
 
