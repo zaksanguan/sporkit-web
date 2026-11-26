@@ -36,4 +36,13 @@ export const LOGOS: Record<string, ReactNode> = {
       <circle cx="15.4" cy="15.4" r="2" fill="#fff" />
     </svg>
   ),
+  // Bunny: simplified mark (orange circle, rabbit head with two ears).
+  bunny: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="11" fill="#FF8A1F" />
+      <ellipse cx="9.3" cy="7.2" rx="1.6" ry="3.6" fill="#fff" />
+      <ellipse cx="14.7" cy="7.2" rx="1.6" ry="3.6" fill="#fff" />
+      <circle cx="12" cy="14.4" r="4.4" fill="#fff" />
+    </svg>
+  ),
 }
