@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 export type Level = 'fine' | 'watch' | 'act'
-export type Snapshot = { service: string; title: string; value: string; level: Level; checked_at: string }
+export type Snapshot = { service: string; title: string; value: string; level: Level; detail?: { label?: string } | null; checked_at: string }
 
 // Phosphor icons (bold), same set as the app. Shape + word, never colour alone:
 // Fine = check circle, Watch = eye, Act now = warning octagon.
@@ -23,3 +23,17 @@ export function StatusPill({ level }: { level: Level }): ReactNode {
 }
 
 export const CARD_CLASS: Record<Level, string> = { fine: 'card', watch: 'card wa-b', act: 'card ac-b' }
+
+// Brand marks for the service cards (white rounded square, like the approved mock). Add one per service as it is connected.
+// Twilio is not in the simple-icons set, so this is the simplified mark from the mock (red circle, four dots).
+export const LOGOS: Record<string, ReactNode> = {
+  twilio: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="11" fill="#F22F46" />
+      <circle cx="8.6" cy="8.6" r="2" fill="#fff" />
+      <circle cx="15.4" cy="8.6" r="2" fill="#fff" />
+      <circle cx="8.6" cy="15.4" r="2" fill="#fff" />
+      <circle cx="15.4" cy="15.4" r="2" fill="#fff" />
+    </svg>
+  ),
+}

@@ -9,7 +9,7 @@ export default async function AdminPage() {
   await requireAdmin()
   const { data } = await supabaseAdmin()
     .from('admin_snapshots')
-    .select('service,title,value,level,checked_at')
+    .select('service,title,value,level,detail,checked_at')
     .order('title')
   return <Shell snapshots={(data ?? []) as Snapshot[]} />
 }

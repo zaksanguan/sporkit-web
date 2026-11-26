@@ -67,3 +67,6 @@
 .adm .summary.ac-b .sum-t,.adm .summary.wa-b .sum-t{color:#1d1d1b}
 .adm .summary.ac-b .st.ac{background:#1d1d1b;color:#fff}
 .adm .summary.wa-b .st.wa{background:#1d1d1b;color:#FFD700}
+.adm .ttl{display:flex;align-items:center;gap:10px;min-width:0}
+.adm .lg{width:34px;height:34px;border-radius:9px;background:#fff;border:0.5px solid rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;flex:none}
+.adm .lg svg{width:20px;height:20px}
