@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 export type Level = 'fine' | 'watch' | 'act'
-export type Snapshot = { service: string; title: string; value: string; level: Level; detail?: { label?: string; rows?: { label: string; value: string }[] } | null; checked_at: string }
+export type Snapshot = { service: string; title: string; value: string; level: Level; detail?: { label?: string; meter?: { percent: number }; rows?: { label: string; value: string }[] } | null; checked_at: string }
 
 // Phosphor icons (bold), same set as the app. Shape + word, never colour alone:
 // Fine = check circle, Watch = eye, Act now = warning octagon.

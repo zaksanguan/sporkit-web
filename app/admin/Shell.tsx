@@ -63,6 +63,13 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
       </div>
       {c.detail?.label ? <div className="lbl cap">{c.detail.label}</div> : null}
       <div className="big">{c.value || '-'}</div>
+      {typeof c.detail?.meter?.percent === 'number' ? (
+        <div className="bar" role="img" aria-label={`${Math.round(c.detail.meter.percent)} percent of the limit used`}>
+          <i style={{ width: c.detail.meter.percent + '%' }} />
+          <b style={{ left: '60%' }} />
+          <b style={{ left: '80%' }} />
+        </div>
+      ) : null}
       {c.detail?.rows?.length ? (
         <div className="rows">
           {c.detail.rows.map((r) => (
