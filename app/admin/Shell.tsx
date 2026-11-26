@@ -26,12 +26,12 @@ export default function Shell() {
       <div className="hdr">
         <AdminLogo />
         <nav className="nav" aria-label="Dashboard">
-          <button className={'tab' + (tab === 'server' ? ' on' : '')} onClick={() => setTab('server')}>Server</button>
-          <button className={'tab' + (tab === 'client' ? ' on' : '')} onClick={() => setTab('client')}>Client</button>
+          <button className={'tab' + (tab === 'server' ? ' on' : '')} onClick={() => setTab('server')}>Services</button>
+          <button className={'tab' + (tab === 'client' ? ' on' : '')} onClick={() => setTab('client')}>Users</button>
         </nav>
       </div>
       <div className="upd">
-        <span className="pt">{tab === 'server' ? 'Latest status' : 'Client activity'}</span>
+        <span className="pt">{tab === 'server' ? 'Summary' : 'Client activity'}</span>
         <span className="rt">
           <span>No data yet</span>
           <button className={'rf' + (spin ? ' go' : '')} onClick={refresh} aria-label="Refresh" title="Refresh">
