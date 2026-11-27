@@ -51,7 +51,7 @@ export default function UsersPanel({ s }: { s: UserStats }) {
         <div className="card"><b>Can&apos;t read the user numbers</b><div className="lbl">Reason: {s.error}</div></div>
       ) : (
         <>
-          <div className={'card summary ' + (waitingAny ? 'wa-b' : '')}>
+          <div className={'card summary ' + (level === 'act' ? 'ac-b' : level === 'watch' ? 'wa-b' : '')}>
             <StatusPill level={level} />
             <div className="sum-stats">
               <div className="sum-s"><span className="sum-n">{s.health.claims}</span><span className="sum-l">{plural(s.health.claims, 'Claim waiting', 'Claims waiting')}</span></div>
