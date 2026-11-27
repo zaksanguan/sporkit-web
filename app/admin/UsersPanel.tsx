@@ -31,6 +31,10 @@ function C({ icon, title, cap, big, rows, note, level = 'fine' }: { icon: string
 
 export default function UsersPanel({ s }: { s: UserStats }) {
   const waitingAny = s.health.claims + s.health.reports > 0
+  const waitingCard = (
+    <C icon="health" title="Waiting for you" cap="Claims and reports to review" big={n(s.health.claims + s.health.reports)} level={waitingAny ? 'watch' : 'fine'}
+              rows={[['Claims waiting', n(s.health.claims)], ['Oldest claim', days(s.health.claimsOldestDays)], ['Reports waiting', n(s.health.reports)], ['Oldest report', days(s.health.reportsOldestDays)]]} />
+  )
   return (
     <div>
       {s.error ? (
@@ -61,6 +65,18 @@ export default function UsersPanel({ s }: { s: UserStats }) {
               ) : null}
             </div>
           </div>
+          <div className="sec">Requires attention</div>
+          {waitingAny ? (
+            <div className="grid">
+            {waitingAny ? waitingCard : null}
+            </div>
+          ) : (
+            <div className="card summary">
+              <StatusPill level="fine" />
+              <div><div className="sum-t">Nothing requires attention right now</div></div>
+            </div>
+          )}
+          <div className="sec">Activity</div>
           <div className="grid">
             <C icon="people" title="Users" cap="New sign-ups today" big={n(s.people.today)}
               rows={[['New last 7 days', n(s.people.week)], ['Previous 7 days', n(s.people.prevWeek)], ['Total users', n(s.people.total)], ['Owners', n(s.people.owners)], ['iPhones with notifications on', n(s.people.pushIos)], ['Android phones with notifications on', n(s.people.pushAndroid)]]} />
@@ -71,8 +87,7 @@ export default function UsersPanel({ s }: { s: UserStats }) {
             <C icon="viewing" title="Viewing" cap="Views today" big={n(s.viewing.today)}
               rows={[['Views last 7 days', n(s.viewing.week)], ['Previous 7 days', n(s.viewing.prevWeek)]]}
               note="Counts uploaded videos only, watched 3 seconds by signed-in people." />
-            <C icon="health" title="Waiting for you" cap="Claims and reports to review" big={n(s.health.claims + s.health.reports)} level={waitingAny ? 'watch' : 'fine'}
-              rows={[['Claims waiting', n(s.health.claims)], ['Oldest claim', days(s.health.claimsOldestDays)], ['Reports waiting', n(s.health.reports)], ['Oldest report', days(s.health.reportsOldestDays)]]} />
+            {waitingAny ? null : waitingCard}
           </div>
           <div className="lbl" style={{ marginTop: 14 }}>Page stats, the sign-up funnel and failing screens come with the app events (step 6).</div>
         </>
