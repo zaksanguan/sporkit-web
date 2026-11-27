@@ -99,8 +99,8 @@ export async function loadUserStats(period: Period = 7): Promise<UserStats> {
     const sRows = (sporkRows.data ?? []) as SporkRow[]
     const withText = sRows.filter((r) => has(r.reasons) && filled(r.notes))
     const sFlav = await flavorsFor(withText.map((r) => r.video_id).filter((x): x is string => !!x))
-    const allFive = new Set(sFlav.filter((f) => pairs(f) === 5).map((f) => `${f.user_id}:${f.video_id}`))
-    const fullReviews = withText.filter((r) => !filled(r.dish_name) || (!!r.video_id && allFive.has(`${r.user_id}:${r.video_id}`)))
+    const hasFlavor = new Set(sFlav.filter((f) => pairs(f) >= 1).map((f) => `${f.user_id}:${f.video_id}`))
+    const fullReviews = withText.filter((r) => !filled(r.dish_name) || (!!r.video_id && hasFlavor.has(`${r.user_id}:${r.video_id}`)))
     const fullReviewUsers = new Set(fullReviews.map((r) => r.user_id)).size
     const reviews = (sporkRows.data ?? []).filter((r: { reasons: string[] | null; notes: string | null }) => (r.reasons?.length ?? 0) > 0 || (r.notes ?? '').trim().length > 0).length
     return {
