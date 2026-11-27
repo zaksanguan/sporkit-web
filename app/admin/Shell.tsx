@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import AdminLogo from './AdminLogo'
 import { logout, refreshNow } from './actions'
 import { adviceFor, topText } from './advice'
+import BunnyPage from './BunnyPage'
 import { CARD_CLASS, LOGOS, PLAIN_LOGOS, StatusPill, type Level, type Snapshot } from './status'
 
 // Phosphor ArrowClockwise (bold), same icon set as the app.
@@ -24,6 +25,7 @@ function ago(ms: number): string {
 export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
   const router = useRouter()
   const [tab, setTab] = useState<Tab>('server')
+  const [view, setView] = useState<'bunny' | null>(null)
   const [pending, start] = useTransition()
   const [now, setNow] = useState(() => Date.now())
 
@@ -110,6 +112,7 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
           ))}
         </div>
       ) : null}
+      {c.service === 'bunny' ? <button className="detail-link" onClick={() => setView('bunny')}>View details</button> : null}
       {c.detail?.link?.url?.startsWith('https://') ? (
         <a className="more" href={c.detail.link.url} target="_blank" rel="noopener noreferrer">
           <span>{c.detail.link.label}</span>
@@ -152,7 +155,19 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
         </span>
       </div>
 
-      {tab === 'server' ? (
+      {tab === 'server' && view === 'bunny' && cards.find((x) => x.service === 'bunny') ? (
+        (() => {
+          const b = cards.find((x) => x.service === 'bunny')!
+          const a = adviceFor(b)
+          return (
+            <BunnyPage
+              c={b}
+              onBack={() => setView(null)}
+              advice={a ? <div className="adv" style={{ marginTop: 10 }}><div>{a.why}</div><ol>{a.steps.map((st) => <li key={st}>{st}</li>)}</ol></div> : null}
+            />
+          )
+        })()
+      ) : tab === 'server' ? (
         cards.length === 0 ? (
           <div className="card"><b>No data yet</b><div className="lbl">The checker has not saved any numbers. It runs every 5 minutes.</div></div>
         ) : (
