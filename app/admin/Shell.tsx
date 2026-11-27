@@ -126,8 +126,10 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
           <>
             <div className={'card summary ' + (top === 'act' ? 'ac-b' : top === 'watch' ? 'wa-b' : '')}>
               <StatusPill level={top} />
-              <div>
-                <div className="sum-t">{act.length} needs action, {watch.length} to watch, {fine.length} fine</div>
+              <div className="sum-stats">
+                <div className="sum-s"><span className="sum-n">{act.length}</span><span className="sum-l">Needs action</span></div>
+                <div className="sum-s"><span className="sum-n">{watch.length}</span><span className="sum-l">To watch</span></div>
+                <div className="sum-s"><span className="sum-n">{fine.length}</span><span className="sum-l">Fine</span></div>
               </div>
             </div>
             <div className="sec">Requires attention</div>
