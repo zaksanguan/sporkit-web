@@ -19,7 +19,7 @@
 .adm .word{font-family:var(--font-jakarta),system-ui,sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.6px;line-height:1}
 .adm .adm-label{font-size:20px;font-weight:500;color:var(--text-secondary);margin-left:8px;padding-left:12px;border-left:1.5px solid var(--border-strong);line-height:1.2}
 .adm .nav{display:flex;gap:8px}
-.adm .tab{padding:10px 24px;border:1px solid var(--border-strong);background:transparent;color:var(--text-primary);border-radius:10px;font-size:17px;font-weight:600;cursor:pointer;font-family:inherit}
+.adm .tab{min-width:132px;text-align:center;padding:10px 24px;border:1px solid var(--border-strong);background:transparent;color:var(--text-primary);border-radius:10px;font-size:17px;font-weight:600;cursor:pointer;font-family:inherit}
 .adm .tab.on{background:#FF8C00;border-color:#FF8C00;color:#0F0F0F}
 .adm .upd{font-size:13px;color:var(--text-secondary);margin:10px 0 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .adm .pt{font-size:20px;font-weight:700;color:var(--text-primary)}
@@ -47,7 +47,7 @@
 
 /* Status cards (approved mock) */
 .adm .sec{font-size:20px;font-weight:700;color:var(--text-primary);margin:22px 0 10px}
-.adm .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.adm .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));grid-auto-rows:1fr;gap:14px}
 .adm .hd{display:flex;justify-content:space-between;gap:8px;align-items:center}
 .adm .hd b{font-weight:600;font-size:17px}
 .adm .big{font-size:30px;font-weight:600;margin:12px 0 2px;line-height:1.15}
@@ -64,6 +64,12 @@
 .adm .card.wa-b .st.wa{background:#1d1d1b;color:#FFD700;border:0}
 .adm .summary{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
 .adm .summary .sum-t{font-size:18px;font-weight:600}
+.adm .summary{align-items:center}
+.adm .sum-stats{display:flex;align-items:stretch;flex-wrap:wrap}
+.adm .sum-s{display:flex;align-items:baseline;gap:8px;padding:0 20px;border-left:1px solid currentColor;border-left-color:rgba(128,128,128,.4)}
+.adm .sum-s:first-child{border-left:0;padding-left:8px}
+.adm .sum-n{font-size:26px;font-weight:700;line-height:1}
+.adm .sum-l{font-size:15px;font-weight:500;opacity:.8}
 .adm .summary.ac-b{background:#E34948;border:0}
 .adm .summary.wa-b{background:#FFD700;border:0}
 .adm .summary.ac-b .sum-t,.adm .summary.wa-b .sum-t{color:#1d1d1b}
