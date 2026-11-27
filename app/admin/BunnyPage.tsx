@@ -17,7 +17,6 @@ function Tile({ label, value, sub }: { label: string; value: ReactNode; sub?: st
 }
 
 function HourChart({ hours }: { hours: { hour: number; avg: number; posts: number }[] }) {
-  if (hours.length === 0) return <div className="lbl">No uploads yet today.</div>
   const W = 640, H = 170, L = 34, B = 24
   const maxAvg = Math.max(12, ...hours.map((h) => h.avg))
   const y = (m: number) => H - B - (m / maxAvg) * (H - B - 10)
@@ -36,6 +35,12 @@ function HourChart({ hours }: { hours: { hour: number; avg: number; posts: numbe
           <text x="2" y={y(m) + 4} fontSize="11" fill="currentColor" opacity=".8">{m} min</text>
         </g>
       ))}
+      {[0, 3, 6, 9, 12, 15, 18, 21].map((hr) => (
+        <text key={'t' + hr} x={L + hr * slot + slot / 2} y={H - 8} fontSize="11" textAnchor="middle" fill="currentColor" opacity=".45">{hr}</text>
+      ))}
+      {hours.length === 0 ? (
+        <text x={(L + W) / 2} y={(H - B) / 2 + 10} fontSize="13" textAnchor="middle" fill="currentColor" opacity=".7">No uploads yet today</text>
+      ) : null}
       {hours.map((h) => {
         const x = L + h.hour * slot + 3
         const top = y(Math.max(h.avg, 0.4))
