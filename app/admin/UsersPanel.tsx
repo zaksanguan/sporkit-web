@@ -79,13 +79,13 @@ export default function UsersPanel({ s }: { s: UserStats }) {
           <div className="sec">Activity</div>
           <div className="grid">
             <C icon="people" title="Users" cap="New sign-ups today" big={n(s.people.today)}
-              rows={[['New last 7 days', n(s.people.week)], ['Previous 7 days', n(s.people.prevWeek)], ['Total users', n(s.people.total)], ['Owners', n(s.people.owners)], ['iPhones with notifications on', n(s.people.pushIos)], ['Android phones with notifications on', n(s.people.pushAndroid)]]} />
+              rows={[['Last 7 days', n(s.people.week)], ['Previous 7 days', n(s.people.prevWeek)], ['Total users', n(s.people.total)], ['Owners', n(s.people.owners)], ['iPhones with notifications on', n(s.people.pushIos)], ['Android with notifications on', n(s.people.pushAndroid)]]} />
             <C icon="posting" title="Posting" cap="Posts today" big={n(s.posting.today)}
-              rows={[['Posts last 7 days', n(s.posting.week)], ['Previous 7 days', n(s.posting.prevWeek)], [`${plural(s.posting.posters, 'Person', 'People')} who posted, last 7 days`, n(s.posting.posters)]]} />
+              rows={[['Last 7 days', n(s.posting.week)], ['Previous 7 days', n(s.posting.prevWeek)], [`${plural(s.posting.posters, 'Person', 'People')} who posted, last 7 days`, n(s.posting.posters)]]} />
             <C icon="sporking" title="Sporking" cap="Sporks today" big={n(s.sporking.today)}
-              rows={[['Sporks last 7 days', n(s.sporking.week)], ['Previous 7 days', n(s.sporking.prevWeek)], ['With a review, last 7 days', n(s.sporking.reviews)]]} />
+              rows={[['Last 7 days', n(s.sporking.week)], ['Previous 7 days', n(s.sporking.prevWeek)], ['With a review, last 7 days', n(s.sporking.reviews)]]} />
             <C icon="viewing" title="Viewing" cap="Views today" big={n(s.viewing.today)}
-              rows={[['Views last 7 days', n(s.viewing.week)], ['Previous 7 days', n(s.viewing.prevWeek)]]}
+              rows={[['Last 7 days', n(s.viewing.week)], ['Previous 7 days', n(s.viewing.prevWeek)]]}
               note="Counts uploaded videos only, watched 3 seconds by signed-in people." />
             {waitingAny ? null : waitingCard}
           </div>
