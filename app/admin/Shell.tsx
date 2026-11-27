@@ -127,7 +127,8 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
           <button className={'tab' + (tab === 'client' ? ' on' : '')} onClick={() => setTab('client')}>Users</button>
           <button className={'tab' + (tab === 'server' ? ' on' : '')} onClick={() => setTab('server')}>
             Services
-            {attention.length > 0 ? <span className={'bd ' + (top === 'act' ? 'bd-a' : 'bd-w')} aria-label={`${attention.length} need attention`}>{attention.length}</span> : null}
+            {act.length > 0 ? <span className="bd bd-a" aria-label={`${act.length} need action`}>{act.length}</span> : null}
+            {watch.length > 0 ? <span className="bd bd-w" aria-label={`${watch.length} to watch`}>{watch.length}</span> : null}
           </button>
         </nav>
       </div>
