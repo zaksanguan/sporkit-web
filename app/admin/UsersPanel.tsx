@@ -4,6 +4,7 @@ import { CARD_CLASS, StatusPill } from './status'
 import { USER_ICONS } from './userIcons'
 import type { Level } from './status'
 import type { UserStats } from './userStats'
+import { useState, useTransition } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 
 type Row = [string, string]
@@ -34,6 +35,9 @@ function C({ icon, title, cap, big, rows, note, level = 'fine' }: { icon: string
 export default function UsersPanel({ s }: { s: UserStats }) {
   const router = useRouter()
   const pathname = usePathname()
+  const [pending, startTransition] = useTransition()
+  const [choice, setChoice] = useState<string | null>(null)
+  const shown = pending && choice ? choice : String(s.period)
   const waitingAny = s.health.claims + s.health.reports > 0
   const waitingCard = (
     <C icon="health" title="Waiting for you" cap="Claims and reports to review" big={n(s.health.claims + s.health.reports)} level={waitingAny ? 'watch' : 'fine'}
@@ -84,15 +88,18 @@ export default function UsersPanel({ s }: { s: UserStats }) {
             <span>Activity</span>
             <label className="per">
               <span>Period</span>
-              <select value={String(s.period)} onChange={(e) => router.replace(`${pathname}?days=${e.target.value}`)} aria-label="Period">
+              <span className="selw">
+              <select value={shown} onChange={(e) => { const v = e.target.value; setChoice(v); startTransition(() => router.replace(`${pathname}?days=${v}`)) }} aria-label="Period">
                 <option value="7">Last 7 days</option>
                 <option value="30">Last 30 days</option>
                 <option value="90">Last 90 days</option>
                 <option value="all">All time</option>
               </select>
+              <svg className="chev" viewBox="0 0 256 256" aria-hidden="true"><path fill="currentColor" d="M216.49,104.49l-80,80a12,12,0,0,1-17,0l-80-80a12,12,0,0,1,17-17L128,159l71.51-71.52a12,12,0,0,1,17,17Z" /></svg>
+            </span>
             </label>
           </div>
-          <div className="grid">
+          <div className="grid" style={{ opacity: pending ? 0.5 : 1, transition: 'opacity .15s' }}>
             <C icon="people" title="Users" cap="New sign-ups today" big={n(s.people.today)}
               rows={[...cmp(s.people), ['Total users', n(s.people.total)], ['Owners', n(s.people.owners)], ['iPhones with notifications on', n(s.people.pushIos)], ['Android with notifications on', n(s.people.pushAndroid)]]} />
             <C icon="posting" title="Posting" cap="Posts today" big={n(s.posting.today)}
