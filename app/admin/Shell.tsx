@@ -26,7 +26,7 @@ function ago(ms: number): string {
 
 export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; stats: UserStats }) {
   const router = useRouter()
-  const [tab, setTab] = useState<Tab>('server')
+  const [tab, setTab] = useState<Tab>('client')
   const [view, setView] = useState<'bunny' | null>(null)
   const [pending, start] = useTransition()
   const [now, setNow] = useState(() => Date.now())
