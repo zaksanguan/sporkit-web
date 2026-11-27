@@ -124,3 +124,7 @@
 .adm .tile .big{margin:4px 0 0}
 .adm .detail-link{background:none;border:0;padding:9px 0 0;border-top:0.5px solid var(--border);font-size:15px;font-weight:600;color:#FF8C00;cursor:pointer;text-align:left;font-family:inherit;margin-top:auto;display:block;width:100%}
 .adm .card.ac-b .detail-link,.adm .card.wa-b .detail-link{color:#1d1d1b;border-top-color:rgba(0,0,0,.2)}
+
+.adm .secrow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.adm .per{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:400;color:var(--text-secondary)}
+.adm .per select{font:inherit;font-size:15px;color:var(--text-primary);background:var(--bg-card, transparent);border:0.5px solid var(--border);border-radius:8px;padding:6px 10px}

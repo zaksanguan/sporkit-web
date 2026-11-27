@@ -1,14 +1,15 @@
 import { requireAdmin } from '../../lib/admin/session'
 import { supabaseAdmin } from '../../lib/supabaseAdmin'
 import Shell from './Shell'
-import { loadUserStats } from './userStats'
+import { loadUserStats, parsePeriod } from './userStats'
 import type { Snapshot } from './status'
 
 export const dynamic = 'force-dynamic'
 
-export default async function AdminPage() {
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ days?: string }> }) {
   await requireAdmin()
-  const stats = await loadUserStats()
+  const { days } = await searchParams
+  const stats = await loadUserStats(parsePeriod(days))
   const { data } = await supabaseAdmin()
     .from('admin_snapshots')
     .select('service,title,value,level,detail,checked_at')

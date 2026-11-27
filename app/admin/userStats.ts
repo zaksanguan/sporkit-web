@@ -1,8 +1,14 @@
 import { supabaseAdmin } from '../../lib/supabaseAdmin'
 
 // Numbers for the Users tab, read live from our own tables (service role, server only). Bangkok days.
-export type Windows = { today: number; week: number; prevWeek: number }
+// Period choices for the Users tab: 7, 30 or 90 days, or all time (no previous period then).
+export type Period = 7 | 30 | 90 | 'all'
+export function parsePeriod(v: string | undefined): Period {
+  return v === '30' ? 30 : v === '90' ? 90 : v === 'all' ? 'all' : 7
+}
+export type Windows = { today: number; period: number; prev: number | null }
 export type UserStats = {
+  period: Period
   people: Windows & { total: number; owners: number; pushIos: number; pushAndroid: number }
   posting: Windows & { posters: number; full: number; fullUsers: number }
   sporking: Windows & { reviews: number; full: number; fullUsers: number }
@@ -14,12 +20,12 @@ export type UserStats = {
 const DAY = 86400000
 const bangkokDayStart = (now: number) => Math.floor((now + 7 * 3600 * 1000) / DAY) * DAY - 7 * 3600 * 1000
 
-export async function loadUserStats(): Promise<UserStats> {
+export async function loadUserStats(period: Period = 7): Promise<UserStats> {
   const db = supabaseAdmin()
   const now = Date.now()
   const t0 = bangkokDayStart(now)
-  const w0 = now - 7 * DAY
-  const p0 = now - 14 * DAY
+  const w0 = period === 'all' ? 0 : now - period * DAY
+  const p0 = period === 'all' ? null : now - 2 * period * DAY
   const iso = (ms: number) => new Date(ms).toISOString()
 
   async function count(table: string, col: string, build?: (q: any) => any, from?: number, to?: number): Promise<number> {
@@ -31,9 +37,20 @@ export async function loadUserStats(): Promise<UserStats> {
     if (error) throw new Error(`${table}: ${error.message}`)
     return n ?? 0
   }
+  // Read every row in the window, 1000 at a time (the database caps one answer at 1000 rows).
+  async function fetchAll(table: string, cols: string, build: (q: any) => any): Promise<{ data: any[] }> {
+    const out: any[] = []
+    for (let from = 0; from < 20000; from += 1000) {
+      const { data, error } = await build(db.from(table).select(cols)).order('created_at', { ascending: true }).range(from, from + 999)
+      if (error) throw new Error(`${table}: ${error.message}`)
+      out.push(...(data ?? []))
+      if ((data ?? []).length < 1000) break
+    }
+    return { data: out }
+  }
   const windows = (table: string, build?: (q: any) => any) =>
-    Promise.all([count(table, 'created_at', build, t0), count(table, 'created_at', build, w0), count(table, 'created_at', build, p0, w0)])
-      .then(([today, week, prevWeek]) => ({ today, week, prevWeek }))
+    Promise.all([count(table, 'created_at', build, t0), count(table, 'created_at', build, w0), p0 === null ? Promise.resolve(null) : count(table, 'created_at', build, p0, w0)])
+      .then(([today, per, prev]) => ({ today, period: per, prev }))
 
   const uploads = (q: any) => q.eq('source', 'direct_upload').in('status', ['active', 'pending'])
   const activeSporks = (q: any) => q.eq('status', 'active')
@@ -47,9 +64,9 @@ export async function loadUserStats(): Promise<UserStats> {
       count('push_tokens', 'updated_at', (q) => q.eq('platform', 'ios')),
       count('push_tokens', 'updated_at', (q) => q.eq('platform', 'android')),
       windows('videos', uploads),
-      db.from('videos').select('id, creator_id, description, dish_name, restaurant_id, cuisine_tags, protein_tags, meal_tags').eq('source', 'direct_upload').in('status', ['active', 'pending']).gte('created_at', iso(w0)).limit(5000),
+      fetchAll('videos', 'id, creator_id, description, dish_name, restaurant_id, cuisine_tags, protein_tags, meal_tags', (q) => q.eq('source', 'direct_upload').in('status', ['active', 'pending']).gte('created_at', iso(w0))),
       windows('sporks', activeSporks),
-      db.from('sporks').select('user_id, video_id, dish_name, reasons, notes').eq('status', 'active').gte('created_at', iso(w0)).limit(5000),
+      fetchAll('sporks', 'user_id, video_id, dish_name, reasons, notes', (q) => q.eq('status', 'active').gte('created_at', iso(w0))),
       windows('video_views'),
       db.from('restaurants').select('updated_at', { count: 'exact' }).eq('claim_status', 'pending').order('updated_at', { ascending: true }).limit(1),
       db.from('reports').select('created_at', { count: 'exact' }).eq('status', 'pending').order('created_at', { ascending: true }).limit(1),
@@ -87,6 +104,7 @@ export async function loadUserStats(): Promise<UserStats> {
     const fullReviewUsers = new Set(fullReviews.map((r) => r.user_id)).size
     const reviews = (sporkRows.data ?? []).filter((r: { reasons: string[] | null; notes: string | null }) => (r.reasons?.length ?? 0) > 0 || (r.notes ?? '').trim().length > 0).length
     return {
+      period,
       people: { ...people, total, owners, pushIos, pushAndroid },
       posting: { ...posting, posters, full: fullPosts.length, fullUsers: fullPostUsers },
       sporking: { ...sporking, reviews, full: fullReviews.length, fullUsers: fullReviewUsers },
@@ -99,8 +117,9 @@ export async function loadUserStats(): Promise<UserStats> {
       },
     }
   } catch (e) {
-    const z = { today: 0, week: 0, prevWeek: 0 }
+    const z = { today: 0, period: 0, prev: 0 }
     return {
+      period,
       people: { ...z, total: 0, owners: 0, pushIos: 0, pushAndroid: 0 }, posting: { ...z, posters: 0, full: 0, fullUsers: 0 }, sporking: { ...z, reviews: 0, full: 0, fullUsers: 0 }, viewing: z,
       health: { claims: 0, claimsOldestDays: null, reports: 0, reportsOldestDays: null },
       error: e instanceof Error ? e.message : 'unknown',

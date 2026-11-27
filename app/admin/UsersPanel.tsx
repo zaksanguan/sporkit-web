@@ -4,12 +4,14 @@ import { CARD_CLASS, StatusPill } from './status'
 import { USER_ICONS } from './userIcons'
 import type { Level } from './status'
 import type { UserStats } from './userStats'
+import { useRouter, usePathname } from 'next/navigation'
 
+type Row = [string, string]
 const n = (x: number) => x.toLocaleString('en-US')
+const cmp = (w: { period: number; prev: number | null }): Row[] => (w.prev === null ? [['In total', n(w.period)]] : [['This period', n(w.period)], ['Previous period', n(w.prev)]])
 const plural = (x: number, one: string, many: string) => (x === 1 ? one : many)
 const days = (d: number | null) => (d === null ? '-' : d === 0 ? 'Today' : d + (d === 1 ? ' day' : ' days'))
 
-type Row = [string, string]
 function C({ icon, title, cap, big, rows, note, level = 'fine' }: { icon: string; title: string; cap: string; big: string; rows: Row[]; note?: string; level?: Level }) {
   return (
     <div className={CARD_CLASS[level]}>
@@ -30,6 +32,8 @@ function C({ icon, title, cap, big, rows, note, level = 'fine' }: { icon: string
 }
 
 export default function UsersPanel({ s }: { s: UserStats }) {
+  const router = useRouter()
+  const pathname = usePathname()
   const waitingAny = s.health.claims + s.health.reports > 0
   const waitingCard = (
     <C icon="health" title="Waiting for you" cap="Claims and reports to review" big={n(s.health.claims + s.health.reports)} level={waitingAny ? 'watch' : 'fine'}
@@ -76,16 +80,27 @@ export default function UsersPanel({ s }: { s: UserStats }) {
               <div><div className="sum-t">Nothing requires attention right now</div></div>
             </div>
           )}
-          <div className="sec">Activity</div>
+          <div className="sec secrow">
+            <span>Activity</span>
+            <label className="per">
+              <span>Period</span>
+              <select value={String(s.period)} onChange={(e) => router.replace(`${pathname}?days=${e.target.value}`)} aria-label="Period">
+                <option value="7">Last 7 days</option>
+                <option value="30">Last 30 days</option>
+                <option value="90">Last 90 days</option>
+                <option value="all">All time</option>
+              </select>
+            </label>
+          </div>
           <div className="grid">
             <C icon="people" title="Users" cap="New sign-ups today" big={n(s.people.today)}
-              rows={[['Last 7 days', n(s.people.week)], ['Previous 7 days', n(s.people.prevWeek)], ['Total users', n(s.people.total)], ['Owners', n(s.people.owners)], ['iPhones with notifications on', n(s.people.pushIos)], ['Android with notifications on', n(s.people.pushAndroid)]]} />
+              rows={[...cmp(s.people), ['Total users', n(s.people.total)], ['Owners', n(s.people.owners)], ['iPhones with notifications on', n(s.people.pushIos)], ['Android with notifications on', n(s.people.pushAndroid)]]} />
             <C icon="posting" title="Posting" cap="Posts today" big={n(s.posting.today)}
-              rows={[['Last 7 days', n(s.posting.week)], ['Previous 7 days', n(s.posting.prevWeek)], [`${plural(s.posting.posters, 'User', 'Users')} who posted, last 7 days`, n(s.posting.posters)], ['Full posts, last 7 days', n(s.posting.full)], [`${plural(s.posting.fullUsers, 'User', 'Users')} with a full post, last 7 days`, n(s.posting.fullUsers)]]} />
+              rows={[...cmp(s.posting), [`${plural(s.posting.posters, 'User', 'Users')} who posted`, n(s.posting.posters)], ['Full posts', n(s.posting.full)], [`${plural(s.posting.fullUsers, 'User', 'Users')} with a full post`, n(s.posting.fullUsers)]]} />
             <C icon="sporking" title="Sporking" cap="Sporks today" big={n(s.sporking.today)}
-              rows={[['Last 7 days', n(s.sporking.week)], ['Previous 7 days', n(s.sporking.prevWeek)], ['With a review, last 7 days', n(s.sporking.reviews)], ['Full reviews, last 7 days', n(s.sporking.full)], [`${plural(s.sporking.fullUsers, 'User', 'Users')} with a full review, last 7 days`, n(s.sporking.fullUsers)]]} />
+              rows={[...cmp(s.sporking), ['With a review', n(s.sporking.reviews)], ['Full reviews', n(s.sporking.full)], [`${plural(s.sporking.fullUsers, 'User', 'Users')} with a full review`, n(s.sporking.fullUsers)]]} />
             <C icon="viewing" title="Viewing" cap="Views today" big={n(s.viewing.today)}
-              rows={[['Last 7 days', n(s.viewing.week)], ['Previous 7 days', n(s.viewing.prevWeek)]]}
+              rows={[...cmp(s.viewing)]}
               note="Counts uploaded videos only, watched 3 seconds by signed-in people." />
             {waitingAny ? null : waitingCard}
           </div>
