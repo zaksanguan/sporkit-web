@@ -39,7 +39,7 @@ function HourChart({ hours }: { hours: { hour: number; avg: number; posts: numbe
         <text key={'t' + hr} x={L + hr * slot + slot / 2} y={H - 8} fontSize="11" textAnchor="middle" fill="currentColor" opacity=".45">{hr}</text>
       ))}
       {hours.length === 0 ? (
-        <text x={(L + W) / 2} y={(H - B) / 2 + 10} fontSize="13" textAnchor="middle" fill="currentColor" opacity=".7">No uploads yet today</text>
+        <text x={(L + W) / 2} y={y(5) + 26} fontSize="13" textAnchor="middle" fill="currentColor" opacity=".7">No uploads yet today</text>
       ) : null}
       {hours.map((h) => {
         const x = L + h.hour * slot + 3
