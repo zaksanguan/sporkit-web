@@ -54,8 +54,8 @@
 .adm .st{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;padding:4px 12px;border-radius:var(--radius);white-space:nowrap}
 .adm .st svg.pi{width:18px;height:18px;fill:currentColor;flex:none}
 .adm .st.ok{background:var(--bg-success);color:var(--text-success)}
-.adm .st.wa{background:var(--surface-2);color:var(--text-warning)}
-.adm .st.ac{background:var(--surface-2);color:var(--text-danger);border:1.5px solid var(--border-danger)}
+.adm .st.wa{background:#FFD700;color:#1d1d1b}
+.adm .st.ac{background:#E34948;color:#1d1d1b}
 .adm .card.ac-b{background:#E34948;border:0;color:#1d1d1b}
 .adm .card.ac-b .lbl,.adm .card.ac-b b,.adm .card.ac-b .big,.adm .card.ac-b div{color:#1d1d1b}
 .adm .card.wa-b{background:#FFD700;border:0;color:#1d1d1b}
