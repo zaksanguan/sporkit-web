@@ -81,7 +81,8 @@
 .adm .cap{margin-top:14px;margin-bottom:0}
 .adm .cap + .big{margin-top:2px}
 .adm .rows{margin-top:12px}
-.adm .more{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px;font-size:15px;font-weight:600;text-decoration:none;color:#FF8C00}
+.adm .more{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:15px;font-weight:600;text-decoration:none;color:#FF8C00}
+.adm .more svg{width:16px;height:16px;fill:currentColor;flex:none}
 .adm .more:hover{text-decoration:none;opacity:.85}
 .adm .card.wa-b .more,.adm .card.ac-b .more{color:#1d1d1b}
 .adm .numrow{display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px;margin:12px 0 2px}
