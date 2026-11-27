@@ -7,13 +7,19 @@ export function parsePeriod(v: string | undefined): Period {
   return v === '30' ? 30 : v === '90' ? 90 : v === 'all' ? 'all' : 7
 }
 export type Windows = { today: number; period: number; prev: number | null }
+// One waiting item in the summary card: a report or a restaurant claim.
+export type WaitItem = { kind: 'report' | 'claim'; id: string; title: string; detail: string; ageDays: number | null; link: { label: string; url: string } | null }
+const REASON_WORDS: Record<string, string> = {
+  other: 'Something else / not food related', inappropriate_content: 'Inappropriate content', wrong_info: 'Wrong restaurant or location', closed: 'Permanently closed',
+  dish_unavailable: 'No longer on the menu', spam: 'Spam', video_unavailable: "Video won't play", fake_spork: 'Fake or paid reviews', harassment: 'Harassment',
+}
 export type UserStats = {
   period: Period
   people: Windows & { total: number; owners: number; pushIos: number; pushAndroid: number }
   posting: Windows & { posters: number; full: number; fullUsers: number }
   sporking: Windows & { reviews: number; full: number; fullUsers: number }
   viewing: Windows
-  health: { claims: number; claimsOldestDays: number | null; reports: number; reportsOldestDays: number | null; level: 'fine' | 'watch' | 'act' }
+  health: { claims: number; claimsOldestDays: number | null; reports: number; reportsOldestDays: number | null; level: 'fine' | 'watch' | 'act'; list: WaitItem[] }
   error?: string
 }
 
@@ -113,6 +119,46 @@ export async function loadUserStats(period: Period = 7): Promise<UserStats> {
     const fullReviews = withText.filter((r) => !filled(r.dish_name) || (!!r.video_id && hasFlavor.has(`${r.user_id}:${r.video_id}`)))
     const fullReviewUsers = new Set(fullReviews.map((r) => r.user_id)).size
     const reviews = (sporkRows.data ?? []).filter((r: { reasons: string[] | null; notes: string | null }) => (r.reasons?.length ?? 0) > 0 || (r.notes ?? '').trim().length > 0).length
+    // The waiting list: every pending report and claim, oldest first, with a link to look at it.
+    const list: WaitItem[] = []
+    const { data: rep } = await db.from('reports').select('id, content_type, content_id, reason, notes, created_at').eq('status', 'pending').order('created_at', { ascending: true }).limit(30)
+    const vids = (rep ?? []).filter((r: any) => r.content_type === 'video').map((r: any) => r.content_id)
+    const vinfo = new Map<string, string>()
+    if (vids.length) {
+      const { data: vv } = await db.from('videos').select('id, dish_name, restaurant:restaurants(name)').in('id', vids)
+      for (const v of (vv ?? []) as any[]) vinfo.set(v.id, [v.dish_name, v.restaurant?.name].filter(Boolean).join(' at ') || 'Video')
+    }
+    for (const r of (rep ?? []) as any[]) {
+      const what = r.content_type === 'video' ? vinfo.get(r.content_id) ?? 'Video (no longer found)' : `Report about a ${r.content_type}`
+      list.push({
+        kind: 'report', id: r.id, title: what,
+        detail: (REASON_WORDS[r.reason] ?? r.reason) + (r.notes ? ` - "${String(r.notes).slice(0, 120)}"` : ''),
+        ageDays: oldestDays(r.created_at),
+        link: r.content_type === 'video' ? { label: 'Watch video', url: `https://sporkitapp.com/video/${r.content_id}` } : null,
+      })
+    }
+    const { data: cl } = await db.from('restaurants').select('id, name, claimed_by, claimed_at, updated_at').eq('claim_status', 'pending').order('claimed_at', { ascending: true }).limit(30)
+    const claimers = (cl ?? []).map((c: any) => c.claimed_by).filter(Boolean)
+    const names = new Map<string, string>()
+    if (claimers.length) {
+      const { data: uu } = await db.from('users').select('id, username').in('id', claimers)
+      for (const u of (uu ?? []) as any[]) names.set(u.id, u.username)
+    }
+    for (const c of (cl ?? []) as any[]) {
+      const { data: pr } = await db.from('claim_requests').select('proof_path').eq('restaurant_id', c.id).order('created_at', { ascending: false }).limit(1)
+      const path = pr?.[0]?.proof_path as string | undefined
+      let link: WaitItem['link'] = null
+      if (path) {
+        const { data: signed } = await db.storage.from('claim-proofs').createSignedUrl(path, 3600)
+        if (signed?.signedUrl) link = { label: 'Open proof', url: signed.signedUrl }
+      }
+      list.push({
+        kind: 'claim', id: c.id, title: c.name,
+        detail: `Claim by @${names.get(c.claimed_by) ?? 'unknown'}` + (path ? '' : ', no proof yet'),
+        ageDays: oldestDays(c.claimed_at ?? c.updated_at), link,
+      })
+    }
+    list.sort((a, b) => (b.ageDays ?? 0) - (a.ageDays ?? 0))
     return {
       period,
       people: { ...people, total, owners, pushIos, pushAndroid },
@@ -124,6 +170,7 @@ export async function loadUserStats(period: Period = 7): Promise<UserStats> {
         claimsOldestDays: oldestDays(claims.data?.[0]?.claimed_at ?? claims.data?.[0]?.updated_at),
         reports: reports.count ?? 0,
         reportsOldestDays: oldestDays(reports.data?.[0]?.created_at),
+        list,
         level: waitingLevel((claims.count ?? 0) > 0 ? oldestDays(claims.data?.[0]?.claimed_at ?? claims.data?.[0]?.updated_at) : null, (reports.count ?? 0) > 0 ? oldestDays(reports.data?.[0]?.created_at) : null),
       },
     }
@@ -132,7 +179,7 @@ export async function loadUserStats(period: Period = 7): Promise<UserStats> {
     return {
       period,
       people: { ...z, total: 0, owners: 0, pushIos: 0, pushAndroid: 0 }, posting: { ...z, posters: 0, full: 0, fullUsers: 0 }, sporking: { ...z, reviews: 0, full: 0, fullUsers: 0 }, viewing: z,
-      health: { claims: 0, claimsOldestDays: null, reports: 0, reportsOldestDays: null, level: 'fine' },
+      health: { claims: 0, claimsOldestDays: null, reports: 0, reportsOldestDays: null, level: 'fine', list: [] },
       error: e instanceof Error ? e.message : 'unknown',
     }
   }
