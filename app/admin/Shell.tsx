@@ -84,7 +84,8 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
       ) : null}
       {c.detail?.link?.url?.startsWith('https://') ? (
         <a className="more" href={c.detail.link.url} target="_blank" rel="noopener noreferrer">
-          {c.detail.link.label} →
+          <span>{c.detail.link.label}</span>
+          <span aria-hidden="true">→</span>
         </a>
       ) : null}
     </div>
