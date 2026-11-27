@@ -4,8 +4,8 @@ import { supabaseAdmin } from '../../lib/supabaseAdmin'
 export type Windows = { today: number; week: number; prevWeek: number }
 export type UserStats = {
   people: Windows & { total: number; owners: number; pushIos: number; pushAndroid: number }
-  posting: Windows & { posters: number }
-  sporking: Windows & { reviews: number }
+  posting: Windows & { posters: number; full: number; fullUsers: number }
+  sporking: Windows & { reviews: number; full: number; fullUsers: number }
   viewing: Windows
   health: { claims: number; claimsOldestDays: number | null; reports: number; reportsOldestDays: number | null }
   error?: string
@@ -47,19 +47,49 @@ export async function loadUserStats(): Promise<UserStats> {
       count('push_tokens', 'updated_at', (q) => q.eq('platform', 'ios')),
       count('push_tokens', 'updated_at', (q) => q.eq('platform', 'android')),
       windows('videos', uploads),
-      db.from('videos').select('creator_id').eq('source', 'direct_upload').in('status', ['active', 'pending']).gte('created_at', iso(w0)).limit(5000),
+      db.from('videos').select('id, creator_id, description, dish_name, restaurant_id, cuisine_tags, protein_tags, meal_tags').eq('source', 'direct_upload').in('status', ['active', 'pending']).gte('created_at', iso(w0)).limit(5000),
       windows('sporks', activeSporks),
-      db.from('sporks').select('reasons, notes').eq('status', 'active').gte('created_at', iso(w0)).limit(5000),
+      db.from('sporks').select('user_id, video_id, dish_name, reasons, notes').eq('status', 'active').gte('created_at', iso(w0)).limit(5000),
       windows('video_views'),
       db.from('restaurants').select('updated_at', { count: 'exact' }).eq('claim_status', 'pending').order('updated_at', { ascending: true }).limit(1),
       db.from('reports').select('created_at', { count: 'exact' }).eq('status', 'pending').order('created_at', { ascending: true }).limit(1),
     ])
     const posters = new Set((posterRows.data ?? []).map((r: { creator_id: string | null }) => r.creator_id)).size
+    // Flavor ratings for the videos in the window, read in small chunks (long id lists break the request address).
+    type Flav = { user_id: string; video_id: string; source: string; sweet_salty: number | null; mild_spicy: number | null; bland_savory: number | null; mellow_sour: number | null; light_rich: number | null }
+    async function flavorsFor(videoIds: string[]): Promise<Flav[]> {
+      const out: Flav[] = []
+      const ids = Array.from(new Set(videoIds))
+      for (let i = 0; i < ids.length; i += 100) {
+        const { data, error } = await db.from('flavor_ratings').select('user_id, video_id, source, sweet_salty, mild_spicy, bland_savory, mellow_sour, light_rich').in('video_id', ids.slice(i, i + 100))
+        if (error) throw new Error(`flavor_ratings: ${error.message}`)
+        out.push(...((data ?? []) as Flav[]))
+      }
+      return out
+    }
+    const pairs = (f: Flav) => [f.sweet_salty, f.mild_spicy, f.bland_savory, f.mellow_sour, f.light_rich].filter((x) => x !== null).length
+    const filled = (t: string | null) => (t ?? '').trim().length > 0
+    const has = (a: string[] | null) => (a?.length ?? 0) > 0
+
+    type PostRow = { id: string; creator_id: string | null; description: string | null; dish_name: string | null; restaurant_id: string | null; cuisine_tags: string[] | null; protein_tags: string[] | null; meal_tags: string[] | null }
+    const postRows = (posterRows.data ?? []) as PostRow[]
+    const postFlav = await flavorsFor(postRows.map((r) => r.id))
+    const postFlavOk = new Set(postFlav.filter((f) => f.source === 'post' && pairs(f) >= 1).map((f) => f.video_id))
+    const fullPosts = postRows.filter((r) => filled(r.description) && filled(r.dish_name) && !!r.restaurant_id && has(r.cuisine_tags) && has(r.protein_tags) && has(r.meal_tags) && postFlavOk.has(r.id))
+    const fullPostUsers = new Set(fullPosts.map((r) => r.creator_id)).size
+
+    type SporkRow = { user_id: string; video_id: string | null; dish_name: string | null; reasons: string[] | null; notes: string | null }
+    const sRows = (sporkRows.data ?? []) as SporkRow[]
+    const withText = sRows.filter((r) => has(r.reasons) && filled(r.notes))
+    const sFlav = await flavorsFor(withText.map((r) => r.video_id).filter((x): x is string => !!x))
+    const allFive = new Set(sFlav.filter((f) => pairs(f) === 5).map((f) => `${f.user_id}:${f.video_id}`))
+    const fullReviews = withText.filter((r) => !filled(r.dish_name) || (!!r.video_id && allFive.has(`${r.user_id}:${r.video_id}`)))
+    const fullReviewUsers = new Set(fullReviews.map((r) => r.user_id)).size
     const reviews = (sporkRows.data ?? []).filter((r: { reasons: string[] | null; notes: string | null }) => (r.reasons?.length ?? 0) > 0 || (r.notes ?? '').trim().length > 0).length
     return {
       people: { ...people, total, owners, pushIos, pushAndroid },
-      posting: { ...posting, posters },
-      sporking: { ...sporking, reviews },
+      posting: { ...posting, posters, full: fullPosts.length, fullUsers: fullPostUsers },
+      sporking: { ...sporking, reviews, full: fullReviews.length, fullUsers: fullReviewUsers },
       viewing,
       health: {
         claims: claims.count ?? 0,
@@ -71,7 +101,7 @@ export async function loadUserStats(): Promise<UserStats> {
   } catch (e) {
     const z = { today: 0, week: 0, prevWeek: 0 }
     return {
-      people: { ...z, total: 0, owners: 0, pushIos: 0, pushAndroid: 0 }, posting: { ...z, posters: 0 }, sporking: { ...z, reviews: 0 }, viewing: z,
+      people: { ...z, total: 0, owners: 0, pushIos: 0, pushAndroid: 0 }, posting: { ...z, posters: 0, full: 0, fullUsers: 0 }, sporking: { ...z, reviews: 0, full: 0, fullUsers: 0 }, viewing: z,
       health: { claims: 0, claimsOldestDays: null, reports: 0, reportsOldestDays: null },
       error: e instanceof Error ? e.message : 'unknown',
     }
