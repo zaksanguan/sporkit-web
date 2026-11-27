@@ -17,7 +17,7 @@ const waiting = (count: number, oldest: number | null) => (count === 0 ? 'none' 
 function C({ icon, title, big, lines, foot }: { icon: string; title: string; big: string; lines: string[]; foot?: string }) {
   return (
     <div className="card">
-      <span className="ttl"><span className="lg n">{USER_ICONS[icon]}</span><b>{title}</b></span>
+      <span className="ttl"><span className="lg u">{USER_ICONS[icon]}</span><b>{title}</b></span>
       <div className="big">{big}</div>
       {lines.map((l) => <div className="lbl" key={l}>{l}</div>)}
       {foot ? <div className="lbl" style={{ marginTop: 4 }}>{foot}</div> : null}

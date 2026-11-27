@@ -103,6 +103,7 @@
 .adm .ptw{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .adm .word .it{color:#FF8C00}
 .adm .lg.n{background:none;border:0;color:var(--text-primary)}
+.adm .lg.u{color:#1C2024}
 
 .adm .summary{flex-wrap:wrap}
 .adm .sum-adv{flex-basis:100%;display:flex;flex-direction:column;gap:10px;font-size:15px;line-height:1.4;padding-top:10px;border-top:0.5px solid rgba(128,128,128,.4)}
