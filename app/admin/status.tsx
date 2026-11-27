@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react'
 
 export type Level = 'fine' | 'watch' | 'act'
-export type Snapshot = { service: string; title: string; value: string; level: Level; detail?: { label?: string; meter?: { percent: number }; link?: { label: string; url: string }; rows?: { label: string; value: string }[]; groups?: { title: string; rows: { label: string; value: string }[] }[] } | null; checked_at: string }
+export type BunnyWait = { postsToday: number; over5Today: number; over10Today: number; peopleOver10: number; peopleWeek: number; hours: { hour: number; avg: number; posts: number }[] }
+export type Snapshot = { service: string; title: string; value: string; level: Level; detail?: { label?: string; meter?: { percent: number }; link?: { label: string; url: string }; rows?: { label: string; value: string }[]; groups?: { title: string; rows: { label: string; value: string }[] }[]; balance?: number; stuck?: number; wait?: BunnyWait; library?: { storageBytes: number; trafficBytes: number; videos: number } | null; charges?: { storage: number; traffic: number; encoding: number }; stuckList?: { dish: string; waitMin: number }[] } | null; checked_at: string }
 
 // Phosphor icons (bold), same set as the app. Shape + word, never colour alone:
 // Fine = check circle, Watch = eye, Act now = warning octagon.
