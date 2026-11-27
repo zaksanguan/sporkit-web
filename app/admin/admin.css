@@ -140,3 +140,7 @@
 .adm .wage{opacity:.85}
 .adm .wside a{color:inherit;text-decoration:underline;font-weight:600}
 .adm .summary.ac-b .wlist,.adm .summary.wa-b .wlist{color:#1d1d1b;border-top-color:rgba(0,0,0,.2)}
+
+.adm .card.sc{display:flex;flex-direction:column}
+.adm .card.sc .cfoot{margin-top:auto;padding-top:14px}
+.adm .card.sc .cfoot .bar{flex:none;width:100%;min-width:0;margin:0 0 12px}
