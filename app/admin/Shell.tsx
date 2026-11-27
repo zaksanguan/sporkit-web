@@ -70,7 +70,7 @@ export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; sta
   const top: Level = act.length ? 'act' : watch.length ? 'watch' : 'fine'
 
   const Card = ({ c }: { c: Snapshot }) => (
-    <div className={CARD_CLASS[c.level]}>
+    <div className={CARD_CLASS[c.level] + ' sc'}>
       <div className="hd">
         <span className="ttl">
           {LOGOS[c.service] ? <span className={'lg' + (PLAIN_LOGOS.has(c.service) ? ' n' : '')}>{LOGOS[c.service]}</span> : null}
@@ -81,13 +81,6 @@ export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; sta
       {c.detail?.label ? <div className="lbl cap">{c.detail.label}</div> : null}
       <div className="numrow">
         <div className="big">{c.value || '-'}</div>
-        {typeof c.detail?.meter?.percent === 'number' ? (
-          <div className="bar" role="img" aria-label={`${Math.round(c.detail.meter.percent)} percent of the limit used`}>
-            <i style={{ width: c.detail.meter.percent + '%' }} />
-            <b style={{ left: '60%' }} />
-            <b style={{ left: '80%' }} />
-          </div>
-        ) : null}
       </div>
       {c.detail?.rows?.length ? (
         <div className="rows">
@@ -114,6 +107,14 @@ export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; sta
           ))}
         </div>
       ) : null}
+      <div className="cfoot">
+        {typeof c.detail?.meter?.percent === 'number' ? (
+          <div className="bar" role="img" aria-label={`${Math.round(c.detail.meter.percent)} percent of the limit used`}>
+            <i style={{ width: c.detail.meter.percent + '%' }} />
+            <b style={{ left: '60%' }} />
+            <b style={{ left: '80%' }} />
+          </div>
+        ) : null}
       {c.service === 'bunny' ? <button className="detail-link" onClick={() => setView('bunny')}>View details</button> : null}
       {c.detail?.link?.url?.startsWith('https://') ? (
         <a className="more" href={c.detail.link.url} target="_blank" rel="noopener noreferrer">
@@ -121,6 +122,7 @@ export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; sta
           <svg viewBox="0 0 256 256" aria-hidden="true"><path d="M228 104a12 12 0 0 1-24 0V69l-59.51 59.51a12 12 0 0 1-17-17L187 52h-35a12 12 0 0 1 0-24h64a12 12 0 0 1 12 12Zm-44 24a12 12 0 0 0-12 12v64H52V84h64a12 12 0 0 0 0-24H48a20 20 0 0 0-20 20v128a20 20 0 0 0 20 20h128a20 20 0 0 0 20-20v-68a12 12 0 0 0-12-12" /></svg>
         </a>
       ) : null}
+      </div>
     </div>
   )
 
