@@ -4,6 +4,7 @@ import { useEffect, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import AdminLogo from './AdminLogo'
 import { logout, refreshNow } from './actions'
+import { adviceFor, topText } from './advice'
 import { CARD_CLASS, LOGOS, PLAIN_LOGOS, StatusPill, type Level, type Snapshot } from './status'
 
 // Phosphor ArrowClockwise (bold), same icon set as the app.
@@ -123,8 +124,11 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
       <div className="hdr">
         <AdminLogo />
         <nav className="nav" aria-label="Dashboard">
-          <button className={'tab' + (tab === 'server' ? ' on' : '')} onClick={() => setTab('server')}>Services</button>
           <button className={'tab' + (tab === 'client' ? ' on' : '')} onClick={() => setTab('client')}>Users</button>
+          <button className={'tab' + (tab === 'server' ? ' on' : '')} onClick={() => setTab('server')}>
+            Services
+            {attention.length > 0 ? <span className={'bd ' + (top === 'act' ? 'bd-a' : 'bd-w')} aria-label={`${attention.length} need attention`}>{attention.length}</span> : null}
+          </button>
         </nav>
       </div>
       <div className="upd">
@@ -158,6 +162,19 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
                 <div className="sum-s"><span className="sum-n">{act.length}</span><span className="sum-l">Needs action</span></div>
                 <div className="sum-s"><span className="sum-n">{watch.length}</span><span className="sum-l">To watch</span></div>
                 <div className="sum-s"><span className="sum-n">{fine.length}</span><span className="sum-l">Fine</span></div>
+              </div>
+              <div className="sum-adv">
+                <div className="sum-note">{topText(top)}</div>
+                {attention.map((c) => {
+                  const a = adviceFor(c)
+                  return a ? (
+                    <div className="adv" key={c.service}>
+                      <b>{c.title}</b>
+                      <div>{a.why}</div>
+                      <ol>{a.steps.map((st) => <li key={st}>{st}</li>)}</ol>
+                    </div>
+                  ) : null
+                })}
               </div>
             </div>
             <div className="sec">Requires attention</div>
