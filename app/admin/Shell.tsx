@@ -61,7 +61,7 @@ export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; sta
   // Fullest first (percent of limit); cards with no bar sort last, then by title.
   const pct = (c: Snapshot) => (typeof c.detail?.meter?.percent === 'number' ? c.detail.meter.percent : -1)
   const cards: Snapshot[] = snapshots
-    .filter((s) => s.service !== 'checker')
+    .filter((s) => s.service !== 'checker' && s.service !== 'waiting')
     .sort((a, b) => pct(b) - pct(a) || a.title.localeCompare(b.title))
   const act = cards.filter((c) => c.level === 'act')
   const watch = cards.filter((c) => c.level === 'watch')
@@ -131,7 +131,7 @@ export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; sta
         <nav className="nav" aria-label="Dashboard">
           <button className={'tab' + (tab === 'client' ? ' on' : '')} onClick={() => setTab('client')}>
             Users
-            {stats.health.claims + stats.health.reports > 0 ? <span className="bd bd-w" aria-label={`${stats.health.claims + stats.health.reports} waiting for you`}>{stats.health.claims + stats.health.reports}</span> : null}
+            {stats.health.claims + stats.health.reports > 0 ? <span className={'bd ' + (stats.health.level === 'act' ? 'bd-a' : 'bd-w')} aria-label={`${stats.health.claims + stats.health.reports} waiting for you`}>{stats.health.claims + stats.health.reports}</span> : null}
           </button>
           <button className={'tab' + (tab === 'server' ? ' on' : '')} onClick={() => setTab('server')}>
             Services

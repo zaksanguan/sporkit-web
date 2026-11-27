@@ -13,11 +13,21 @@ export type UserStats = {
   posting: Windows & { posters: number; full: number; fullUsers: number }
   sporking: Windows & { reviews: number; full: number; fullUsers: number }
   viewing: Windows
-  health: { claims: number; claimsOldestDays: number | null; reports: number; reportsOldestDays: number | null }
+  health: { claims: number; claimsOldestDays: number | null; reports: number; reportsOldestDays: number | null; level: 'fine' | 'watch' | 'act' }
   error?: string
 }
 
 const DAY = 86400000
+
+// Same rules as the checker (sporkit-app supabase/functions/admin-check/status.ts). Change both together.
+// Claim: Watch after 1 day, Act now after 5. Report: Watch after 1 day, Act now after 3.
+type Lvl = 'fine' | 'watch' | 'act'
+const ageLevel = (d: number | null, watchAt: number, actAt: number): Lvl => (d === null ? 'fine' : d >= actAt ? 'act' : d >= watchAt ? 'watch' : 'fine')
+export function waitingLevel(claimDays: number | null, reportDays: number | null): Lvl {
+  const a = ageLevel(claimDays, 1, 5)
+  const b = ageLevel(reportDays, 1, 3)
+  return a === 'act' || b === 'act' ? 'act' : a === 'watch' || b === 'watch' ? 'watch' : 'fine'
+}
 const bangkokDayStart = (now: number) => Math.floor((now + 7 * 3600 * 1000) / DAY) * DAY - 7 * 3600 * 1000
 
 export async function loadUserStats(period: Period = 7): Promise<UserStats> {
@@ -68,7 +78,7 @@ export async function loadUserStats(period: Period = 7): Promise<UserStats> {
       windows('sporks', activeSporks),
       fetchAll('sporks', 'user_id, video_id, dish_name, reasons, notes', (q) => q.eq('status', 'active').gte('created_at', iso(w0))),
       windows('video_views'),
-      db.from('restaurants').select('updated_at', { count: 'exact' }).eq('claim_status', 'pending').order('updated_at', { ascending: true }).limit(1),
+      db.from('restaurants').select('claimed_at, updated_at', { count: 'exact' }).eq('claim_status', 'pending').order('claimed_at', { ascending: true }).limit(1),
       db.from('reports').select('created_at', { count: 'exact' }).eq('status', 'pending').order('created_at', { ascending: true }).limit(1),
     ])
     const posters = new Set((posterRows.data ?? []).map((r: { creator_id: string | null }) => r.creator_id)).size
@@ -111,9 +121,10 @@ export async function loadUserStats(period: Period = 7): Promise<UserStats> {
       viewing,
       health: {
         claims: claims.count ?? 0,
-        claimsOldestDays: oldestDays(claims.data?.[0]?.updated_at),
+        claimsOldestDays: oldestDays(claims.data?.[0]?.claimed_at ?? claims.data?.[0]?.updated_at),
         reports: reports.count ?? 0,
         reportsOldestDays: oldestDays(reports.data?.[0]?.created_at),
+        level: waitingLevel((claims.count ?? 0) > 0 ? oldestDays(claims.data?.[0]?.claimed_at ?? claims.data?.[0]?.updated_at) : null, (reports.count ?? 0) > 0 ? oldestDays(reports.data?.[0]?.created_at) : null),
       },
     }
   } catch (e) {
@@ -121,7 +132,7 @@ export async function loadUserStats(period: Period = 7): Promise<UserStats> {
     return {
       period,
       people: { ...z, total: 0, owners: 0, pushIos: 0, pushAndroid: 0 }, posting: { ...z, posters: 0, full: 0, fullUsers: 0 }, sporking: { ...z, reviews: 0, full: 0, fullUsers: 0 }, viewing: z,
-      health: { claims: 0, claimsOldestDays: null, reports: 0, reportsOldestDays: null },
+      health: { claims: 0, claimsOldestDays: null, reports: 0, reportsOldestDays: null, level: 'fine' },
       error: e instanceof Error ? e.message : 'unknown',
     }
   }

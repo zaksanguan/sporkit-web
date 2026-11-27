@@ -38,9 +38,11 @@ export default function UsersPanel({ s }: { s: UserStats }) {
   const [pending, startTransition] = useTransition()
   const [choice, setChoice] = useState<string | null>(null)
   const shown = pending && choice ? choice : String(s.period)
-  const waitingAny = s.health.claims + s.health.reports > 0
+  const waitingCount = s.health.claims + s.health.reports
+  const level: Level = s.health.level
+  const waitingAny = level !== 'fine'
   const waitingCard = (
-    <C icon="health" title="Waiting for you" cap="Claims and reports to review" big={n(s.health.claims + s.health.reports)} level={waitingAny ? 'watch' : 'fine'}
+    <C icon="health" title="Waiting for you" cap="Claims and reports to review" big={n(s.health.claims + s.health.reports)} level={level}
               rows={[['Claims waiting', n(s.health.claims)], ['Oldest claim', days(s.health.claimsOldestDays)], ['Reports waiting', n(s.health.reports)], ['Oldest report', days(s.health.reportsOldestDays)]]} />
   )
   return (
@@ -50,21 +52,21 @@ export default function UsersPanel({ s }: { s: UserStats }) {
       ) : (
         <>
           <div className={'card summary ' + (waitingAny ? 'wa-b' : '')}>
-            <StatusPill level={waitingAny ? 'watch' : 'fine'} />
+            <StatusPill level={level} />
             <div className="sum-stats">
               <div className="sum-s"><span className="sum-n">{s.health.claims}</span><span className="sum-l">{plural(s.health.claims, 'Claim waiting', 'Claims waiting')}</span></div>
               <div className="sum-s"><span className="sum-n">{s.health.reports}</span><span className="sum-l">{plural(s.health.reports, 'Report waiting', 'Reports waiting')}</span></div>
             </div>
             <div className="sum-adv">
-              <div className="sum-note">{waitingAny ? 'Nobody is reviewing these but you. They stay here until you deal with them.' : 'Nothing is waiting for you. Claims and reports are all reviewed.'}</div>
-              {s.health.claims > 0 ? (
+              <div className="sum-note">{level === 'act' ? 'Something has waited too long. Deal with it now: they stay here until you do.' : level === 'watch' ? 'Something has waited more than a day. They stay here until you deal with them.' : waitingCount > 0 ? 'New today, nothing is late yet. You get a reminder if it waits more than a day.' : 'Nothing is waiting for you. Claims and reports are all reviewed.'}</div>
+              {s.health.claims > 0 && waitingAny ? (
                 <div className="adv">
                   <b>Restaurant claims</b>
                   <div>An owner asked to claim a restaurant and is waiting for an answer.</div>
                   <ol><li>Open the proof from the claim email, or the claim_requests table in Supabase.</li><li>Approve it (claim_status approved) or reject it in Supabase.</li></ol>
                 </div>
               ) : null}
-              {s.health.reports > 0 ? (
+              {s.health.reports > 0 && waitingAny ? (
                 <div className="adv">
                   <b>User reports</b>
                   <div>People reported a video, review, restaurant or user.</div>
