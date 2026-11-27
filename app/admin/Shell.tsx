@@ -6,6 +6,8 @@ import AdminLogo from './AdminLogo'
 import { logout, refreshNow } from './actions'
 import { adviceFor, topText } from './advice'
 import BunnyPage from './BunnyPage'
+import UsersPanel from './UsersPanel'
+import type { UserStats } from './userStats'
 import { CARD_CLASS, LOGOS, PLAIN_LOGOS, StatusPill, type Level, type Snapshot } from './status'
 
 // Phosphor ArrowClockwise (bold), same icon set as the app.
@@ -22,7 +24,7 @@ function ago(ms: number): string {
   return h < 24 ? `${h} h ago` : `${Math.floor(h / 24)} d ago`
 }
 
-export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
+export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; stats: UserStats }) {
   const router = useRouter()
   const [tab, setTab] = useState<Tab>('server')
   const [view, setView] = useState<'bunny' | null>(null)
@@ -127,7 +129,10 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
       <div className="hdr">
         <AdminLogo />
         <nav className="nav" aria-label="Dashboard">
-          <button className={'tab' + (tab === 'client' ? ' on' : '')} onClick={() => setTab('client')}>Users</button>
+          <button className={'tab' + (tab === 'client' ? ' on' : '')} onClick={() => setTab('client')}>
+            Users
+            {stats.health.claims + stats.health.reports > 0 ? <span className="bd bd-w" aria-label={`${stats.health.claims + stats.health.reports} waiting for you`}>{stats.health.claims + stats.health.reports}</span> : null}
+          </button>
           <button className={'tab' + (tab === 'server' ? ' on' : '')} onClick={() => setTab('server')}>
             Services
             {act.length > 0 ? <span className="bd bd-a" aria-label={`${act.length} need action`}>{act.length}</span> : null}
@@ -213,10 +218,7 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
           </>
         )
       ) : (
-        <div className="card">
-          <b>No user data yet</b>
-          <div className="lbl">Sign-ups, posts, sporks and views appear here once they are connected (step 5).</div>
-        </div>
+        <UsersPanel s={stats} />
       )}
     </div>
   )

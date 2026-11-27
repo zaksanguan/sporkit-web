@@ -1,15 +1,17 @@
 import { requireAdmin } from '../../lib/admin/session'
 import { supabaseAdmin } from '../../lib/supabaseAdmin'
 import Shell from './Shell'
+import { loadUserStats } from './userStats'
 import type { Snapshot } from './status'
 
 export const dynamic = 'force-dynamic'
 
 export default async function AdminPage() {
   await requireAdmin()
+  const stats = await loadUserStats()
   const { data } = await supabaseAdmin()
     .from('admin_snapshots')
     .select('service,title,value,level,detail,checked_at')
     .order('title')
-  return <Shell snapshots={(data ?? []) as Snapshot[]} />
+  return <Shell snapshots={(data ?? []) as Snapshot[]} stats={stats} />
 }
