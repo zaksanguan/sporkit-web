@@ -78,7 +78,7 @@ export default function BunnyPage({ c, advice, onBack }: { c: Snapshot; advice: 
           <Tile label="Total uploads today" value={w.postsToday} />
           <Tile label="Uploads over 5 min" value={w.over5Today} sub="today" />
           <Tile label="Uploads over 10 min" value={w.over10Today} sub="today" />
-          <Tile label="People with a slow upload" value={`${w.peopleOver10} of ${w.peopleWeek}`} sub="over 10 min, last 7 days" />
+          <Tile label="People affected, last 7 days" value={`${w.peopleOver10} of ${w.peopleWeek}`} sub="had an upload over 10 min" />
           <Tile label="Balance" value={typeof d?.balance === 'number' ? usd(d.balance) : '-'} sub={d?.rows?.find((r) => r.label === 'Spent this month') ? 'spent this month ' + d.rows.find((r) => r.label === 'Spent this month')!.value : undefined} />
           {lib ? (
             <Tile
