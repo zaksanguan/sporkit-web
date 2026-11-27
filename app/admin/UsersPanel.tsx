@@ -81,9 +81,9 @@ export default function UsersPanel({ s }: { s: UserStats }) {
             <C icon="people" title="Users" cap="New sign-ups today" big={n(s.people.today)}
               rows={[['Last 7 days', n(s.people.week)], ['Previous 7 days', n(s.people.prevWeek)], ['Total users', n(s.people.total)], ['Owners', n(s.people.owners)], ['iPhones with notifications on', n(s.people.pushIos)], ['Android with notifications on', n(s.people.pushAndroid)]]} />
             <C icon="posting" title="Posting" cap="Posts today" big={n(s.posting.today)}
-              rows={[['Last 7 days', n(s.posting.week)], ['Previous 7 days', n(s.posting.prevWeek)], [`${plural(s.posting.posters, 'Person', 'People')} who posted, last 7 days`, n(s.posting.posters)]]} />
+              rows={[['Last 7 days', n(s.posting.week)], ['Previous 7 days', n(s.posting.prevWeek)], [`${plural(s.posting.posters, 'User', 'Users')} who posted, last 7 days`, n(s.posting.posters)], ['Full posts, last 7 days', n(s.posting.full)], [`${plural(s.posting.fullUsers, 'User', 'Users')} with a full post, last 7 days`, n(s.posting.fullUsers)]]} />
             <C icon="sporking" title="Sporking" cap="Sporks today" big={n(s.sporking.today)}
-              rows={[['Last 7 days', n(s.sporking.week)], ['Previous 7 days', n(s.sporking.prevWeek)], ['With a review, last 7 days', n(s.sporking.reviews)]]} />
+              rows={[['Last 7 days', n(s.sporking.week)], ['Previous 7 days', n(s.sporking.prevWeek)], ['With a review, last 7 days', n(s.sporking.reviews)], ['Full reviews, last 7 days', n(s.sporking.full)], [`${plural(s.sporking.fullUsers, 'User', 'Users')} with a full review, last 7 days`, n(s.sporking.fullUsers)]]} />
             <C icon="viewing" title="Viewing" cap="Views today" big={n(s.viewing.today)}
               rows={[['Last 7 days', n(s.viewing.week)], ['Previous 7 days', n(s.viewing.prevWeek)]]}
               note="Counts uploaded videos only, watched 3 seconds by signed-in people." />
