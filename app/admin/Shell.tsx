@@ -31,6 +31,14 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
     return () => clearInterval(t)
   }, [])
 
+  // Re-read the saved numbers every minute while the tab is visible (no checker run, just a page re-read).
+  useEffect(() => {
+    const t = setInterval(() => {
+      if (document.visibilityState === 'visible') router.refresh()
+    }, 60000)
+    return () => clearInterval(t)
+  }, [router])
+
   function refresh() {
     start(async () => {
       await refreshNow()
