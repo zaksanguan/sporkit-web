@@ -53,7 +53,11 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
   const checker = snapshots.find((s) => s.service === 'checker')
   const checkerAge = checker ? now - new Date(checker.checked_at).getTime() : 0
   const checkerStopped = checker ? checkerAge > STALE_MIN * 60000 : false
-  const cards: Snapshot[] = snapshots.filter((s) => s.service !== 'checker')
+  // Fullest first (percent of limit); cards with no bar sort last, then by title.
+  const pct = (c: Snapshot) => (typeof c.detail?.meter?.percent === 'number' ? c.detail.meter.percent : -1)
+  const cards: Snapshot[] = snapshots
+    .filter((s) => s.service !== 'checker')
+    .sort((a, b) => pct(b) - pct(a) || a.title.localeCompare(b.title))
   const act = cards.filter((c) => c.level === 'act')
   const watch = cards.filter((c) => c.level === 'watch')
   const fine = cards.filter((c) => c.level === 'fine')
