@@ -66,10 +66,10 @@
 .adm .summary .sum-t{font-size:18px;font-weight:600}
 .adm .summary{align-items:center}
 .adm .sum-stats{display:flex;align-items:stretch;flex-wrap:wrap}
-.adm .sum-s{display:flex;align-items:baseline;gap:8px;padding:0 20px;border-left:1px solid currentColor;border-left-color:rgba(128,128,128,.4)}
+.adm .sum-s{display:flex;align-items:center;gap:8px;padding:0 20px;border-left:1px solid currentColor;border-left-color:rgba(128,128,128,.4)}
 .adm .sum-s:first-child{border-left:0;padding-left:8px}
-.adm .sum-n{font-size:26px;font-weight:700;line-height:1}
-.adm .sum-l{font-size:15px;font-weight:500;opacity:.8}
+.adm .sum-n{font-size:26px;font-weight:700;line-height:1;display:block}
+.adm .sum-l{font-size:15px;font-weight:500;line-height:1;opacity:.8}
 .adm .summary.ac-b{background:#E34948;border:0}
 .adm .summary.wa-b{background:#FFD700;border:0}
 .adm .summary.ac-b .sum-t,.adm .summary.wa-b .sum-t{color:#1d1d1b}
