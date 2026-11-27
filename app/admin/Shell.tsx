@@ -142,7 +142,7 @@ export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; sta
       </div>
       <div className="upd">
         <span className="ptw">
-          <span className="pt">{tab === 'server' ? 'Status summary' : 'User activity'}</span>
+          <span className="pt">{tab === 'server' ? 'Status summary' : 'User activity summary'}</span>
           {tab === 'server' && checker ? (
             <StatusPill
               level={checkerStopped ? 'act' : 'fine'}
