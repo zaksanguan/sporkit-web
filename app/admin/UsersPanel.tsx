@@ -73,6 +73,23 @@ export default function UsersPanel({ s }: { s: UserStats }) {
                   <ol><li>Open the reports table in Supabase and read the ones with status pending.</li><li>Hide the video if needed, then set the report to reviewed, actioned or dismissed.</li></ol>
                 </div>
               ) : null}
+              {s.health.list.length > 0 ? (
+                <div className="wlist">
+                  <b>Waiting now</b>
+                  {s.health.list.map((it) => (
+                    <div className="wrow" key={it.kind + it.id}>
+                      <div className="wmain">
+                        <div className="wt">{it.title}</div>
+                        <div className="wd">{it.detail}</div>
+                      </div>
+                      <div className="wside">
+                        <span className="wage">{days(it.ageDays)}</span>
+                        {it.link ? <a href={it.link.url} target="_blank" rel="noopener noreferrer">{it.link.label}</a> : null}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="sec">Requires attention</div>
