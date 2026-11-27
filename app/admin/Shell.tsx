@@ -94,6 +94,21 @@ export default function Shell({ snapshots }: { snapshots: Snapshot[] }) {
           ))}
         </div>
       ) : null}
+      {c.detail?.groups?.length ? (
+        <div className="rows">
+          {c.detail.groups.map((g) => (
+            <div className="grp" key={g.title}>
+              <div className="gt">{g.title}</div>
+              {g.rows.map((r) => (
+                <div className="row" key={r.label}>
+                  <span>{r.label}</span>
+                  <b>{r.value}</b>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      ) : null}
       {c.detail?.link?.url?.startsWith('https://') ? (
         <a className="more" href={c.detail.link.url} target="_blank" rel="noopener noreferrer">
           <span>{c.detail.link.label}</span>

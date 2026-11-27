@@ -94,6 +94,10 @@
 .adm .card.ac-b .bar i,.adm .card.wa-b .bar i,.adm .card.ac-b .bar b,.adm .card.wa-b .bar b{background:#1d1d1b}
 .adm .row{display:flex;justify-content:space-between;gap:8px;font-size:16px;padding:9px 0;border-top:0.5px solid var(--border);border-radius:0}
 .adm .row b{font-size:16px;font-weight:600}
+.adm .grp{padding:9px 0 5px;border-top:0.5px solid var(--border)}
+.adm .grp .gt{font-size:16px;font-weight:600;white-space:nowrap;padding-bottom:4px}
+.adm .grp .row{border-top:0;padding:4px 0}
+.adm .card.ac-b .grp,.adm .card.wa-b .grp{border-top-color:rgba(0,0,0,.2)}
 .adm .card.ac-b .row,.adm .card.wa-b .row{border-top-color:rgba(0,0,0,.2)}
 .adm .card.ac-b .row span,.adm .card.wa-b .row span{color:#1d1d1b}
 .adm .ptw{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
