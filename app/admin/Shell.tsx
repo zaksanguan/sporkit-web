@@ -86,7 +86,7 @@ export default function Shell({ snapshots, stats, youtube }: { snapshots: Snapsh
       {c.detail?.rows?.length ? (
         <div className="rows">
           {c.detail.rows.map((r) => (
-            <div className="row" key={r.label}>
+            <div className={r.label === 'Last check' ? 'row nowrap' : 'row'} key={r.label}>
               <span>{r.label}</span>
               <b>{r.value}</b>
             </div>
