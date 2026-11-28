@@ -19,10 +19,10 @@ export type YoutubeItem = {
 }
 
 const WHY: Record<YoutubeItem['state'], string> = {
-  age_restricted: 'Age-restricted on YouTube',
-  not_embeddable: 'Embedding switched off',
-  not_returned: 'Removed, private or blocked in Thailand',
-  ok: 'Plays again',
+  age_restricted: 'YouTube marked it age-restricted, so it cannot play in the app.',
+  not_embeddable: 'The owner switched off playing outside YouTube.',
+  not_returned: 'YouTube no longer shows it: deleted, private or blocked in Thailand.',
+  ok: 'Plays again.',
 }
 
 const MSG: Record<string, string> = {
@@ -51,10 +51,14 @@ function Row({ it, first }: { it: YoutubeItem; first: boolean }) {
       <div className="ymain">
         <b>{it.restaurant_name || '(no restaurant)'}</b>
         <div className="lbl">{it.caption || '(no caption)'}</div>
-        <div className="lbl">
-          {hidden ? 'Hidden by you' : `${WHY[it.state]}, bad for ${it.bad_days} days`}
-          {it.sporks > 0 ? ` · ${it.sporks} spork${it.sporks === 1 ? '' : 's'} stay` : ''}
-        </div>
+        {hidden ? (
+          <div className="lbl">Hidden by you{it.sporks > 0 ? ` · ${it.sporks} spork${it.sporks === 1 ? '' : 's'} stay` : ''}</div>
+        ) : (
+          <>
+            <div className="lbl">Not playing for {it.bad_days} days in a row{it.sporks > 0 ? ` · ${it.sporks} spork${it.sporks === 1 ? '' : 's'} stay` : ''}</div>
+            <div className="lbl">{WHY[it.state]}</div>
+          </>
+        )}
         {note ? <div className="lbl ynote">{note}</div> : null}
       </div>
       <div className="yside">
