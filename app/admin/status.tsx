@@ -129,3 +129,6 @@ LOGOS.youtube = (
     />
   </svg>
 )
+
+// The YouTube videos card uses the same YouTube mark.
+LOGOS.youtube_videos = LOGOS.youtube

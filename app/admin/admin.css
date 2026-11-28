@@ -144,3 +144,14 @@
 .adm .card.sc{display:flex;flex-direction:column}
 .adm .card.sc .cfoot{margin-top:auto;padding-top:14px}
 .adm .card.sc .cfoot .bar{flex:none;width:100%;min-width:0;margin:0 0 12px}
+
+/* YouTube videos detail page (admin step 7) */
+.adm .yrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:0.5px solid var(--border);flex-wrap:wrap}
+.adm .ymain{min-width:0;flex:1 1 260px}
+.adm .ymain b{font-size:16px;font-weight:600;color:var(--text-primary)}
+.adm .ymain .lbl{font-size:14px;margin-top:2px;overflow-wrap:anywhere}
+.adm .ynote{color:var(--text-primary);font-weight:600}
+.adm .yside{display:flex;gap:8px;flex:none}
+.adm .ybtn{display:inline-flex;align-items:center;justify-content:center;min-width:76px;height:38px;padding:0 14px;border-radius:10px;border:0.5px solid var(--border);background:transparent;color:var(--text-primary);font-size:15px;font-weight:600;font-family:inherit;text-decoration:none;cursor:pointer}
+.adm .ybtn.yprim{background:#FF8C00;border-color:#FF8C00;color:#1d1d1b}
+.adm .ybtn:disabled{opacity:.5;cursor:default}

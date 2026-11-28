@@ -6,6 +6,12 @@ export type Advice = { why: string; steps: string[] }
 type Entry = { watch?: Advice; act?: Advice }
 
 const ADVICE: Record<string, Entry> = {
+  youtube_videos: {
+    watch: {
+      why: 'Some YouTube videos no longer play (deleted, private, blocked in Thailand, age-restricted or embedding switched off), or the daily check is late. People would see a dead screen.',
+      steps: ['Press View details on the YouTube videos card.', 'Watch each video, then press Hide on the ones that do not play. Sporks stay, and Unhide brings a video back.'],
+    },
+  },
   twilio: {
     watch: {
       why: 'More sign-up texts than usual today. Could be real growth, or someone sending fake sign-ups (many different numbers, one country).',

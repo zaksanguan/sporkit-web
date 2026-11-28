@@ -93,3 +93,15 @@ export async function refreshNow(): Promise<{ ran: boolean }> {
     return { ran: false }
   }
 }
+
+// Hide / Unhide a broken YouTube video (admin step 7). Only changes the video's status; sporks, Bites and notifications stay.
+// Server-side function supabase/sql/youtube_health.sql (service role only). Results: hidden | unhidden | not_found | not_active |
+// already_hidden | not_hidden_by_admin | error.
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+export async function setYoutubeHidden(videoId: string, hide: boolean): Promise<{ result: string }> {
+  await requireAdmin()
+  if (typeof videoId !== 'string' || !UUID.test(videoId)) return { result: 'not_found' }
+  const { data, error } = await supabaseAdmin().rpc('admin_set_youtube_hidden', { p_video_id: videoId, p_hide: !!hide })
+  if (error || typeof data !== 'string') return { result: 'error' }
+  return { result: data }
+}
