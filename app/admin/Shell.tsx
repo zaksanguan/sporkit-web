@@ -6,6 +6,7 @@ import AdminLogo from './AdminLogo'
 import { logout, refreshNow } from './actions'
 import { adviceFor, topText } from './advice'
 import BunnyPage from './BunnyPage'
+import YoutubePage, { type YoutubeItem } from './YoutubePage'
 import UsersPanel from './UsersPanel'
 import type { UserStats } from './userStats'
 import { CARD_CLASS, LOGOS, PLAIN_LOGOS, StatusPill, type Level, type Snapshot } from './status'
@@ -24,10 +25,10 @@ function ago(ms: number): string {
   return h < 24 ? `${h} h ago` : `${Math.floor(h / 24)} d ago`
 }
 
-export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; stats: UserStats }) {
+export default function Shell({ snapshots, stats, youtube }: { snapshots: Snapshot[]; stats: UserStats; youtube: YoutubeItem[] }) {
   const router = useRouter()
   const [tab, setTab] = useState<Tab>('client')
-  const [view, setView] = useState<'bunny' | null>(null)
+  const [view, setView] = useState<'bunny' | 'youtube' | null>(null)
   const [pending, start] = useTransition()
   const [now, setNow] = useState(() => Date.now())
 
@@ -116,6 +117,7 @@ export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; sta
           </div>
         ) : null}
       {c.service === 'bunny' ? <button className="detail-link" onClick={() => setView('bunny')}>View details</button> : null}
+      {c.service === 'youtube_videos' ? <button className="detail-link" onClick={() => setView('youtube')}>View details</button> : null}
       {c.detail?.link?.url?.startsWith('https://') ? (
         <a className="more" href={c.detail.link.url} target="_blank" rel="noopener noreferrer">
           <span>{c.detail.link.label}</span>
@@ -174,6 +176,8 @@ export default function Shell({ snapshots, stats }: { snapshots: Snapshot[]; sta
             />
           )
         })()
+      ) : tab === 'server' && view === 'youtube' && cards.find((x) => x.service === 'youtube_videos') ? (
+        <YoutubePage c={cards.find((x) => x.service === 'youtube_videos')!} items={youtube} onBack={() => setView(null)} />
       ) : tab === 'server' ? (
         cards.length === 0 ? (
           <div className="card"><b>No data yet</b><div className="lbl">The checker has not saved any numbers. It runs every 5 minutes.</div></div>
