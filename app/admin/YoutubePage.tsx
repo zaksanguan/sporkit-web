@@ -54,10 +54,10 @@ function Row({ it, first }: { it: YoutubeItem; first: boolean }) {
         {hidden ? (
           <div className="lbl">Hidden by you{it.sporks > 0 ? ` · ${it.sporks} spork${it.sporks === 1 ? '' : 's'} stay` : ''}</div>
         ) : (
-          <>
-            <div className="lbl">Not playing for {it.bad_days} days in a row{it.sporks > 0 ? ` · ${it.sporks} spork${it.sporks === 1 ? '' : 's'} stay` : ''}</div>
-            <div className="lbl">{WHY[it.state]}</div>
-          </>
+          <ul className="ylist">
+            <li>Not playing for {it.bad_days} days in a row{it.sporks > 0 ? ` · ${it.sporks} spork${it.sporks === 1 ? '' : 's'} stay` : ''}</li>
+            <li>{WHY[it.state]}</li>
+          </ul>
         )}
         {note ? <div className="lbl ynote">{note}</div> : null}
       </div>
