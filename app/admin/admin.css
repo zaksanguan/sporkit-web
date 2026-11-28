@@ -93,7 +93,7 @@
 .adm .card.ac-b .bar,.adm .card.wa-b .bar{background:rgba(0,0,0,.18)}
 .adm .card.ac-b .bar i,.adm .card.wa-b .bar i,.adm .card.ac-b .bar b,.adm .card.wa-b .bar b{background:#1d1d1b}
 .adm .row{display:flex;justify-content:space-between;gap:8px;font-size:16px;padding:9px 0;border-top:0.5px solid var(--border);border-radius:0}
-.adm .row b{font-size:16px;font-weight:600}
+.adm .row b{font-size:16px;font-weight:600;text-align:right}
 .adm .grp{padding:9px 0 5px;border-top:0.5px solid var(--border)}
 .adm .grp .gt{font-size:16px;font-weight:600;white-space:nowrap;padding-bottom:4px}
 .adm .grp .row{border-top:0;padding:4px 0}
