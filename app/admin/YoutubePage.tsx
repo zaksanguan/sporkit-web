@@ -63,7 +63,7 @@ function Row({ it, first }: { it: YoutubeItem; first: boolean }) {
       </div>
       <div className="yside">
         <a className="ybtn" href={`https://youtu.be/${it.youtube_video_id}`} target="_blank" rel="noopener noreferrer">Watch</a>
-        <button className="ybtn yprim" onClick={go} disabled={pending}>{pending ? '...' : hidden ? 'Unhide' : 'Hide'}</button>
+        <button className="ybtn yprim" onClick={go} disabled={pending}>{pending ? (hidden ? 'Unhiding...' : 'Hiding...') : hidden ? 'Unhide' : 'Hide'}</button>
       </div>
     </div>
   )
